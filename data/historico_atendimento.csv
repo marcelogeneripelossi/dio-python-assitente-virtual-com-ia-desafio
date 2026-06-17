@@ -1,6 +1,18 @@
 data,canal,tema,resumo,resolvido
+2025-09-01,chat,CDB,Explicação sobre impostos no CDB,sim
+2025-09-05,telefone,App,Erro de login resolvido,sim
+2025-09-10,chat,Tesouro,Dúvida sobre taxa de custódia,sim
+2025-09-15,email,Investimento,Consulta sobre LCI,sim
 2025-09-15,chat,CDB,Cliente perguntou sobre rentabilidade e prazos,sim
 2025-09-22,telefone,Problema no app,Erro ao visualizar extrato foi corrigido,sim
 2025-10-01,chat,Tesouro Selic,Cliente pediu explicação sobre o funcionamento do Tesouro Direto,sim
+2025-10-01,chat,Metas,Ajuste de meta de reserva,sim
+2025-10-05,telefone,Cartão,Bloqueio por suspeita de fraude,sim
+2025-10-10,chat,Fundo,Rentabilidade do multimercado,sim
 2025-10-12,chat,Metas financeiras,Cliente acompanhou o progresso da reserva de emergência,sim
+2025-10-15,chat,Perfil,Atualização de renda mensal,sim
+2025-10-20,email,Documento,Envio de comprovante,sim
 2025-10-25,email,Atualização cadastral,Cliente atualizou e-mail e telefone,sim
+2025-10-25,chat,Ações,Dúvida sobre volatilidade,sim
+2025-11-01,telefone,Investimento,Resgate antecipado,não
+2025-11-05,chat,Metas,Configuração de débito automático,sim
