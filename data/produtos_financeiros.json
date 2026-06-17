@@ -38,5 +38,53 @@
     "rentabilidade": "Variável",
     "aporte_minimo": 100.00,
     "indicado_para": "Perfil arrojado com foco no longo prazo"
-  }
+  },
+{
+   "nome":"Tesouro Selic 2029",
+   "categoria":"renda_fixa",
+   "risco":"baixo",
+   "rentabilidade":"100% Selic",
+   "aporte_minimo":30.00,
+   "indicado_para":"Reserva de emergência"
+},
+{
+   "nome":"CDB Pós-Fixado 110%",
+   "categoria":"renda_fixa",
+   "risco":"baixo",
+   "rentabilidade":"110% CDI",
+   "aporte_minimo":500.00,
+   "indicado_para":"Curto/Médio prazo"
+},
+{
+   "nome":"LCI Direto 95%",
+   "categoria":"renda_fixa",
+   "risco":"baixo",
+   "rentabilidade":"95% CDI (Isento IR)",
+   "aporte_minimo":1000.00,
+   "indicado_para":"Prazo mínimo de 90 dias"
+},
+{
+   "nome":"Fundo Multimercado Agressivo",
+   "categoria":"fundo",
+   "risco":"medio",
+   "rentabilidade":"CDI + 3.5%",
+   "aporte_minimo":200.00,
+   "indicado_para":"Diversificação moderada"
+},
+{
+   "nome":"Fundo de Ações Tech",
+   "categoria":"fundo",
+   "risco":"alto",
+   "rentabilidade":"Variável",
+   "aporte_minimo":100.00,
+   "indicado_para":"Longuíssimo prazo"
+},
+{
+   "nome":"ETF S&P 500",
+   "categoria":"fundo",
+   "risco":"alto",
+   "rentabilidade":"Dólar + Variação Global",
+   "aporte_minimo":50.00,
+   "indicado_para":"Exposição internacional"
+}
 ]
