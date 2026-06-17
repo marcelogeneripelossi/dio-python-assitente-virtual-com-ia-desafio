@@ -7,5 +7,10 @@ data,descricao,categoria,valor,tipo
 2025-10-10,Restaurante,alimentacao,120.00,saida
 2025-10-12,Uber,transporte,45.00,saida
 2025-10-15,Conta de Luz,moradia,180.00,saida
+2025-10-18,Internet,moradia,120.00,saida
 2025-10-20,Academia,saude,99.00,saida
+2025-10-22,Cinema,lazer,80.00,saida
 2025-10-25,Combustível,transporte,250.00,saida
+2025-10-27,Ifood,alimentacao,150.00,saida
+2025-10-28,Manutenção carro,transporte,400.00,saida
+2025-10-30,Poupança,investimento,500.00,saida
