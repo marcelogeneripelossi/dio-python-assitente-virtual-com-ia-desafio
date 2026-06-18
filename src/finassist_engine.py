@@ -22,23 +22,22 @@ import pandas as pd
 
 # 1. Carregamento dos dados
 def carregar_dados():
-    with open('data/perfis_investidores.json', 'r', encoding='utf-8') as f:
+    with open('data/perfil_investidor.json', 'r', encoding='utf-8') as f:
         perfis = json.load(f)
     with open('data/produtos_financeiros.json', 'r', encoding='utf-8') as f:
         produtos = json.load(f)
-    # Garantindo o tipo de dado correto para o ID
-    transacoes = pd.read_csv('data/transacoes.csv', dtype={'id_cliente': int})
-    historico = pd.read_csv('data/historico_atendimento.csv', dtype={'id_cliente': int})
+    transacoes = pd.read_csv('data/transacoes.csv')
+    historico = pd.read_csv('data/historico_atendimento.csv')
     return perfis, produtos, transacoes, historico
 
-# Carrega os dados
+# Carrega os dados na memória
 perfis, produtos, transacoes, historico = carregar_dados()
 
 # 2. Motor de inferência (Lógica de resposta do Finassist)
-# Agora recebe transacoes_cliente e historico_cliente como parâmetros!
-def motor_finassist(perfil, pergunta, transacoes_cliente, historico_cliente):
+def motor_finassist(perfil, pergunta):
     pergunta = pergunta.lower()
     
+    # Exemplo de lógica RAG simplificada
     if "risco" in pergunta or "investir" in pergunta:
         nivel_risco = 'baixo' if not perfil['aceita_risco'] else 'médio/alto'
         sugestao = [p['nome'] for p in produtos if p['risco'] == nivel_risco]
@@ -48,34 +47,44 @@ def motor_finassist(perfil, pergunta, transacoes_cliente, historico_cliente):
         metas = perfil['metas']
         return f"Suas metas atuais: " + ", ".join([m['meta'] for m in metas])
     
-    elif "gasto" in pergunta or "transação" in pergunta:
-        total = transacoes_cliente[transacoes_cliente['tipo'] == 'saida']['valor'].sum()
-        return f"Analisei suas transações. Você gastou um total de R$ {total:.2f} recentemente."
-    
     else:
-        return "Sinto muito, mas não tenho essa informação detalhada no momento."
+        return "Sinto muito, mas não tenho essa informação detalhada no momento. Posso ajudar com suas metas ou sugestões de investimento?"
 
-# 3. Execução da interação
+# 3. Execução da interação (Simulação)
 def rodar_interacao():
     print("Finassist: Olá! Sou seu assistente financeiro pessoal.")
-    print("Clientes disponíveis:", ", ".join([p['nome'] for p in perfis]))
+    print("Clientes cadastrados:", ", ".join([p['nome'] for p in perfis]))
     
-    nome_escolhido = input("\nDigite o nome do cliente para simular: ")
-    perfil = next((p for p in perfis if p['nome'].lower() == nome_escolhido.lower()), None)
-    
-    if perfil:
-        # Filtra os dados aqui, logo após identificar o perfil
-        transacoes_cliente = transacoes[transacoes['id_cliente'] == perfil['id']]
-        historico_cliente = historico[historico['id_cliente'] == perfil['id']]
-        
-        print(f"\nConectado como: {perfil['nome']} (ID: {perfil['id']})")
+    # Validação simples
+    while True:
+        nome_escolhido = input("\nDigite o nome ou sobrenome do cliente: ").strip().lower()
+
+        if nome_escolhido.lower() == 'fim':
+          print("Encerrando ...")
+          break
+
+        # Busca todos os perfis que contenham o trecho digitado
+        resultados = [p for p in perfis if nome_escolhido in p["nome"].lower()]
+
+        if not resultados:
+            print("Nenhum cliente encontrado. Tente novamente ou 'FIM' para encerrar.")
+            continue
+
+        if len(resultados) > 1:
+            print("\nForam encontrados vários perfis:")
+            for p in resultados:
+                print(f"- {p['id']}: {p['nome']}")
+            print()
+            print("Digite novamente para refinar a busca.")
+            continue
+
+        # Se chegou aqui, significa que encontrou apenas 1 perfil
+        perfil = resultados[0]
+        print(f"\nConectado como: {perfil['nome']} ({perfil['perfil_investidor']})")
         pergunta = input(f"{perfil['nome']}, como posso te ajudar? ")
-        
-        # Passa os dados filtrados para o motor
-        resposta = motor_finassist(perfil, pergunta, transacoes_cliente, historico_cliente)
+        resposta = motor_finassist(perfil, pergunta)
         print(f"\nFinassist: {resposta}")
-    else:
-        print("Cliente não encontrado.")
+        break
 
 # --- Rodar ---
 rodar_interacao()
