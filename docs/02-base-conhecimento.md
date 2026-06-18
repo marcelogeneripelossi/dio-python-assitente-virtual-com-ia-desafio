@@ -7,6 +7,8 @@ A base de conhecimento é composta por arquivos estruturados que permitem a aná
 
 - **`perfil_investidor.json`**: Contém os dados demográficos, objetivos financeiros, nível de tolerância ao risco e metas específicas de cada cliente.
 - **`produtos_financeiros.json`**: Catálogo curado de produtos de investimento, incluindo categoria, nível de risco, rentabilidade e público-alvo.
+- **`palavras_chave.json`**: Dicionário de termos e sinônimos utilizados pelo motor de inferência para identificar intenções de busca do usuário (ex: gastos, investimentos, dúvidas) de forma rápida e eficiente.
+- **`chave_sugestoes.json`**: Estrutura de mapeamento que associa intenções específicas do usuário a recomendações de produtos ou ações pré-configuradas, garantindo consistência nas sugestões do agente.
 - **`transacoes.csv`**: Registro histórico de movimentações financeiras (receitas e despesas), contendo `id_cliente`, data, categoria e valor.
 - **`historico_atendimento.csv`**: Logs de interações anteriores com o cliente, permitindo que o Finassist compreenda o contexto de atendimentos prévios e o status de resoluções de problemas.
 
