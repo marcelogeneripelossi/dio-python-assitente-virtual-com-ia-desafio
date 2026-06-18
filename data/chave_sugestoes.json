@@ -1,0 +1,46 @@
+{
+  "risco": [
+    "Tesouro Selic é indicado para quem busca baixo risco.",
+    "CDB Liquidez Diária oferece segurança com rendimento diário."
+  ],
+  "investir": [
+    "Tesouro Selic 2029 é uma opção segura.",
+    "CDB Pós-Fixado 110% pode ser usado para curto/médio prazo."
+  ],
+  "meta": [
+    "Planeje suas metas com Tesouro IPCA para longo prazo.",
+    "Use CDB ou LCI/LCA para metas de médio prazo."
+  ],
+  "poupanca": [
+    "Tesouro Selic é ideal para reserva de emergência.",
+    "CDB Liquidez Diária é uma alternativa à poupança tradicional."
+  ],
+  "acoes": [
+    "Fundo de Ações é indicado para perfil arrojado.",
+    "ETF S&P 500 dá exposição internacional."
+  ],
+  "tesouro": [
+    "Tesouro Selic é ideal para reserva de emergência.",
+    "Tesouro IPCA protege contra inflação em longo prazo."
+  ],
+  "cdb": [
+    "CDB Liquidez Diária é indicado para segurança e liquidez.",
+    "CDB Pós-Fixado 110% oferece maior rentabilidade."
+  ],
+  "lci_lca": [
+    "LCI/LCA são isentos de IR e indicados para médio prazo.",
+    "LCI Direto 95% exige prazo mínimo de 90 dias."
+  ],
+  "fundo_multimercado": [
+    "Fundo Multimercado é indicado para perfil moderado.",
+    "Fundo Multimercado Agressivo oferece diversificação com maior risco."
+  ],
+  "fundo_acoes": [
+    "Fundo de Ações é indicado para longo prazo.",
+    "Fundo de Ações Tech é voltado para perfil arrojado."
+  ],
+  "etf": [
+    "ETF S&P 500 oferece exposição internacional.",
+    "Ideal para diversificação global."
+  ]
+}
