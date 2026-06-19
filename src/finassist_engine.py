@@ -9,10 +9,6 @@ import pandas as pd
 import os
 import subprocess
 
-def cls():
-    comando = 'cls' if os.name == 'nt' else 'clear'
-    subprocess.run (comando, shell = True)
-
 # system_prompt = """
 # Você é o Finassist, um assistente virtual com IA especializado em educação financeira e planejamento de metas. Seu público-alvo são clientes que buscam organizar suas finanças de forma consciente.
 # 
@@ -29,7 +25,42 @@ def cls():
 # """
 #
 
-# 1. Carregamento dos dados
+# ============================================================
+# Utilidades
+# ============================================================
+
+def cls():
+    comando = 'cls' if os.name == 'nt' else 'clear'
+    subprocess.run (comando, shell = True)
+
+
+def formatar_moeda(valor):
+    return (
+        f"{valor:,.2f}"
+        .replace(",", "_")
+        .replace(".", ",")
+        .replace("_", ".")
+    )
+
+
+def normalizar_perfil(perfil):
+    perfil = perfil.lower().strip()
+
+    mapa = {
+        "conservador": "conservador",
+        "conservadora": "conservador",
+        "moderado": "moderado",
+        "moderada": "moderado",
+        "arrojado": "arrojado",
+        "arrojada": "arrojado"
+    }
+
+    return mapa.get(perfil, perfil)
+
+# ============================================================
+# Carregamento dos dados
+# ============================================================
+
 def carregar_dados():
     with open('data/perfil_investidor.json', 'r', encoding='utf-8') as f:
         perfis = json.load(f)
@@ -43,103 +74,396 @@ def carregar_dados():
     historico = pd.read_csv('data/historico_atendimento.csv')
     return perfis, produtos, transacoes, historico, palavras_chave, chave_sugestoes
 
-# 2. Gerais
-# Normalização do perfil do investidor
-def normalizar_perfil(perfil_investidor: str) -> str:
-    perfil_investidor = perfil_investidor.lower().strip()
-    mapa = {
-        "conservador": "conservador",
-        "conservadora": "conservador",
-        "moderado": "moderado",
-        "moderada": "moderado",
-        "arrojado": "arrojado",
-        "arrojada": "arrojado"
-    }
-    return mapa.get(perfil_investidor, perfil_investidor)
+# ============================================================
+# Motor do Finassist
+# ============================================================
 
-# 3. Motor de inferência (Lógica de resposta do Finassist)
-def motor_finassist(perfil, pergunta, produtos, palavras_chave, chave_sugestoes):
+def motor_finassist(
+    perfil,
+    pergunta,
+    produtos,
+    historico,
+    palavras_chave,
+    chave_sugestoes
+):
+
     pergunta_lower = pergunta.lower()
-    perfil_cliente = normalizar_perfil(perfil["perfil_investidor"])
-    
+
     resposta_final = []
-    sugestoes_coletadas = []
 
-    # 1. Detecção de Metas
-    if any(t in pergunta_lower for t in palavras_chave.get("meta", [])):
+    perfil_cliente = normalizar_perfil(
+        perfil["perfil_investidor"]
+    )
+
+    risco_por_perfil = {
+        "conservador": "baixo",
+        "moderado": "medio",
+        "arrojado": "alto"
+    }
+
+    # ========================================================
+    # 1) Metas
+    # ========================================================
+
+    quer_metas = any(
+        termo in pergunta_lower
+        for termo in palavras_chave.get("meta", [])
+    )
+
+    if quer_metas:
+
         metas = perfil.get("metas", [])
-        if metas:
-            lista = "\n".join([f"- {m['meta']} (R$ {m['valor_necessario']:,.2f} até {m['prazo']})" for m in metas])
-            resposta_final.append(f"Suas metas atuais:\n{lista}")
-        else:
-            resposta_final.append("Você não possui metas cadastradas no momento.")
 
-    # 2. Detecção de Perfil explícito na pergunta ou padrão do cliente
+        if metas:
+
+            texto_metas = []
+
+            for m in metas:
+                texto_metas.append(
+                    f"- {m['meta']} "
+                    f"(R$ {formatar_moeda(m['valor_necessario'])} "
+                    f"até {m['prazo']})"
+                )
+
+            resposta_final.append(
+                "Suas metas atuais são:\n"
+                + "\n".join(texto_metas)
+            )
+
+        else:
+
+            resposta_final.append(
+                "Você não possui metas cadastradas."
+            )
+
+    # ========================================================
+    # 2) Histórico
+    # ========================================================
+
+    quer_historico = any(
+        termo in pergunta_lower
+        for termo in [
+            "atendimento",
+            "histórico",
+            "historico",
+            "recentemente",
+            "último atendimento",
+            "ultimo atendimento"
+        ]
+    )
+
+    if quer_historico:
+
+        hist = historico[
+            historico["id_cliente"] == perfil["id"]
+        ]
+
+        if not hist.empty:
+
+            ultimo = (
+                hist
+                .sort_values("data")
+                .iloc[-1]
+            )
+
+            resposta_final.append(
+                f"Seu último atendimento foi em "
+                f"{ultimo['data']}, "
+                f"tema: {ultimo['tema']}.\n"
+                f"Resumo: {ultimo['resumo']}."
+            )
+
+    # ========================================================
+    # 3) Riscos
+    # ========================================================
+
+    if (
+        "risco" in pergunta_lower
+        or "volatilidade" in pergunta_lower
+    ):
+
+        resposta_final.append(
+            "Os produtos financeiros podem apresentar:\n"
+            "- Risco baixo: Tesouro Selic, CDB e LCI/LCA.\n"
+            "- Risco médio: Fundos Multimercado.\n"
+            "- Risco alto: Fundos de Ações e ETFs internacionais."
+        )
+
+    # ========================================================
+    # 4) Perfil explícito
+    # ========================================================
+
     perfil_detectado = None
-    for p_termo in ["conservador", "conservadora", "moderado", "moderada", "arrojado", "arrojada"]:
-        if p_termo in pergunta_lower:
-            perfil_detectado = normalizar_perfil(p_termo)
+
+    for termo in [
+        "conservador",
+        "conservadora",
+        "moderado",
+        "moderada",
+        "arrojado",
+        "arrojada"
+    ]:
+
+        if termo in pergunta_lower:
+
+            perfil_detectado = normalizar_perfil(termo)
             break
-    
-    if not perfil_detectado and ("perfil" in pergunta_lower or "meu perfil" in pergunta_lower):
+
+    # ========================================================
+    # 5) Meu perfil
+    # ========================================================
+
+    if (
+        perfil_detectado is None
+        and "perfil" in pergunta_lower
+    ):
+
         perfil_detectado = perfil_cliente
 
-    # 3. Coleta de sugestões baseada em palavras-chave
+    # ========================================================
+    # 6) Investimentos
+    # ========================================================
+
+    quer_investimento = any(
+        termo in pergunta_lower
+        for termo in palavras_chave.get(
+            "investir",
+            []
+        )
+    )
+
+    if quer_investimento and perfil_detectado is None:
+
+        perfil_detectado = perfil_cliente
+
+    # ========================================================
+    # 7) Produtos pelo perfil
+    # ========================================================
+
+    if perfil_detectado:
+
+        risco_alvo = risco_por_perfil[
+            perfil_detectado
+        ]
+
+        produtos_perfil = [
+
+            p["nome"]
+
+            for p in produtos
+
+            if p["risco"] == risco_alvo
+        ]
+
+        if produtos_perfil:
+
+            resposta_final.append(
+                f"Investimentos para o perfil "
+                f"{perfil_detectado} são:\n"
+                + "\n".join(
+                    f"- {p}"
+                    for p in produtos_perfil
+                )
+            )
+
+    # ========================================================
+    # 8) Sugestões acumuladas
+    # ========================================================
+
+    sugestoes = []
+
     for chave, termos in palavras_chave.items():
-        if any(t in pergunta_lower for t in termos):
-            if chave in chave_sugestoes:
-                sugestoes_coletadas.extend(chave_sugestoes[chave])
 
-    # 4. Busca de produtos (se perfil detectado ou se o usuário pediu sugestões gerais)
-    risco_map = {"conservador": "baixo", "moderado": "medio", "arrojado": "alto"}
-    risco_alvo = risco_map.get(perfil_detectado or perfil_cliente)
-    
-    produtos_filtrados = [p["nome"] for p in produtos if p["risco"] == risco_alvo]
-    
-    if produtos_filtrados:
-        p_nome = perfil_detectado or perfil_cliente
-        resposta_final.append(f"Investimentos para o perfil {p_nome}: " + ", ".join(produtos_filtrados))
-    
-    if sugestoes_coletadas:
-        resposta_final.append("Sugestões relacionadas:")
-        for sugestao in list(set(sugestoes_coletadas)): # set para evitar duplicatas
-            resposta_final.append(f"- {sugestao}")
+        encontrou_chave = any(
+            termo in pergunta_lower
+            for termo in termos
+        )
 
-    return "\n\n".join(resposta_final) if resposta_final else "Sinto muito, mas não tenho essa informação detalhada no momento. Posso ajudar com suas metas ou sugestões de investimento?"
-
-# 4. Execução da interação (Simulação)
-def rodar_interacao():
-    perfis, produtos, transacoes, historico, palavras_chave, chave_sugestoes = carregar_dados()
-    print("Finassist: Olá! Sou seu assistente financeiro pessoal.")
-    print("Clientes cadastrados:")
-    for p in sorted(perfis, key=lambda x: x['nome']):
-      print(f"- {p['nome']}")    
-
-    # Validação simples
-    while True:
-        nome_escolhido = input("\nDigite o nome do cliente (ou 'fim'): ").strip().lower()
-        if nome_escolhido.lower() == 'fim':
-          print("Encerrando ...")
-          return
-        
-        # Busca todos os perfis que contenham o trecho digitado
-        resultados = [p for p in perfis if nome_escolhido in p["nome"].lower()]
-        if not resultados:
-            print("Nenhum cliente encontrado. Tente novamente ou 'FIM' para encerrar.")
+        if not encontrou_chave:
             continue
-        
-        perfil = resultados[0]
-        print(f"\nConectado como: {perfil['nome']} ({perfil['perfil_investidor']})")
+
+        # chave direta
+        if chave in chave_sugestoes:
+
+            sugestoes.extend(
+                chave_sugestoes[chave]
+            )
+
+        # # procura sugestões pelos termos
+        # for termo in termos:
+
+        #     termo_normalizado = (
+        #         termo
+        #         .lower()
+        #         .replace(" ", "_")
+        #         .replace("/", "_")
+        #     )
+
+        #     if termo_normalizado in chave_sugestoes:
+
+        #         sugestoes.extend(
+        #             chave_sugestoes[
+        #                 termo_normalizado
+        #             ]
+        #         )
+
+    # remove duplicidades
+    sugestoes = list(dict.fromkeys(sugestoes))
+
+    if sugestoes:
+
+        resposta_final.append(
+            "Sugestões:\n"
+            + "\n".join(
+                f"- {s}"
+                for s in sugestoes
+            )
+        )
+
+    # ========================================================
+    # 9) Fallback
+    # ========================================================
+
+    if resposta_final:
+
+        return "\n\n".join(resposta_final)
+
+    return (
+        "Sinto muito, mas não tenho essa "
+        "informação detalhada no momento. "
+        "Posso ajudar com metas, histórico "
+        "ou sugestões de investimento."
+    )
+
+
+# ============================================================
+# Interação
+# ============================================================
+
+def rodar_interacao(
+
+    perfis,
+    produtos,
+    historico,
+    palavras_chave,
+    chave_sugestoes
+
+):
+
+    print(
+        "Finassist: Olá! "
+        "Sou seu assistente financeiro pessoal."
+    )
+
+    print("\nClientes cadastrados:")
+
+    for p in sorted(
+        perfis,
+        key=lambda x: x["nome"]
+    ):
+
+        print(f"- {p['nome']}")
+
+    while True:
+
+        nome = input(
+            "\nDigite o nome ou sobrenome "
+            "do cliente ('FIM' para sair): "
+        ).strip()
+
+        if nome.lower() == "fim":
+
+            print("Encerrando...")
+            return
+
+        encontrados = [
+
+            p
+
+            for p in perfis
+
+            if nome.lower()
+            in p["nome"].lower()
+        ]
+
+        if len(encontrados) == 0:
+
+            print(
+                "Nenhum cliente encontrado."
+            )
+
+            continue
+
+        if len(encontrados) > 1:
+
+            print(
+                "\nForam encontrados "
+                "vários clientes:"
+            )
+
+            for p in encontrados:
+
+                print(f"- {p['nome']}")
+
+            continue
+
+        perfil = encontrados[0]
+
+        print(
+            f"\nConectado como "
+            f"{perfil['nome']} "
+            f"({perfil['perfil_investidor']})"
+        )
 
         while True:
-            pergunta = input(f"{perfil['nome']}, como posso te ajudar? ('fim'): ")
-            if pergunta.lower() == 'fim':
-                print("Encerrando ...")
+
+            pergunta = input(
+                f"\n{perfil['nome']}, "
+                f"como posso ajudar? "
+                f"('FIM' para sair): "
+            )
+
+            if pergunta.lower() == "fim":
+
+                print("Encerrando...")
                 return
-            resposta = motor_finassist(perfil, pergunta, produtos, palavras_chave, chave_sugestoes)
-            print(f"\nFinassist: {resposta}\n")
-            print()
+
+            resposta = motor_finassist(
+                perfil,
+                pergunta,
+                produtos,
+                historico,
+                palavras_chave,
+                chave_sugestoes
+            )
+
+            print(
+                "\nFinassist:"
+            )
+
+            print(resposta)
+
+# ============================================================
+# Main
+# ============================================================
 
 if __name__ == "__main__":
+
     cls()
-    rodar_interacao()
+
+    (
+        perfis,
+        produtos,
+        transacoes,
+        historico,
+        palavras_chave,
+        chave_sugestoes
+    ) = carregar_dados()
+
+    rodar_interacao(
+        perfis,
+        produtos,
+        historico,
+        palavras_chave,
+        chave_sugestoes
+    )
