@@ -5,6 +5,7 @@
 import csv
 import json
 import pandas as pd
+import re
 
 import os
 import subprocess
@@ -57,6 +58,37 @@ def normalizar_perfil(perfil):
 
     return mapa.get(perfil, perfil)
 
+def tokenizar(texto):
+    """
+    Remove pontuação e devolve uma lista de palavras.
+    """
+
+    return re.findall(
+        r'\b[\w/]+\b',
+        texto.lower()
+    )
+
+NEGACOES = {
+    "não",
+    "nao",
+    "nunca",
+    "jamais",
+    "nem"
+}
+
+def termo_negado(tokens, indice, janela = 2):
+    """
+    Verifica se existe uma negação nas palavras
+    imediatamente anteriores ao termo.
+    """
+
+    inicio = max(0, indice - janela)
+
+    return any(
+        token in NEGACOES
+        for token in tokens[inicio:indice]
+    )
+
 # ============================================================
 # Carregamento dos dados
 # ============================================================
@@ -88,6 +120,8 @@ def motor_finassist(
 ):
 
     pergunta_lower = pergunta.lower()
+
+    tokens = tokenizar(pergunta)
 
     resposta_final = []
 
@@ -274,10 +308,26 @@ def motor_finassist(
 
     for chave, termos in palavras_chave.items():
 
-        encontrou_chave = any(
-            termo in pergunta_lower
-            for termo in termos
-        )
+        encontrou_chave = False
+
+        for termo in termos:
+
+            termo_busca = termo.lower()
+
+            for indice, token in enumerate(tokens):
+
+                if token != termo_busca:
+                    continue
+
+                # ignora se estiver negado
+                if termo_negado(tokens, indice):
+                    continue
+
+                encontrou_chave = True
+                break
+
+            if encontrou_chave:
+                break
 
         if not encontrou_chave:
             continue
@@ -328,13 +378,7 @@ def motor_finassist(
 
         return "\n\n".join(resposta_final)
 
-    return (
-        "Sinto muito, mas não tenho essa "
-        "informação detalhada no momento. "
-        "Posso ajudar com metas, histórico "
-        "ou sugestões de investimento."
-    )
-
+    return "Sinto muito, mas não tenho essa informação detalhada no momento. Posso ajudar com suas metas ou sugestões de investimento?"
 
 # ============================================================
 # Interação
