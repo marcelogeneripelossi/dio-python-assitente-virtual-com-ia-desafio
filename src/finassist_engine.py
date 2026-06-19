@@ -34,7 +34,6 @@ def cls():
     comando = 'cls' if os.name == 'nt' else 'clear'
     subprocess.run (comando, shell = True)
 
-
 def formatar_moeda(valor):
     return (
         f"{valor:,.2f}"
@@ -42,7 +41,6 @@ def formatar_moeda(valor):
         .replace(".", ",")
         .replace("_", ".")
     )
-
 
 def normalizar_perfil(perfil):
     perfil = perfil.lower().strip()
@@ -114,6 +112,7 @@ def motor_finassist(
     perfil,
     pergunta,
     produtos,
+    transacoes,
     historico,
     palavras_chave,
     chave_sugestoes
@@ -171,7 +170,7 @@ def motor_finassist(
             )
 
     # ========================================================
-    # 2) Histórico
+    # 2) Histórico, Transações e Gastos
     # ========================================================
 
     quer_historico = any(
@@ -207,6 +206,108 @@ def motor_finassist(
                 f"Resumo: {ultimo['resumo']}."
             )
 
+    quer_transacoes = any(
+        termo in pergunta_lower
+        for termo in [
+            "transação",
+            "transações",
+            "transacao",
+            "transacoes",
+            "movimentação",
+            "movimentações",
+            "movimentacao",
+            "movimentacoes"
+        ]
+    )
+
+    if quer_transacoes:
+
+        trans = transacoes[
+            transacoes["id_cliente"] == perfil["id"]
+        ]
+
+        if not trans.empty:
+
+            ultimas = (
+                trans
+                .sort_values("data", ascending=False)
+                .head(3)
+            )
+
+            linhas = []
+
+            for _, t in ultimas.iterrows():
+
+                linhas.append(
+                    f"- {t['data']} | "
+                    f"{t['descricao']} | "
+                    f"R$ {formatar_moeda(t['valor'])}"
+                )
+
+            resposta_final.append(
+                "Suas últimas transações foram:\n"
+                + "\n".join(linhas)
+            )
+
+    quer_gastos = any(
+        termo in pergunta_lower
+        for termo in [
+            "quanto gastei",
+            "total de despesas",
+            "despesas"
+        ]
+    )
+
+    if quer_gastos:
+
+        saidas = transacoes[
+            (transacoes["id_cliente"] == perfil["id"])
+            &
+            (transacoes["tipo"] == "saida")
+        ]
+
+        total = saidas["valor"].sum()
+
+        resposta_final.append(
+            f"Suas despesas totalizam "
+            f"R$ {formatar_moeda(total)}."
+        )
+
+    quer_categoria = any(
+        termo in pergunta_lower
+        for termo in [
+            "gastando mais",
+            "maior despesa",
+            "categoria"
+        ]
+    )
+
+    if quer_categoria:
+
+        saidas = transacoes[
+            (transacoes["id_cliente"] == perfil["id"])
+            &
+            (transacoes["tipo"] == "saida")
+        ]
+
+        if not saidas.empty:
+
+            resumo = (
+                saidas
+                .groupby("categoria")["valor"]
+                .sum()
+            )
+
+            categoria = resumo.idxmax()
+
+            valor = resumo.max()
+
+            resposta_final.append(
+                f"Sua maior despesa está na categoria "
+                f"'{categoria}', totalizando "
+                f"R$ {formatar_moeda(valor)}."
+            )
+    
     # ========================================================
     # 3) Riscos
     # ========================================================
@@ -385,9 +486,9 @@ def motor_finassist(
 # ============================================================
 
 def rodar_interacao(
-
     perfis,
     produtos,
+    transacoes,
     historico,
     palavras_chave,
     chave_sugestoes
@@ -421,11 +522,8 @@ def rodar_interacao(
             return
 
         encontrados = [
-
             p
-
             for p in perfis
-
             if nome.lower()
             in p["nome"].lower()
         ]
@@ -476,6 +574,7 @@ def rodar_interacao(
                 perfil,
                 pergunta,
                 produtos,
+                transacoes,
                 historico,
                 palavras_chave,
                 chave_sugestoes
@@ -507,6 +606,7 @@ if __name__ == "__main__":
     rodar_interacao(
         perfis,
         produtos,
+        transacoes,
         historico,
         palavras_chave,
         chave_sugestoes
