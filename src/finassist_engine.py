@@ -1,4 +1,4 @@
- ## Código a ser utilizado no Colab. No Notebook são gerados os arquivos de dados para utilização da simulação do Agente.
+## Código a ser utilizado no Colab. No Notebook são gerados os arquivos de dados para utilização da simulação do Agente.
 ## Para simulação utilizando uma interface simples com Streamlit, é utilizado o app.py
 ## Versão: lê os dados já gravados em arquivos na pasta 'data/'
 
@@ -87,6 +87,12 @@ def termo_negado(tokens, indice, janela = 2):
         for token in tokens[inicio:indice]
     )
 
+mapa_risco_perfil = {
+    "baixo": "conservador",
+    "medio": "moderado",
+    "alto": "arrojado"
+}
+
 # ============================================================
 # Carregamento dos dados
 # ============================================================
@@ -116,6 +122,7 @@ def carregar_dados():
 # ============================================================
 
 def motor_finassist(perfil, pergunta, dados):
+
     pergunta_lower = pergunta.lower()
 
     tokens = tokenizar(pergunta)
@@ -315,11 +322,50 @@ def motor_finassist(perfil, pergunta, dados):
         or "volatilidade" in pergunta_lower
     ):
 
+        # Cria uma cópia da lista de produtos e embaralha para garantir aleatoriedade
+        produtos_embaralhados = dados["produtos"].copy()
+        random.shuffle(produtos_embaralhados)
+     
+        produtos_por_risco = {}
+
+        for produto in produtos_embaralhados:
+
+            risco = produto["risco"]
+            nome = produto["nome"]
+
+            produtos_por_risco.setdefault(
+                risco,
+                []
+            ).append(nome)
+
+        linhas = []
+
+        ordem = {
+            "baixo": "baixo",
+            "medio": "médio",
+            "alto": "alto"
+        }
+
+        for risco_json, risco_texto in ordem.items():
+
+            nomes = produtos_por_risco.get(
+                risco_json,
+                []
+            )
+
+            if nomes:
+                nomes_limitados = nomes[:2]
+
+                linhas.append(
+                    f"- Risco {risco_texto} "
+                    f"(perfil {mapa_risco_perfil[risco_json]}): "
+                    + ", ".join(nomes_limitados)
+                    + "."
+                )
+
         resposta_final.append(
             "Os produtos financeiros podem apresentar:\n"
-            "- Risco baixo: Tesouro Selic, CDB e LCI/LCA.\n"
-            "- Risco médio: Fundos Multimercado.\n"
-            "- Risco alto: Fundos de Ações e ETFs internacionais."
+            + "\n".join(linhas)
         )
 
     # ========================================================
