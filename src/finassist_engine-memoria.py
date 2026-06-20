@@ -1,0 +1,914 @@
+## Para simulação utilizando uma interface simples com Streamlit, é utilizado o app.py
+## Versão: Faz a simulação do Agente sem a necessidade dos arquivos pois os dados estão em variáveis.
+
+import pandas as pd
+import random
+import re
+
+import os
+import subprocess
+
+# system_prompt = """
+# Você é o Finassist, um assistente virtual com IA especializado em educação financeira e planejamento de metas. Seu público-alvo são clientes que buscam organizar suas finanças de forma consciente.
+# 
+# [DIRETRIZES DE COMPORTAMENTO]
+# 1. Papel: Atue como um mentor e educador financeiro. Seu foco é explicar os conceitos e ajudar o cliente a entender suas opções, nunca forçar a venda de um produto.
+# 2. Tom de Voz: Didático, profissional, encorajador e transparente. Evite jargões excessivamente complexos sem explicá-los primeiro.
+# 3. Personalização: Utilize ativamente os dados de perfil (como os do João Silva), transações e histórico fornecidos no contexto para dar respostas personalizadas.
+# 
+# [REGRAS DE SEGURANÇA E ANTI-ALUCINAÇÃO]
+# 1. Restrição de Base: Responda às perguntas baseando-se ESTRITAMENTE nos dados fornecidos (Perfil, Transações e Produtos).
+# 2. Proibição de Invenção: Se o cliente perguntar sobre um dado, valor ou produto financeiro que não está na base fornecida, responda exatamente: "Sinto muito, mas não tenho essa informação no momento."
+# 3. Alinhamento de Risco: Nunca sugira produtos de risco médio ou alto (como Fundos de Ações) se o perfil do investidor constar como "conservador" ou se o cliente não aceitar riscos.
+# 4. Escopo Fechado: Se o usuário tentar desviar o assunto para temas não financeiros (programação, culinária, etc.), recuse educadamente e retorne ao foco financeiro.
+# """
+#
+
+# ============================================================
+# Utilidades
+# ============================================================
+
+def cls():
+    comando = 'cls' if os.name == 'nt' else 'clear'
+    subprocess.run (comando, shell = True)
+
+def formatar_moeda(valor):
+    return (
+        f"{valor:,.2f}"
+        .replace(",", "_")
+        .replace(".", ",")
+        .replace("_", ".")
+    )
+
+def normalizar_perfil(perfil):
+    perfil = perfil.lower().strip()
+
+    mapa = {
+        "conservador": "conservador",
+        "conservadora": "conservador",
+        "moderado": "moderado",
+        "moderada": "moderado",
+        "arrojado": "arrojado",
+        "arrojada": "arrojado"
+    }
+
+    return mapa.get(perfil, perfil)
+
+def tokenizar(texto):
+    """
+    Remove pontuação e devolve uma lista de palavras.
+    """
+
+    return re.findall(
+        r'\b[\w/]+\b',
+        texto.lower()
+    )
+
+NEGACOES = {
+    "não",
+    "nao",
+    "nunca",
+    "jamais",
+    "nem"
+}
+
+def termo_negado(tokens, indice, janela = 2):
+    """
+    Verifica se existe uma negação nas palavras
+    imediatamente anteriores ao termo.
+    """
+
+    inicio = max(0, indice - janela)
+
+    return any(
+        token in NEGACOES
+        for token in tokens[inicio:indice]
+    )
+
+mapa_risco_perfil = {
+    "baixo": "conservador",
+    "medio": "moderado",
+    "alto": "arrojado"
+}
+
+# ============================================================
+# Carregamento dos dados em variáveis globais
+# ============================================================
+
+def carregar_dados():
+
+    # Dados do histórico do cliente
+    dados_historico = [
+        {"id_cliente": 1, "data": "2025-09-01", "canal": "chat", "tema": "CDB", "resumo": "Explicação sobre impostos no CDB", "resolvido": "sim"},
+        {"id_cliente": 2, "data": "2025-09-05", "canal": "telefone", "tema": "App", "resumo": "Erro de login resolvido", "resolvido": "sim"},
+        {"id_cliente": 3, "data": "2025-09-10", "canal": "chat", "tema": "Tesouro", "resumo": "Dúvida sobre taxa de custódia", "resolvido": "sim"},
+        {"id_cliente": 4, "data": "2025-09-15", "canal": "email", "tema": "Investimento", "resumo": "Consulta sobre LCI", "resolvido": "sim"},
+        {"id_cliente": 5, "data": "2025-09-15", "canal": "chat", "tema": "CDB", "resumo": "Cliente perguntou sobre rentabilidade e prazos", "resolvido": "sim"},
+        {"id_cliente": 4, "data": "2025-09-22", "canal": "telefone", "tema": "Problema no app", "resumo": "Erro ao visualizar extrato foi corrigido", "resolvido": "sim"},
+        {"id_cliente": 3, "data": "2025-10-01", "canal": "chat", "tema": "Tesouro Selic", "resumo": "Cliente pediu explicação sobre o funcionamento do Tesouro Direto", "resolvido": "sim"},
+        {"id_cliente": 2, "data": "2025-10-01", "canal": "chat", "tema": "Metas", "resumo": "Ajuste de meta de reserva", "resolvido": "sim"},
+        {"id_cliente": 1, "data": "2025-10-05", "canal": "telefone", "tema": "Cartão", "resumo": "Bloqueio por suspeita de fraude", "resolvido": "sim"},
+        {"id_cliente": 4, "data": "2025-10-10", "canal": "chat", "tema": "Fundo", "resumo": "Rentabilidade do multimercado", "resolvido": "sim"},
+        {"id_cliente": 2, "data": "2025-10-12", "canal": "chat", "tema": "Metas financeiras", "resumo": "Cliente acompanhou o progresso da reserva de emergência", "resolvido": "sim"},
+        {"id_cliente": 3, "data": "2025-10-15", "canal": "chat", "tema": "Perfil", "resumo": "Atualização de renda mensal", "resolvido": "sim"},
+        {"id_cliente": 5, "data": "2025-10-20", "canal": "email", "tema": "Documento", "resumo": "Envio de comprovante", "resolvido": "sim"},
+        {"id_cliente": 4, "data": "2025-10-25", "canal": "email", "tema": "Atualização cadastral", "resumo": "Cliente atualizou e-mail e telefone", "resolvido": "sim"},
+        {"id_cliente": 2, "data": "2025-10-25", "canal": "chat", "tema": "Ações", "resumo": "Dúvida sobre volatilidade", "resolvido": "sim"},
+        {"id_cliente": 1, "data": "2025-11-01", "canal": "telefone", "tema": "Investimento", "resumo": "Resgate antecipado", "resolvido": "não"},
+        {"id_cliente": 3, "data": "2025-11-05", "canal": "chat", "tema": "Metas", "resumo": "Configuração de débito automático", "resolvido": "sim"}
+    ]
+
+    # Criar DataFrame como se fosse carregado de CSV
+    historico = pd.DataFrame(dados_historico)
+
+
+    # Dados das transações do cliente
+    dados_transacoes = [
+        {"id_cliente": 1, "data": "2025-10-01", "descricao": "Salário", "categoria": "receita", "valor": 5000.00, "tipo": "entrada"},
+        {"id_cliente": 1, "data": "2025-10-02", "descricao": "Aluguel", "categoria": "moradia", "valor": 1200.00, "tipo": "saida"},
+        {"id_cliente": 1, "data": "2025-10-03", "descricao": "Supermercado", "categoria": "alimentacao", "valor": 450.00, "tipo": "saida"},
+        
+        {"id_cliente": 2, "data": "2025-10-01", "descricao": "Salário", "categoria": "receita", "valor": 3000.00, "tipo": "entrada"},
+        {"id_cliente": 2, "data": "2025-10-05", "descricao": "Netflix", "categoria": "lazer", "valor": 55.90, "tipo": "saida"},
+        {"id_cliente": 2, "data": "2025-10-10", "descricao": "Ifood", "categoria": "alimentacao", "valor": 120.00, "tipo": "saida"},
+        
+        {"id_cliente": 3, "data": "2025-10-01", "descricao": "Salário", "categoria": "receita", "valor": 12000.00, "tipo": "entrada"},
+        {"id_cliente": 3, "data": "2025-10-15", "descricao": "Investimento Ações", "categoria": "investimento", "valor": 2000.00, "tipo": "saida"},
+        {"id_cliente": 3, "data": "2025-10-20", "descricao": "Manutenção carro", "categoria": "transporte", "valor": 400.00, "tipo": "saida"},
+        
+        {"id_cliente": 4, "data": "2025-10-01", "descricao": "Salário", "categoria": "receita", "valor": 7500.00, "tipo": "entrada"},
+        {"id_cliente": 4, "data": "2025-10-07", "descricao": "Farmácia", "categoria": "saude", "valor": 89.00, "tipo": "saida"},
+        {"id_cliente": 4, "data": "2025-10-12", "descricao": "Uber", "categoria": "transporte", "valor": 45.00, "tipo": "saida"},
+        
+        {"id_cliente": 5, "data": "2025-10-01", "descricao": "Salário", "categoria": "receita", "valor": 4500.00, "tipo": "entrada"},
+        {"id_cliente": 5, "data": "2025-10-15", "descricao": "Conta de Luz", "categoria": "moradia", "valor": 180.00, "tipo": "saida"},
+        {"id_cliente": 5, "data": "2025-10-18", "descricao": "Internet", "categoria": "moradia", "valor": 120.00, "tipo": "saida"},
+        {"id_cliente": 5, "data": "2025-10-30", "descricao": "Poupança", "categoria": "investimento", "valor": 500.00, "tipo": "saida"}
+    ]
+
+    # Criar DataFrame como se fosse carregado de CSV
+    transacoes = pd.DataFrame(dados_transacoes)
+
+    perfis = [
+        {
+            "id": 1,
+            "nome": "João Silva",
+            "idade": 32,
+            "profissao": "Analista de Sistemas",
+            "renda_mensal": 5000,
+            "perfil_investidor": "moderado",
+            "objetivo_principal": "Construir reserva de emergência",
+            "patrimonio_total": 15000,
+            "reserva_emergencia_atual": 10000,
+            "aceita_risco": False,
+            "metas": [
+                {"meta": "Completar reserva de emergência", "valor_necessario": 15000, "prazo": "2026-06"},
+                {"meta": "Entrada do apartamento", "valor_necessario": 50000, "prazo": "2027-12"}
+            ]
+        },
+        {
+            "id": 2,
+            "nome": "Maria Souza",
+            "idade": 25,
+            "profissao": "Designer",
+            "renda_mensal": 3000,
+            "perfil_investidor": "conservador",
+            "objetivo_principal": "Viagem internacional",
+            "patrimonio_total": 5000,
+            "reserva_emergencia_atual": 2000,
+            "aceita_risco": False,
+            "metas": [
+                {"meta": "Viagem para Europa", "valor_necessario": 12000, "prazo": "2026-12"}
+            ]
+        },
+        {
+            "id": 3,
+            "nome": "Carlos Mendes",
+            "idade": 45,
+            "profissao": "Gerente de Projetos",
+            "renda_mensal": 12000,
+            "perfil_investidor": "arrojado",
+            "objetivo_principal": "Aposentadoria antecipada",
+            "patrimonio_total": 250000,
+            "reserva_emergencia_atual": 50000,
+            "aceita_risco": True,
+            "metas": [
+                {"meta": "Aposentadoria FIRE", "valor_necessario": 1000000, "prazo": "2035-01"},
+                {"meta": "Intercâmbio filhos", "valor_necessario": 80000, "prazo": "2028-05"}
+            ]
+        },
+        {
+            "id": 4,
+            "nome": "Ana Oliveira",
+            "idade": 35,
+            "profissao": "Advogada",
+            "renda_mensal": 7500,
+            "perfil_investidor": "moderado",
+            "objetivo_principal": "Quitação de dívidas",
+            "patrimonio_total": 20000,
+            "reserva_emergencia_atual": 5000,
+            "aceita_risco": False,
+            "metas": [
+                {"meta": "Quitação Financiamento", "valor_necessario": 30000, "prazo": "2027-01"}
+            ]
+        },
+        {
+            "id": 5,
+            "nome": "Pedro Lima",
+            "idade": 30,
+            "profissao": "Engenheiro Civil",
+            "renda_mensal": 4500,
+            "perfil_investidor": "conservador",
+            "objetivo_principal": "Compra de veículo",
+            "patrimonio_total": 12000,
+            "reserva_emergencia_atual": 8000,
+            "aceita_risco": False,
+            "metas": [
+                {"meta": "Veículo seminovo", "valor_necessario": 40000, "prazo": "2026-10"}
+            ]
+        }
+    ]
+
+    produtos = [
+        {
+            "nome": "Tesouro Selic",
+            "categoria": "renda_fixa",
+            "risco": "baixo",
+            "rentabilidade": "100% da Selic",
+            "aporte_minimo": 30.00,
+            "indicado_para": "Reserva de emergência e iniciantes"
+        },
+        {
+            "nome": "CDB Liquidez Diária",
+            "categoria": "renda_fixa",
+            "risco": "baixo",
+            "rentabilidade": "102% do CDI",
+            "aporte_minimo": 100.00,
+            "indicado_para": "Quem busca segurança com rendimento diário"
+        },
+        {
+            "nome": "LCI/LCA",
+            "categoria": "renda_fixa",
+            "risco": "baixo",
+            "rentabilidade": "95% do CDI",
+            "aporte_minimo": 1000.00,
+            "indicado_para": "Quem pode esperar 90 dias (isento de IR)"
+        },
+        {
+            "nome": "Fundo Multimercado",
+            "categoria": "fundo",
+            "risco": "medio",
+            "rentabilidade": "CDI + 2%",
+            "aporte_minimo": 500.00,
+            "indicado_para": "Perfil moderado que busca diversificação"
+        },
+        {
+            "nome": "Fundo de Ações",
+            "categoria": "fundo",
+            "risco": "alto",
+            "rentabilidade": "Variável",
+            "aporte_minimo": 100.00,
+            "indicado_para": "Perfil arrojado com foco no longo prazo"
+        },
+        {
+            "nome":"Tesouro Selic 2029",
+            "categoria":"renda_fixa",
+            "risco":"baixo",
+            "rentabilidade":"100% Selic",
+            "aporte_minimo":30.00,
+            "indicado_para":"Reserva de emergência"
+        },
+        {
+            "nome":"CDB Pós-Fixado 110%",
+            "categoria":"renda_fixa",
+            "risco":"baixo",
+            "rentabilidade":"110% CDI",
+            "aporte_minimo":500.00,
+            "indicado_para":"Curto/Médio prazo"
+        },
+        {
+            "nome":"LCI Direto 95%",
+            "categoria":"renda_fixa",
+            "risco":"baixo",
+            "rentabilidade":"95% CDI (Isento IR)",
+            "aporte_minimo":1000.00,
+            "indicado_para":"Prazo mínimo de 90 dias"
+        },
+        {
+            "nome":"Fundo Multimercado Agressivo",
+            "categoria":"fundo",
+            "risco":"medio",
+            "rentabilidade":"CDI + 3.5%",
+            "aporte_minimo":200.00,
+            "indicado_para":"Diversificação moderada"
+        },
+        {
+            "nome":"Fundo de Ações Tech",
+            "categoria":"fundo",
+            "risco":"alto",
+            "rentabilidade":"Variável",
+            "aporte_minimo":100.00,
+            "indicado_para":"Longuíssimo prazo"
+        },
+        {
+            "nome":"ETF S&P 500",
+            "categoria":"fundo",
+            "risco":"alto",
+            "rentabilidade":"Dólar + Variação Global",
+            "aporte_minimo":50.00,
+            "indicado_para":"Exposição internacional"
+        }
+    ]
+
+    palavras_chave = {
+        "meta": ["meta", "objetivo", "planejamento", "alvo"],
+        "seguro": ["seguro", "poupança", "poupanca", "selic", "lci/lca", "lci_lca"],
+        "poupanca": ["poupança", "guardar dinheiro", "economizar", "poupar"],
+        "acoes": ["ações", "arriscar", "bolsa", "mercado", "volatilidade"],
+        "tesouro": ["tesouro", "selic", "direto", "título público"],
+        "cdb": ["cdb", "certificado de depósito", "liquidez diária"],
+        "lci_lca": ["lci", "lca", "lci/lca", "letra de crédito", "imobiliário", "agrícola"],
+        "fundo_multimercado": ["multimercado", "diversificação"],
+        "fundo_acoes": ["fundo de ações", "ações tech", "ações", "variável"],
+        "etf": ["etf", "s&p", "internacional", "global"],
+        "investir": ["investir", "investimento", "aplicar", "aplicação"]
+    }
+
+    chave_sugestoes = {
+        "poupanca": [
+            "Tesouro Selic é ideal para reserva de emergência.",
+            "CDB Liquidez Diária é uma alternativa à poupança tradicional."
+        ],
+        "acoes": [
+            "Fundo de Ações é indicado para perfil arrojado.",
+            "ETF S&P 500 dá exposição internacional."
+        ],
+        "tesouro": [
+            "Tesouro Selic é ideal para reserva de emergência.",
+            "Tesouro IPCA protege contra inflação em longo prazo."
+        ],
+        "cdb": [
+            "CDB Liquidez Diária é indicado para segurança e liquidez.",
+            "CDB Pós-Fixado 110% oferece maior rentabilidade."
+        ],
+        "lci_lca": [
+            "LCI/LCA são isentos de IR e indicados para médio prazo.",
+            "LCI Direto 95% exige prazo mínimo de 90 dias."
+        ],
+        "fundo_multimercado": [
+            "Fundo Multimercado é indicado para perfil moderado.",
+            "Fundo Multimercado Agressivo oferece diversificação com maior risco."
+        ],
+        "fundo_acoes": [
+            "Fundo de Ações é indicado para longo prazo.",
+            "Fundo de Ações Tech é voltado para perfil arrojado."
+        ],
+        "etf": [
+            "ETF S&P 500 oferece exposição internacional.",
+            "Ideal para diversificação global."
+        ],
+        "seguro": [
+            "Tesouro Selic é ideal para reserva de emergência.",
+            "CDB Liquidez Diária é indicado para segurança e liquidez.",
+            "LCI/LCA são isentos de IR e indicados para médio prazo."
+        ]
+    }
+
+    return {
+        "perfis": perfis,
+        "produtos": produtos,
+        "transacoes": transacoes,
+        "historico": historico,
+        "palavras_chave": palavras_chave,
+        "chave_sugestoes": chave_sugestoes
+    }
+
+# ============================================================
+# Motor do Finassist
+# ============================================================
+
+def motor_finassist(perfil, pergunta, dados):
+
+    pergunta_lower = pergunta.lower()
+
+    tokens = tokenizar(pergunta)
+
+    resposta_final = []
+
+    perfil_cliente = normalizar_perfil(
+        perfil["perfil_investidor"]
+    )
+
+    risco_por_perfil = {
+        "conservador": "baixo",
+        "moderado": "medio",
+        "arrojado": "alto"
+    }
+
+    # ========================================================
+    # 1) Metas
+    # ========================================================
+
+    quer_metas = any(
+        termo in pergunta_lower
+        for termo in palavras_chave.get("meta", [])
+    )
+
+    if quer_metas:
+
+        metas = perfil.get("metas", [])
+
+        if metas:
+
+            texto_metas = []
+
+            for m in metas:
+                texto_metas.append(
+                    f"- {m['meta']} "
+                    f"(R$ {formatar_moeda(m['valor_necessario'])} "
+                    f"até {m['prazo']})"
+                )
+
+            resposta_final.append(
+                "Suas metas atuais são:\n"
+                + "\n".join(texto_metas)
+            )
+
+        else:
+
+            resposta_final.append(
+                "Você não possui metas cadastradas."
+            )
+
+    # ========================================================
+    # 2) Histórico, Transações e Gastos
+    # ========================================================
+
+    quer_historico = any(
+        termo in pergunta_lower
+        for termo in [
+            "atendimento",
+            "histórico",
+            "historico",
+            "recentemente",
+            "último atendimento",
+            "ultimo atendimento"
+        ]
+    )
+
+    if quer_historico:
+
+        hist = historico[
+            historico["id_cliente"] == perfil["id"]
+        ]
+
+        if not hist.empty:
+
+            ultimo = (
+                hist
+                .sort_values("data")
+                .iloc[-1]
+            )
+
+            resposta_final.append(
+                f"Seu último atendimento foi em "
+                f"{ultimo['data']}, "
+                f"tema: {ultimo['tema']}.\n"
+                f"Resumo: {ultimo['resumo']}."
+            )
+
+    quer_transacoes = any(
+        termo in pergunta_lower
+        for termo in [
+            "transação",
+            "transações",
+            "transacao",
+            "transacoes",
+            "movimentação",
+            "movimentações",
+            "movimentacao",
+            "movimentacoes"
+        ]
+    )
+
+    if quer_transacoes:
+
+        trans = transacoes[
+            transacoes["id_cliente"] == perfil["id"]
+        ]
+
+        if not trans.empty:
+
+            ultimas = (
+                trans
+                .sort_values("data", ascending=False)
+                .head(3)
+            )
+
+            linhas = []
+
+            for _, t in ultimas.iterrows():
+
+                linhas.append(
+                    f"- {t['data']} | "
+                    f"{t['descricao']} | "
+                    f"R$ {formatar_moeda(t['valor'])}"
+                )
+
+            resposta_final.append(
+                "Suas últimas transações foram:\n"
+                + "\n".join(linhas)
+            )
+
+    quer_gastos = any(
+        termo in pergunta_lower
+        for termo in [
+            "quanto gastei",
+            "total de despesas",
+            "despesas"
+        ]
+    )
+
+    if quer_gastos:
+
+        saidas = transacoes[
+            (transacoes["id_cliente"] == perfil["id"])
+            &
+            (transacoes["tipo"] == "saida")
+        ]
+
+        total = saidas["valor"].sum()
+
+        resposta_final.append(
+            f"Suas despesas totalizam "
+            f"R$ {formatar_moeda(total)}."
+        )
+
+    quer_categoria = any(
+        termo in pergunta_lower
+        for termo in [
+            "gastando mais",
+            "maior despesa",
+            "categoria"
+        ]
+    )
+
+    if quer_categoria:
+
+        saidas = transacoes[
+            (transacoes["id_cliente"] == perfil["id"])
+            &
+            (transacoes["tipo"] == "saida")
+        ]
+
+        if not saidas.empty:
+
+            resumo = (
+                saidas
+                .groupby("categoria")["valor"]
+                .sum()
+            )
+
+            categoria = resumo.idxmax()
+
+            valor = resumo.max()
+
+            resposta_final.append(
+                f"Sua maior despesa está na categoria "
+                f"'{categoria}', totalizando "
+                f"R$ {formatar_moeda(valor)}."
+            )
+    
+    # ========================================================
+    # 3) Riscos
+    # ========================================================
+
+    if (
+        "risco" in pergunta_lower
+        or "volatilidade" in pergunta_lower
+    ):
+
+        # Cria uma cópia da lista de produtos e embaralha para garantir aleatoriedade
+        produtos_embaralhados = dados["produtos"].copy()
+        random.shuffle(produtos_embaralhados)
+     
+        produtos_por_risco = {}
+
+        for produto in produtos_embaralhados:
+
+            risco = produto["risco"]
+            nome = produto["nome"]
+
+            produtos_por_risco.setdefault(
+                risco,
+                []
+            ).append(nome)
+
+        linhas = []
+
+        ordem = {
+            "baixo": "baixo",
+            "medio": "médio",
+            "alto": "alto"
+        }
+
+        for risco_json, risco_texto in ordem.items():
+
+            nomes = produtos_por_risco.get(
+                risco_json,
+                []
+            )
+
+            if nomes:
+                nomes_limitados = nomes[:2]
+
+                linhas.append(
+                    f"- Risco {risco_texto} "
+                    f"(perfil {mapa_risco_perfil[risco_json]}): "
+                    + ", ".join(nomes_limitados)
+                    + "."
+                )
+
+        resposta_final.append(
+            "Os produtos financeiros podem apresentar:\n"
+            + "\n".join(linhas)
+        )
+
+    # ========================================================
+    # 4) Perfil explícito
+    # ========================================================
+
+    perfil_detectado = None
+
+    for termo in [
+        "conservador",
+        "conservadora",
+        "moderado",
+        "moderada",
+        "arrojado",
+        "arrojada"
+    ]:
+
+        if termo in pergunta_lower:
+
+            perfil_detectado = normalizar_perfil(termo)
+            break
+
+    # ========================================================
+    # 5) Meu perfil
+    # ========================================================
+
+    if (
+        perfil_detectado is None
+        and "perfil" in pergunta_lower
+    ):
+
+        perfil_detectado = perfil_cliente
+
+    # ========================================================
+    # 6) Investimentos
+    # ========================================================
+
+    quer_investimento = any(
+        termo in pergunta_lower
+        for termo in palavras_chave.get(
+            "investir",
+            []
+        )
+    )
+
+    if quer_investimento and perfil_detectado is None:
+
+        perfil_detectado = perfil_cliente
+
+    # ========================================================
+    # 7) Produtos pelo perfil
+    # ========================================================
+
+    if perfil_detectado:
+
+        risco_alvo = risco_por_perfil[
+            perfil_detectado
+        ]
+
+        produtos_perfil = [
+
+            p["nome"]
+
+            for p in produtos
+
+            if p["risco"] == risco_alvo
+        ]
+
+        if produtos_perfil:
+
+            if perfil_detectado != perfil_cliente:
+
+                resposta_final.append(
+                    f"Atenção: seu perfil cadastrado é "
+                    f"'{perfil_cliente}', mas você solicitou "
+                    f"informações para um perfil "
+                    f"'{perfil_detectado}'.\n"
+                    "Os produtos abaixo possuem um nível "
+                    "de risco diferente daquele "
+                    "habitualmente recomendado para você."
+                )
+
+            resposta_final.append(
+                f"Investimentos para o perfil "
+                f"{perfil_detectado} são:\n"
+                + "\n".join(
+                    f"- {p}"
+                    for p in produtos_perfil
+                )
+            )
+
+    # ========================================================
+    # 8) Sugestões acumuladas
+    # ========================================================
+
+    sugestoes = []
+
+    for chave, termos in palavras_chave.items():
+
+        encontrou_chave = False
+
+        for termo in termos:
+
+            termo_busca = termo.lower()
+
+            for indice, token in enumerate(tokens):
+
+                if token != termo_busca:
+                    continue
+
+                # ignora se estiver negado
+                if termo_negado(tokens, indice):
+                    continue
+
+                encontrou_chave = True
+                break
+
+            if encontrou_chave:
+                break
+
+        if not encontrou_chave:
+            continue
+
+        # chave direta
+        if chave in chave_sugestoes:
+
+            sugestoes.extend(
+                chave_sugestoes[chave]
+            )
+
+        # # procura sugestões pelos termos
+        # for termo in termos:
+
+        #     termo_normalizado = (
+        #         termo
+        #         .lower()
+        #         .replace(" ", "_")
+        #         .replace("/", "_")
+        #     )
+
+        #     if termo_normalizado in chave_sugestoes:
+
+        #         sugestoes.extend(
+        #             chave_sugestoes[
+        #                 termo_normalizado
+        #             ]
+        #         )
+
+    # remove duplicidades
+    sugestoes = list(dict.fromkeys(sugestoes))
+
+    if sugestoes:
+
+        resposta_final.append(
+            "Sugestões:\n"
+            + "\n".join(
+                f"- {s}"
+                for s in sugestoes
+            )
+        )
+
+    # ========================================================
+    # 9) Fallback
+    # ========================================================
+
+    if resposta_final:
+
+        return "\n\n".join(resposta_final)
+
+    return "Sinto muito, mas não tenho essa informação detalhada no momento. Posso ajudar com suas metas ou sugestões de investimento?"
+
+# ============================================================
+# Interação
+# ============================================================
+
+def rodar_interacao(dados):
+
+    print(
+        "Finassist: Olá! "
+        "Sou seu assistente financeiro pessoal."
+    )
+
+    encontrados = []
+
+    while True:
+
+      if len(encontrados) == 0:
+        print("\nClientes cadastrados:")
+
+        for p in sorted(
+            perfis,
+            key=lambda x: x["nome"]
+        ):
+
+          print(f"- {p['nome']}")
+
+      nome = input(
+          "\nDigite o nome ou sobrenome "
+          "do cliente ('FIM' para sair): "
+      ).strip()
+
+      if nome.lower() == "fim":
+          print()
+          print("Encerrando Finassist ...")
+          return
+
+      encontrados = [
+          p
+          for p in perfis
+          if nome.lower()
+          in p["nome"].lower()
+      ]
+
+      if len(encontrados) == 0:
+          print()
+          print("Nenhum cliente encontrado.")
+
+          continue
+
+      if len(encontrados) > 1:
+
+          print(
+              "\nForam encontrados "
+              "vários clientes:"
+          )
+
+          for p in encontrados:
+
+              print(f"- {p['nome']}")
+
+          continue
+
+      perfil = encontrados[0]
+
+      print(
+          f"\nConectado como "
+          f"{perfil['nome']} "
+          f"({perfil['perfil_investidor']})"
+      )
+
+      while True:
+
+          pergunta = input(
+              f"\n{perfil['nome']}, "
+              f"como posso ajudar? "
+              f"('FIM' para sair): "
+          )
+
+          if pergunta.lower() == "fim":
+              print()
+              print(f"Finalizando atendimento para {perfil['nome']} ...")
+              encontrados = []
+              break
+
+          resposta = motor_finassist(perfil, pergunta, dados)
+
+          print(
+              "\nFinassist:"
+          )
+
+          print(resposta)
+
+# ============================================================
+# Main
+# ============================================================
+
+if __name__ == "__main__":
+
+    cls()
+
+    dados = carregar_dados()
+
+    perfis = dados["perfis"]
+    produtos = dados["produtos"]
+    transacoes = dados["transacoes"]
+    historico = dados["historico"]  
+    palavras_chave = dados["palavras_chave"]
+    chave_sugestoes = dados["chave_sugestoes"]
+
+    rodar_interacao(dados)
