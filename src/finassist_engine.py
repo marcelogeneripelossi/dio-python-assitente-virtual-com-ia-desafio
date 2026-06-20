@@ -1,4 +1,4 @@
-## Código a ser utilizado no Colab. No Notebook são gerados os arquivos de dados para utilização da simulação do Agente.
+ ## Código a ser utilizado no Colab. No Notebook são gerados os arquivos de dados para utilização da simulação do Agente.
 ## Para simulação utilizando uma interface simples com Streamlit, é utilizado o app.py
 ## Versão: lê os dados já gravados em arquivos na pasta 'data/'
 
@@ -102,22 +102,20 @@ def carregar_dados():
         chave_sugestoes = json.load(f)
     transacoes = pd.read_csv('data/transacoes.csv')
     historico = pd.read_csv('data/historico_atendimento.csv')
-    return perfis, produtos, transacoes, historico, palavras_chave, chave_sugestoes
+    return {
+        "perfis": perfis,
+        "produtos": produtos,
+        "transacoes": transacoes,
+        "historico": historico,
+        "palavras_chave": palavras_chave,
+        "chave_sugestoes": chave_sugestoes
+    }
 
 # ============================================================
 # Motor do Finassist
 # ============================================================
 
-def motor_finassist(
-    perfil,
-    pergunta,
-    produtos,
-    transacoes,
-    historico,
-    palavras_chave,
-    chave_sugestoes
-):
-
+def motor_finassist(perfil, pergunta, dados):
     pergunta_lower = pergunta.lower()
 
     tokens = tokenizar(pergunta)
@@ -485,15 +483,7 @@ def motor_finassist(
 # Interação
 # ============================================================
 
-def rodar_interacao(
-    perfis,
-    produtos,
-    transacoes,
-    historico,
-    palavras_chave,
-    chave_sugestoes
-
-):
+def rodar_interacao(dados):
 
     print(
         "Finassist: Olá! "
@@ -570,15 +560,7 @@ def rodar_interacao(
                 print("Encerrando...")
                 return
 
-            resposta = motor_finassist(
-                perfil,
-                pergunta,
-                produtos,
-                transacoes,
-                historico,
-                palavras_chave,
-                chave_sugestoes
-            )
+            resposta = motor_finassist(perfil, pergunta, dados)
 
             print(
                 "\nFinassist:"
@@ -594,20 +576,13 @@ if __name__ == "__main__":
 
     cls()
 
-    (
-        perfis,
-        produtos,
-        transacoes,
-        historico,
-        palavras_chave,
-        chave_sugestoes
-    ) = carregar_dados()
+    dados = carregar_dados()
 
-    rodar_interacao(
-        perfis,
-        produtos,
-        transacoes,
-        historico,
-        palavras_chave,
-        chave_sugestoes
-    )
+    perfis = dados["perfis"]
+    produtos = dados["produtos"]
+    transacoes = dados["transacoes"]
+    historico = dados["historico"]  
+    palavras_chave = dados["palavras_chave"]
+    chave_sugestoes = dados["chave_sugestoes"]
+
+    rodar_interacao(dados)
