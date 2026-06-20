@@ -437,6 +437,18 @@ def motor_finassist(perfil, pergunta, dados):
 
         if produtos_perfil:
 
+            if perfil_detectado != perfil_cliente:
+
+                resposta_final.append(
+                    f"Atenção: seu perfil cadastrado é "
+                    f"'{perfil_cliente}', mas você solicitou "
+                    f"informações para um perfil "
+                    f"'{perfil_detectado}'.\n"
+                    "Os produtos abaixo possuem um nível "
+                    "de risco diferente daquele "
+                    "habitualmente recomendado para você."
+                )
+
             resposta_final.append(
                 f"Investimentos para o perfil "
                 f"{perfil_detectado} são:\n"
