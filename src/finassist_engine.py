@@ -49,10 +49,18 @@ def normalizar_perfil(perfil):
     mapa = {
         "conservador": "conservador",
         "conservadora": "conservador",
+        "conservadores": "conservador",
+        "conservadoras": "conservador",
+
         "moderado": "moderado",
         "moderada": "moderado",
+        "moderados": "moderado",
+        "moderadas": "moderado",
+
         "arrojado": "arrojado",
-        "arrojada": "arrojado"
+        "arrojada": "arrojado",
+        "arrojados": "arrojado",
+        "arrojadas": "arrojado"
     }
 
     return mapa.get(perfil, perfil)
@@ -93,6 +101,21 @@ mapa_risco_perfil = {
     "medio": "moderado",
     "alto": "arrojado"
 }
+
+perfil_tipos = [
+        "conservador",
+        "conservadora",
+        "conservadores",
+        "conservadoras",
+        "moderado",
+        "moderada",
+        "moderados",
+        "moderadas",
+        "arrojado",
+        "arrojada",
+        "arrojados",
+        "arrojadas"
+    ]
 
 # ============================================================
 # Carregamento dos dados
@@ -375,18 +398,26 @@ def motor_finassist(perfil, pergunta, dados):
 
     perfil_detectado = None
 
-    for termo in [
-        "conservador",
-        "conservadora",
-        "moderado",
-        "moderada",
-        "arrojado",
-        "arrojada"
-    ]:
+    for termo in perfil_tipos:
 
-        if termo in pergunta_lower:
+        termo_busca = termo.lower()
 
-            perfil_detectado = normalizar_perfil(termo)
+        for indice, token in enumerate(tokens):
+
+            if token != termo_busca:
+                continue
+
+            # ignora perfis explicitamente negados
+            if termo_negado(tokens, indice):
+                break
+
+            perfil_detectado = normalizar_perfil(
+                termo
+            )
+
+            break
+
+        if perfil_detectado:
             break
 
     # ========================================================
