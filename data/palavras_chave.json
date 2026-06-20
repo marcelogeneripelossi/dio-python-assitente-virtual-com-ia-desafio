@@ -1,13 +1,70 @@
 {
-  "meta": ["meta", "objetivo", "planejamento", "alvo"],
-  "poupanca": ["poupança", "guardar dinheiro", "economizar", "poupar"],
-  "acoes": ["ações", "bolsa", "mercado", "volatilidade"],
-  "tesouro": ["tesouro", "selic", "direto", "título público"],
-  "cdb": ["cdb", "certificado de depósito", "liquidez diária"],
-  "lci_lca": ["lci", "lca", "lci/lca", "letra de crédito", "imobiliário", "agrícola"],
-  "fundo_multimercado": ["multimercado", "diversificação", "moderado"],
-  "fundo_acoes": ["fundo de ações", "ações tech", "ações", "variável"],
-  "etf": ["etf", "s&p", "internacional", "global"],
-  "risco": ["risco", "perigo", "incerteza"],
-  "investir": ["investir", "investimento", "aplicar", "aplicação"],
+    "meta": [
+        "meta",
+        "objetivo",
+        "planejamento",
+        "alvo"
+    ],
+    "seguro": [
+        "seguro",
+        "poupança",
+        "poupanca",
+        "selic",
+        "lci/lca",
+        "lci_lca"
+    ],
+    "poupanca": [
+        "poupança",
+        "guardar dinheiro",
+        "economizar",
+        "poupar"
+    ],
+    "acoes": [
+        "ações",
+        "arriscar",
+        "bolsa",
+        "mercado",
+        "volatilidade"
+    ],
+    "tesouro": [
+        "tesouro",
+        "selic",
+        "direto",
+        "título público"
+    ],
+    "cdb": [
+        "cdb",
+        "certificado de depósito",
+        "liquidez diária"
+    ],
+    "lci_lca": [
+        "lci",
+        "lca",
+        "lci/lca",
+        "letra de crédito",
+        "imobiliário",
+        "agrícola"
+    ],
+    "fundo_multimercado": [
+        "multimercado",
+        "diversificação"
+    ],
+    "fundo_acoes": [
+        "fundo de ações",
+        "ações tech",
+        "ações",
+        "variável"
+    ],
+    "etf": [
+        "etf",
+        "s&p",
+        "internacional",
+        "global"
+    ],
+    "investir": [
+        "investir",
+        "investimento",
+        "aplicar",
+        "aplicação"
+    ]
 }
