@@ -55,7 +55,7 @@ O **Finassist** é um agente financeiro inspirado em conceitos de RAG (Retrieval
 * **Segurança e Conformidade**
 
   * Respeito ao perfil de risco do investidor.
-  * Prevenção de recomendações incompatíveis com o perfil do cliente.
+  * Alerta sobre incompatibilidade entre o perfil do cliente e o perfil de risco solicitado, mantendo recomendações com caráter educativo e transparente.
   * Utilização exclusiva de dados mockados para fins educacionais e de demonstração.
  
 ## 🛠️ Tecnologias Utilizadas
@@ -83,6 +83,61 @@ O Finassist utiliza uma base de conhecimento local composta por arquivos JSON e 
 | `chave_sugestoes.json`      | JSON    | Base de sugestões educativas e recomendações pré-definidas associadas a temas financeiros específicos, utilizada para complementar as respostas do agente.                                                         |
 
 Esses arquivos representam a fonte de conhecimento do Finassist e permitem a implementação de um mecanismo simples de recuperação de informações (retrieval), sem dependência de bancos de dados externos.
+
+## 💬 Exemplos de Perguntas
+
+A seguir, alguns exemplos de perguntas que podem ser realizadas ao Finassist para demonstrar suas capacidades de personalização, recuperação de conhecimento e inferência baseada em regras.
+
+### Recomendações e Perfil do Investidor
+
+* Indique produtos para o meu perfil.
+* Tenho o perfil moderado. Quais produtos pode me indicar?
+* Para perfil conservador, o que tem em mente?
+* Sou conservadora. Quais produtos posso pensar em adquirir?
+* Indique produtos para investir com perfil arrojado.
+* Tenho curiosidade sobre investimentos arrojados.
+* Quero algo moderado para investir.
+
+### Produtos e Estratégias de Investimento
+
+* Quero investir meu dinheiro em algo seguro.
+* Quero saber mais sobre CDB.
+* O que você recomenda para investir no Tesouro Direto?
+* Vale a pena investir em LCI/LCA?
+* Quais fundos multimercado se encaixam no meu perfil?
+* Quero diversificar com um ETF internacional.
+* Tenho interesse em ações, mas me preocupo com a volatilidade.
+
+### Metas Financeiras
+
+* Quais são meus objetivos?
+* Quais metas financeiras devo priorizar neste momento?
+* Quais investimentos para atingir minhas metas?
+
+> O agente é capaz de combinar intenções, apresentando simultaneamente as metas do cliente e sugestões de investimentos adequadas ao seu perfil.
+
+### Risco e Educação Financeira
+
+* Qual é o nível de risco dos produtos recomendados?
+* Tenho curiosidade sobre investimentos arrojados.
+* Quero algo moderado para investir.
+
+> Caso o cliente solicite informações sobre produtos incompatíveis com seu perfil cadastrado, o Finassist apresenta um alerta educativo antes de exibir as recomendações.
+
+### Histórico de Atendimento
+
+* Qual foi meu último atendimento?
+* Qual meu histórico de atendimento?
+
+### Transações e Movimentações Financeiras
+
+* Quais foram minhas últimas transações?
+* Quero ver minhas movimentações.
+* Quanto gastei no período?
+* Qual foi meu total de despesas?
+* Em que estou gastando mais?
+* Qual categoria consome mais do meu orçamento?
+
 
 ## ⚙️ Como Executar
 1. **Configuração do Ambiente:** Certifique-se de ter as bibliotecas instaladas (`pip install pandas streamlit google-generativeai`).
