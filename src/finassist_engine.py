@@ -537,83 +537,85 @@ def rodar_interacao(dados):
         "Sou seu assistente financeiro pessoal."
     )
 
-    print("\nClientes cadastrados:")
-
-    for p in sorted(
-        perfis,
-        key=lambda x: x["nome"]
-    ):
-
-        print(f"- {p['nome']}")
+    encontrados = []
 
     while True:
 
-        nome = input(
-            "\nDigite o nome ou sobrenome "
-            "do cliente ('FIM' para sair): "
-        ).strip()
+      if len(encontrados) == 0:
+        print("\nClientes cadastrados:")
 
-        if nome.lower() == "fim":
+        for p in sorted(
+            perfis,
+            key=lambda x: x["nome"]
+        ):
 
-            print("Encerrando...")
-            return
+          print(f"- {p['nome']}")
 
-        encontrados = [
-            p
-            for p in perfis
-            if nome.lower()
-            in p["nome"].lower()
-        ]
+      nome = input(
+          "\nDigite o nome ou sobrenome "
+          "do cliente ('FIM' para sair): "
+      ).strip()
 
-        if len(encontrados) == 0:
+      if nome.lower() == "fim":
+          print()
+          print("Encerrando Finassist ...")
+          return
 
-            print(
-                "Nenhum cliente encontrado."
-            )
+      encontrados = [
+          p
+          for p in perfis
+          if nome.lower()
+          in p["nome"].lower()
+      ]
 
-            continue
+      if len(encontrados) == 0:
+          print()
+          print("Nenhum cliente encontrado.")
 
-        if len(encontrados) > 1:
+          continue
 
-            print(
-                "\nForam encontrados "
-                "vários clientes:"
-            )
+      if len(encontrados) > 1:
 
-            for p in encontrados:
+          print(
+              "\nForam encontrados "
+              "vários clientes:"
+          )
 
-                print(f"- {p['nome']}")
+          for p in encontrados:
 
-            continue
+              print(f"- {p['nome']}")
 
-        perfil = encontrados[0]
+          continue
 
-        print(
-            f"\nConectado como "
-            f"{perfil['nome']} "
-            f"({perfil['perfil_investidor']})"
-        )
+      perfil = encontrados[0]
 
-        while True:
+      print(
+          f"\nConectado como "
+          f"{perfil['nome']} "
+          f"({perfil['perfil_investidor']})"
+      )
 
-            pergunta = input(
-                f"\n{perfil['nome']}, "
-                f"como posso ajudar? "
-                f"('FIM' para sair): "
-            )
+      while True:
 
-            if pergunta.lower() == "fim":
+          pergunta = input(
+              f"\n{perfil['nome']}, "
+              f"como posso ajudar? "
+              f"('FIM' para sair): "
+          )
 
-                print("Encerrando...")
-                return
+          if pergunta.lower() == "fim":
+              print()
+              print(f"Finalizando atendimento para {perfil['nome']} ...")
+              encontrados = []
+              break
 
-            resposta = motor_finassist(perfil, pergunta, dados)
+          resposta = motor_finassist(perfil, pergunta, dados)
 
-            print(
-                "\nFinassist:"
-            )
+          print(
+              "\nFinassist:"
+          )
 
-            print(resposta)
+          print(resposta)
 
 # ============================================================
 # Main
