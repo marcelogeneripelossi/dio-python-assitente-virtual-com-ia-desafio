@@ -138,11 +138,25 @@ A seguir, alguns exemplos de perguntas que podem ser realizadas ao Finassist par
 * Em que estou gastando mais?
 * Qual categoria consome mais do meu orçamento?
 
+## 🚫 Negação de Perfil (Interpretação Contextual)
+O Finassist identifica quando o cliente expressa que **não deseja produtos associados a determinado perfil de risco**, sugerindo alternativas mais adequadas ao seu perfil cadastrado.
+
+**Exemplos:**
+* `Não quero produtos arrojados.`
+* `Não quero algo arrojado para investir.`
+* `Prefiro evitar investimentos moderados.`
+
+**Comportamento esperado:**
+* Cliente moderado evitando produtos arrojados:
+  * sugere produtos de risco médio e baixo;
+* Cliente conservador evitando produtos moderados:
+  * sugere produtos de risco baixo.
 
 ## ⚙️ Como Executar
 1. **Configuração do Ambiente:** Certifique-se de ter as bibliotecas instaladas (`pip install pandas streamlit google-generativeai`).
 2. **Execução Web:** `streamlit run src/app.py`
-3. **Simulação no Colab:** Execute o arquivo `analise_e_execucao.ipynb` para testar o motor de inferência diretamente no ambiente de notebook.
+3. **Interface de linha de comando (CLI)** para execução rápida em ambientes como VS Code: `python src/finassist_engine.py`
+4. **Simulação no Colab:** Execute o arquivo `analise_e_execucao.ipynb` para testar o motor de inferência diretamente no ambiente de notebook.
 
 ---
 *Projeto desenvolvido como parte do desafio técnico de IA Generativa.*
