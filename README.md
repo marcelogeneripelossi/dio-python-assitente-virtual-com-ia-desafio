@@ -139,9 +139,13 @@ A seguir, alguns exemplos de perguntas que podem ser realizadas ao Finassist par
 * Qual categoria consome mais do meu orçamento?
 
 ## 🚫 Negação de Perfil (Interpretação Contextual)
-O Finassist identifica quando o cliente expressa que **não deseja produtos associados a determinado perfil de risco**, sugerindo alternativas mais adequadas ao seu perfil cadastrado.
+O Finassist realiza uma interpretação simples de contexto para identificar quando o usuário **não deseja recomendações associadas a determinados perfis de risco**.
 
-**Exemplos:**
+Ao detectar expressões negativas próximas aos perfis (`conservador`, `moderado` ou `arrojado`), o agente evita sugerir produtos incompatíveis com a intenção do usuário e apresenta alternativas mais adequadas ao seu perfil cadastrado.
+
+Essa lógica utiliza tokenização da pergunta, análise de proximidade (janela contextual) e reconhecimento de negações simples e compostas (bigramas).
+
+### **Exemplos simples:**
 * `Não quero produtos arrojados.`
 * `Não quero algo arrojado para investir.`
 * `Prefiro evitar investimentos moderados.`
@@ -151,6 +155,23 @@ O Finassist identifica quando o cliente expressa que **não deseja produtos asso
   * sugere produtos de risco médio e baixo;
 * Cliente conservador evitando produtos moderados:
   * sugere produtos de risco baixo.
+
+### **Exemplos com Bigramas**
+
+Além das negações simples, o agente também reconhece algumas expressões compostas:
+* `Nem pensar em produtos arrojados.`
+* `jamais sugira produtos arrojados para investir.`
+* `De forma alguma quero investimentos moderados.`
+
+Essas expressões são tratadas como negações válidas por meio da análise de bigramas próximos ao perfil identificado.
+
+**Estratégia Utilizada**
+* Tokenização da pergunta em palavras;
+* Formação de bigramas (duas palavras consecutivas);
+* Busca por termos de negação simples e compostos;
+* Verificação de proximidade em uma janela contextual;
+* Geração de sugestões alternativas compatíveis com o perfil do cliente.
+
 
 ## ⚙️ Como Executar
 1. **Configuração do Ambiente:** Certifique-se de ter as bibliotecas instaladas (`pip install pandas streamlit google-generativeai`).
