@@ -225,19 +225,19 @@ def motor_finassist(perfil, pergunta, dados):
     # 2) Histórico, Transações e Gastos
     # ========================================================
 
-    quer_historico = any(
+    quer_ultimo_atendimento = any(
         termo in pergunta_lower
         for termo in [
-            "atendimento",
-            "histórico",
-            "historico",
-            "recentemente",
             "último atendimento",
-            "ultimo atendimento"
+            "ultimo atendimento",
+            "último contato",
+            "ultimo contato",
+            "atendimento mais recente",
+            "atendimento recente"
         ]
     )
 
-    if quer_historico:
+    if quer_ultimo_atendimento:
 
         hist = historico[
             historico["id_cliente"] == perfil["id"]
@@ -253,10 +253,52 @@ def motor_finassist(perfil, pergunta, dados):
 
             resposta_final.append(
                 f"Seu último atendimento foi em "
-                f"{ultimo['data']}, "
-                f"tema: {ultimo['tema']}.\n"
+                f"{ultimo['data']} via {ultimo['canal']}.\n"
+                f"Tema: {ultimo['tema']}.\n"
                 f"Resumo: {ultimo['resumo']}."
             )
+
+
+    quer_historico = any(
+        termo in pergunta_lower
+        for termo in [
+            "histórico de atendimento",
+            "historico de atendimento",
+            "meu histórico",
+            "meu historico",
+            "todos os atendimentos",
+            "listar atendimentos"
+        ]
+    )
+
+    if quer_historico:
+
+        hist = historico[
+            historico["id_cliente"] == perfil["id"]
+        ]
+
+        if not hist.empty:
+
+            hist = hist.sort_values(
+                "data",
+                ascending=False
+            )
+
+            linhas = []
+
+            for _, atendimento in hist.iterrows():
+
+                linhas.append(
+                    f"- {atendimento['data']} | "
+                    f"{atendimento['tema']} | "
+                    f"{atendimento['canal']}"
+                )
+
+            resposta_final.append(
+                "Seu histórico de atendimento:\n"
+                + "\n".join(linhas)
+            )
+
 
     quer_transacoes = any(
         termo in pergunta_lower
@@ -423,15 +465,15 @@ def motor_finassist(perfil, pergunta, dados):
     perfil_negado = None
 
     for termo in perfil_tipos:
-
         termo_busca = termo.lower()
 
         for indice, token in enumerate(tokens):
-
             token_normalizado = token.lower()
 
             # trata plural simples
-            if token_normalizado.endswith("s"):
+            if token_normalizado.endswith("es") or token_normalizado.endswith("as"):
+                token_normalizado = token_normalizado[:-2] 
+            elif token_normalizado.endswith("s"):
                 token_normalizado = token_normalizado[:-1]
 
             if token_normalizado != termo_busca:
@@ -442,10 +484,7 @@ def motor_finassist(perfil, pergunta, dados):
                 perfil_negado = normalizar_perfil(termo)
                 break
 
-            perfil_detectado = normalizar_perfil(
-                termo
-            )
-
+            perfil_detectado = normalizar_perfil(termo)
             break
 
         if perfil_detectado:
@@ -475,68 +514,67 @@ def motor_finassist(perfil, pergunta, dados):
     )
 
     if quer_investimento and perfil_detectado is None:
-
         perfil_detectado = perfil_cliente
 
-    # ========================================================
-    # 6.1) Perfil negado
-    # ========================================================
+    # # ========================================================
+    # # 6.1) Perfil negado
+    # # ========================================================
 
-    if perfil_negado:
+    # if perfil_negado:
 
-        resposta_final.append(
-            f"Entendi que você prefere evitar produtos "
-            f"do perfil '{perfil_negado}'."
-        )
+    #     resposta_final.append(
+    #         f"Entendi que você prefere evitar produtos "
+    #         f"do perfil '{perfil_negado}'."
+    #     )
 
-        #produtos_sugeridos = []
+    #     #produtos_sugeridos = []
 
-        # Moderado evitando arrojado
-        if (
-            perfil_cliente == "moderado"
-            and perfil_negado == "arrojado"
-        ):
+    #     # Moderado evitando arrojado
+    #     if (
+    #         perfil_cliente == "moderado"
+    #         and perfil_negado == "arrojado"
+    #     ):
 
-            riscos_sugeridos = ["medio", "baixo"]
+    #         riscos_sugeridos = ["medio", "baixo"]
 
-        # Conservador evitando moderado
-        elif (
-            perfil_cliente == "conservador"
-            and perfil_negado == "moderado"
-        ):
+    #     # Conservador evitando moderado
+    #     elif (
+    #         perfil_cliente == "conservador"
+    #         and perfil_negado == "moderado"
+    #     ):
 
-            riscos_sugeridos = ["baixo"]
+    #         riscos_sugeridos = ["baixo"]
 
-        # Conservador evitando arrojado
-        elif (
-            perfil_cliente == "conservador"
-            and perfil_negado == "arrojado"
-        ):
+    #     # Conservador evitando arrojado
+    #     elif (
+    #         perfil_cliente == "conservador"
+    #         and perfil_negado == "arrojado"
+    #     ):
 
-            riscos_sugeridos = ["baixo"]
+    #         riscos_sugeridos = ["baixo"]
 
-        else:
+    #     else:
 
-            riscos_sugeridos = [
-                risco_por_perfil[perfil_cliente]
-            ]
+    #         riscos_sugeridos = [
+    #             risco_por_perfil[perfil_cliente]
+    #         ]
 
-        for risco in riscos_sugeridos:
-            produtos_risco = [
-                p["nome"]
-                for p in produtos
-                if p["risco"] == risco
-            ][:3]
+    #     for risco in riscos_sugeridos:
+    #         produtos_risco = [
+    #             p["nome"]
+    #             for p in produtos
+    #             if p["risco"] == risco
+    #         ][:3]
 
-            if produtos_risco:
-                resposta_final.append(
-                    f"Produtos de risco {risco}:"
-                )
+    #         if produtos_risco:
+    #             resposta_final.append(
+    #                 f"Produtos de risco {risco}:"
+    #             )
 
-                resposta_final.extend(
-                    f"- {p}"
-                    for p in produtos_risco
-                )
+    #             resposta_final.extend(
+    #                 f"- {p}"
+    #                 for p in produtos_risco
+    #             )
                 
     # ========================================================
     # 7) Produtos pelo perfil
@@ -584,31 +622,37 @@ def motor_finassist(perfil, pergunta, dados):
     # 7.1) Perfil negado
     # ========================================================
 
-    if perfil_negado:
+    if perfil_negado == perfil_cliente:
 
+        resposta_final.append(
+            "Seu perfil é "
+            f"'{perfil_cliente}', e você comentou de evitar "
+            "produtos para o seu perfil."
+        )
+
+    elif perfil_negado:
         resposta_final.append(
             f"Entendi que você prefere evitar "
             f"investimentos com perfil '{perfil_negado}'."
         )
 
         sugestoes = []
-
         if (
             perfil_negado == "arrojado"
             and perfil_cliente == "moderado"
         ):
-
+            print("DEBUG: Perfil moderado evitando arrojado.")
             riscos = ["medio", "baixo"]
 
         elif (
             perfil_negado == "moderado"
             and perfil_cliente == "conservador"
         ):
-
+            print("DEBUG: Perfil conservador evitando moderado.")
             riscos = ["baixo"]
 
         else:
-
+            print("DEBUG: Perfil conservador evitando arrojado.")
             riscos = [risco_por_perfil[perfil_cliente]]
 
         for risco in riscos:
