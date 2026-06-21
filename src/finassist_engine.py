@@ -76,25 +76,48 @@ def tokenizar(texto):
     )
 
 NEGACOES = {
+    "dispensar",
+    "dispenso",
+    "forma alguma",
+    "evitar",
+    "jamais",
+    "nada",
     "não",
     "nao",
-    "nunca",
-    "jamais",
-    "nem"
-}
+    "nem",
+    "nem pensar",
+    "nem quero",
+    "nem sequer",
+    "nunca"}
 
-def termo_negado(tokens, indice, janela = 2):
+def termo_negado(tokens, indice, janela=4):
     """
-    Verifica se existe uma negação nas palavras
-    imediatamente anteriores ao termo.
+    Verifica se existe uma negação nas palavras imediatamente anteriores ao termo.
+
+    Suporta:
+    - unigramas: "não", "nunca", "jamais"
+    - bigramas: "nem pensar", "forma alguma"
     """
 
     inicio = max(0, indice - janela)
 
-    return any(
-        token in NEGACOES
-        for token in tokens[inicio:indice]
-    )
+    trecho = tokens[inicio:indice]
+
+    # unigramas
+    for token in trecho:
+
+        if token in NEGACOES:
+            return True
+
+    # bigramas
+    for i in range(len(trecho) - 1):
+
+        expressao = f"{trecho[i]} {trecho[i + 1]}"
+
+        if expressao in NEGACOES:
+            return True
+
+    return False
 
 mapa_risco_perfil = {
     "baixo": "conservador",
@@ -397,6 +420,7 @@ def motor_finassist(perfil, pergunta, dados):
     # ========================================================
 
     perfil_detectado = None
+    perfil_negado = None
 
     for termo in perfil_tipos:
 
@@ -404,11 +428,18 @@ def motor_finassist(perfil, pergunta, dados):
 
         for indice, token in enumerate(tokens):
 
-            if token != termo_busca:
+            token_normalizado = token.lower()
+
+            # trata plural simples
+            if token_normalizado.endswith("s"):
+                token_normalizado = token_normalizado[:-1]
+
+            if token_normalizado != termo_busca:
                 continue
 
             # ignora perfis explicitamente negados
             if termo_negado(tokens, indice):
+                perfil_negado = normalizar_perfil(termo)
                 break
 
             perfil_detectado = normalizar_perfil(
@@ -448,10 +479,70 @@ def motor_finassist(perfil, pergunta, dados):
         perfil_detectado = perfil_cliente
 
     # ========================================================
+    # 6.1) Perfil negado
+    # ========================================================
+
+    if perfil_negado:
+
+        resposta_final.append(
+            f"Entendi que você prefere evitar produtos "
+            f"do perfil '{perfil_negado}'."
+        )
+
+        #produtos_sugeridos = []
+
+        # Moderado evitando arrojado
+        if (
+            perfil_cliente == "moderado"
+            and perfil_negado == "arrojado"
+        ):
+
+            riscos_sugeridos = ["medio", "baixo"]
+
+        # Conservador evitando moderado
+        elif (
+            perfil_cliente == "conservador"
+            and perfil_negado == "moderado"
+        ):
+
+            riscos_sugeridos = ["baixo"]
+
+        # Conservador evitando arrojado
+        elif (
+            perfil_cliente == "conservador"
+            and perfil_negado == "arrojado"
+        ):
+
+            riscos_sugeridos = ["baixo"]
+
+        else:
+
+            riscos_sugeridos = [
+                risco_por_perfil[perfil_cliente]
+            ]
+
+        for risco in riscos_sugeridos:
+            produtos_risco = [
+                p["nome"]
+                for p in produtos
+                if p["risco"] == risco
+            ][:3]
+
+            if produtos_risco:
+                resposta_final.append(
+                    f"Produtos de risco {risco}:"
+                )
+
+                resposta_final.extend(
+                    f"- {p}"
+                    for p in produtos_risco
+                )
+                
+    # ========================================================
     # 7) Produtos pelo perfil
     # ========================================================
 
-    if perfil_detectado:
+    if (perfil_detectado and perfil_negado is None):
 
         risco_alvo = risco_por_perfil[
             perfil_detectado
@@ -489,6 +580,61 @@ def motor_finassist(perfil, pergunta, dados):
                 )
             )
 
+    # ========================================================
+    # 7.1) Perfil negado
+    # ========================================================
+
+    if perfil_negado:
+
+        resposta_final.append(
+            f"Entendi que você prefere evitar "
+            f"investimentos com perfil '{perfil_negado}'."
+        )
+
+        sugestoes = []
+
+        if (
+            perfil_negado == "arrojado"
+            and perfil_cliente == "moderado"
+        ):
+
+            riscos = ["medio", "baixo"]
+
+        elif (
+            perfil_negado == "moderado"
+            and perfil_cliente == "conservador"
+        ):
+
+            riscos = ["baixo"]
+
+        else:
+
+            riscos = [risco_por_perfil[perfil_cliente]]
+
+        for risco in riscos:
+
+            produtos_risco = [
+
+                p["nome"]
+
+                for p in produtos
+
+                if p["risco"] == risco
+
+            ][:3]
+
+            sugestoes.extend(produtos_risco)
+
+        sugestoes = list(dict.fromkeys(sugestoes))
+
+        resposta_final.append(
+            "Talvez estas alternativas façam mais sentido:\n"
+            + "\n".join(
+                f"- {produto}"
+                for produto in sugestoes
+            )
+        )
+        
     # ========================================================
     # 8) Sugestões acumuladas
     # ========================================================
