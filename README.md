@@ -62,7 +62,24 @@ O **Finassist** é um agente financeiro inspirado em conceitos de RAG (Retrieval
 - **Linguagem:** Python
 - **Interface:** Streamlit (Web) / Notebook (Simulação)
 - **Processamento de Dados:** Pandas & JSON
-- **IA Generativa:** Google Gemini (via API)
+- **IA Generativa (Opcional):** Google Gemini (via API)
+- **Recuperação de Conhecimento:** RAG simples baseado em JSON e CSV
+
+## 🤖 Integração com IA Generativa
+
+O Finassist pode operar em dois modos distintos:
+
+* **Modo Determinístico (padrão):**
+
+  * utiliza exclusivamente o motor de inferência baseado na base de conhecimento local;
+  * garante respostas reproduzíveis e alinhadas às regras de negócio.
+
+* **Modo IA Generativa (opcional):**
+
+  * utiliza o Google Gemini apenas para reescrever respostas produzidas pelo motor interno;
+  * não altera recomendações, produtos ou dados recuperados;
+  * reduz o risco de alucinações ao manter o mecanismo RAG como fonte oficial de informação.
+
 
 ## 📂 Estrutura do Projeto
 - `/data`: Arquivos de dados (JSON e CSV) com informações dos clientes, transações e produtos.
@@ -174,10 +191,43 @@ Essas expressões são tratadas como negações válidas por meio da análise de
 
 
 ## ⚙️ Como Executar
-1. **Configuração do Ambiente:** Certifique-se de ter as bibliotecas instaladas (`pip install pandas streamlit google-generativeai`).
-2. **Execução Web:** `streamlit run src/app.py`
-3. **Interface de linha de comando (CLI)** para execução rápida em ambientes como VS Code: `python src/finassist_engine.py`
-4. **Simulação no Colab:** Execute o arquivo `analise_e_execucao.ipynb` para testar o motor de inferência diretamente no ambiente de notebook.
+### 1. Configuração do Ambiente
+
+Instale as dependências necessárias:
+```bash
+pip install pandas streamlit google-generativeai
+```
+
+> **Observação:** a biblioteca `google-generativeai` é opcional e necessária apenas caso deseje habilitar a integração com o Google Gemini.
+
+---
+
+### 2. Interface Web (Streamlit)
+
+Execute a aplicação web com:
+
+```bash
+streamlit run src/app.py
+```
+
+A interface permite selecionar dinamicamente o cliente e realizar consultas financeiras personalizadas.
+
+---
+
+### 3. Interface de Linha de Comando (CLI)
+Para uma execução rápida em ambientes como VS Code ou terminal:
+
+```bash
+python src/finassist_engine.py
+```
+
+Essa opção permite validar toda a lógica do motor de inferência sem a necessidade de instanciar uma interface web.
+
+---
+
+### 4. Notebook (Google Colab/Jupyter)
+Execute o arquivo `analise_e_execucao.ipynb` para testar o motor de inferência diretamente em ambientes de notebook.
+
 
 ---
 *Projeto desenvolvido como parte do desafio técnico de IA Generativa.*
