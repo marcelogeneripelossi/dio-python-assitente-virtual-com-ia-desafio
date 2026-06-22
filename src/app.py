@@ -1,6 +1,9 @@
 import streamlit as st
-import pandas as pd
-import json
+
+from finassist_engine import (
+    carregar_dados,
+    motor_finassist
+)
 
 # ==============================================================================
 # CONFIGURAÇÃO DA IA (GEMINI)
@@ -14,66 +17,106 @@ import json
 # model = genai.GenerativeModel('gemini-1.5-flash')
 
 USE_GEMINI = False # Mude para True quando descomentar as linhas acima
+
+# ======================================================================
+# SYSTEM PROMPT
+# ======================================================================
+
+system_prompt = """
+Você é o Finassist, um assistente virtual com IA especializado em educação financeira e planejamento de metas. Seu público-alvo são clientes que buscam organizar suas finanças de forma consciente.
+
+[DIRETRIZES DE COMPORTAMENTO]
+
+1. Papel:
+Atue como um mentor e educador financeiro.
+Seu foco é explicar os conceitos e ajudar o cliente a entender suas opções, nunca forçar a venda de um produto.
+
+2. Tom de Voz:
+Didático, profissional, encorajador e transparente.
+Evite jargões excessivamente complexos sem explicá-los primeiro.
+
+3. Personalização:
+Utilize ativamente os dados de perfil, transações e histórico fornecidos no contexto para dar respostas personalizadas.
+
+[REGRAS DE SEGURANÇA E ANTI-ALUCINAÇÃO]
+
+1. Restrição de Base:
+Responda às perguntas baseando-se ESTRITAMENTE nos dados fornecidos.
+
+2. Proibição de Invenção:
+Se a informação não estiver disponível na base, responda exatamente:
+
+"Sinto muito, mas não tenho essa informação no momento."
+
+3. Alinhamento de Risco:
+Nunca recomende produtos incompatíveis com o perfil cadastrado do cliente sem alertar explicitamente sobre o desvio do perfil.
+
+4. Escopo Fechado:
+Se o usuário desviar para temas não financeiros, recuse educadamente e retorne ao foco financeiro.
+"""
+
 # ==============================================================================
 
-# 1. Carregamento dos Dados
-def carregar_dados():
-    perfis = json.load(open('data/perfil_investidor.json'))
-    produtos = json.load(open('data/produtos_financeiros.json'))
-    transacoes = pd.read_csv('data/transacoes.csv', dtype={'id_cliente': int})
-    historico = pd.read_csv('data/historico_atendimento.csv', dtype={'id_cliente': int})
-    return perfis, produtos, transacoes, historico
+dados = carregar_dados()
+perfis = dados["perfis"]
 
-perfis, produtos, transacoes, historico = carregar_dados()
-
-# 2. Interface com o Usuário (Streamlit)
 st.title("Finassist - Assistente Financeiro Inteligente")
 
-# Seletor de Cliente (Adicionado para dinamismo)
-nome_clientes = [p['nome'] for p in perfis]
-cliente_selecionado = st.sidebar.selectbox("Selecione o Cliente:", nome_clientes)
+nome_clientes = [p["nome"] for p in perfis]
 
-# Filtra o perfil e os dados específicos desse cliente
-perfil = next(p for p in perfis if p['nome'] == cliente_selecionado)
-transacoes_cliente = transacoes[transacoes['id_cliente'] == perfil['id']]
-historico_cliente = historico[historico['id_cliente'] == perfil['id']]
+cliente_selecionado = st.sidebar.selectbox(
+    "Selecione o Cliente:",
+    nome_clientes
+)
 
-st.write(f"Olá, **{perfil['nome']}**! Como posso te ajudar com suas finanças hoje?")
+perfil = next(
+    p
+    for p in perfis
+    if p["nome"] == cliente_selecionado
+)
 
-# Caixa de texto para a pergunta
-pergunta = st.text_input("Digite sua dúvida (ex: Qual produto é indicado para mim?):")
+st.write(
+    f"Olá, **{perfil['nome']}**! "
+    f"Seu perfil é **{perfil['perfil_investidor']}**."
+)
+
+pergunta = st.text_input(
+    "Digite sua dúvida:"
+)
 
 if pergunta:
-    # O contexto é dinâmico baseado no cliente selecionado
-    contexto = f"""
-    Perfil do Cliente: {perfil}
-    Produtos Disponíveis: {produtos}
-    Transações do Cliente: {transacoes_cliente.to_string()}
-    Histórico de Atendimento: {historico_cliente.to_string()}
-    """
-   
-    # Execução baseada na configuração do usuário
+    resposta = motor_finassist(
+        perfil,
+        pergunta,
+        dados
+    )
+
     if USE_GEMINI:
-        # prompt = f"Com base nos dados: {contexto}. Responda: {pergunta}"
-        # resposta = model.generate_content(prompt)
-        # st.write(resposta.text)
-        pass
+        prompt = f"""
+        {system_prompt}
+        
+        CONTEXTO DO CLIENTE:
+        {perfil}
+        
+        PERGUNTA:
+        {pergunta}
+        
+        RESPOSTA GERADA PELO MOTOR:
+        {resposta_motor}
+        
+        INSTRUÇÕES:
+        - Não invente informações.
+        - Não acrescente produtos.
+        - Não altere recomendações.
+        - Apenas reescreva a resposta de forma mais natural.
+        """
+
+        resposta = model.generate_content(
+            prompt
+        )
+
+        st.write(resposta.text)
+
     else:
-        # Lógica de Demonstração (Sem API ativada)
-        st.warning("Executando em Modo de Demonstração.")
-        
-        st.write(f"*(Processando dúvida de {perfil['nome']}...)*")
-            
-        # Exemplo de resposta baseada no perfil dinâmico
-        pergunta_lower = pergunta.lower()
-        
-        if "risco" in pergunta_lower or "investir" in pergunta_lower:
-            st.write(f"**Finassist:** Como seu perfil é **{perfil['perfil_investidor']}**, "
-                     f"recomendo focar em produtos com risco **{'baixo' if not perfil['aceita_risco'] else 'médio/alto'}**.")
-        
-        elif "gasto" in pergunta_lower or "transação" in pergunta_lower:
-            total_gasto = transacoes_cliente[transacoes_cliente['tipo'] == 'saida']['valor'].sum()
-            st.write(f"**Finassist:** Analisando suas transações, você gastou um total de **R$ {total_gasto:.2f}** recentemente.")
-            
-        else:
-            st.write("**Finassist:** Analisei seus dados. Para melhor te ajudar, poderia reformular sua pergunta?")
+        st.markdown("### Finassist")
+        st.write(resposta)
