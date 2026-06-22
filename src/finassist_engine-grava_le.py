@@ -375,10 +375,18 @@ def normalizar_perfil(perfil):
     mapa = {
         "conservador": "conservador",
         "conservadora": "conservador",
+        "conservadores": "conservador",
+        "conservadoras": "conservador",
+
         "moderado": "moderado",
         "moderada": "moderado",
+        "moderados": "moderado",
+        "moderadas": "moderado",
+
         "arrojado": "arrojado",
-        "arrojada": "arrojado"
+        "arrojada": "arrojado",
+        "arrojados": "arrojado",
+        "arrojadas": "arrojado"
     }
 
     return mapa.get(perfil, perfil)
@@ -394,25 +402,48 @@ def tokenizar(texto):
     )
 
 NEGACOES = {
+    "dispensar",
+    "dispenso",
+    "forma alguma",
+    "evitar",
+    "jamais",
+    "nada",
     "não",
     "nao",
-    "nunca",
-    "jamais",
-    "nem"
-}
+    "nem",
+    "nem pensar",
+    "nem quero",
+    "nem sequer",
+    "nunca"}
 
-def termo_negado(tokens, indice, janela = 2):
+def termo_negado(tokens, indice, janela=4):
     """
-    Verifica se existe uma negação nas palavras
-    imediatamente anteriores ao termo.
+    Verifica se existe uma negação nas palavras imediatamente anteriores ao termo.
+
+    Suporta:
+    - unigramas: "não", "nunca", "jamais"
+    - bigramas: "nem pensar", "forma alguma"
     """
 
     inicio = max(0, indice - janela)
 
-    return any(
-        token in NEGACOES
-        for token in tokens[inicio:indice]
-    )
+    trecho = tokens[inicio:indice]
+
+    # unigramas
+    for token in trecho:
+
+        if token in NEGACOES:
+            return True
+
+    # bigramas
+    for i in range(len(trecho) - 1):
+
+        expressao = f"{trecho[i]} {trecho[i + 1]}"
+
+        if expressao in NEGACOES:
+            return True
+
+    return False
 
 mapa_risco_perfil = {
     "baixo": "conservador",
@@ -420,6 +451,20 @@ mapa_risco_perfil = {
     "alto": "arrojado"
 }
 
+perfil_tipos = [
+        "conservador",
+        "conservadora",
+        "conservadores",
+        "conservadoras",
+        "moderado",
+        "moderada",
+        "moderados",
+        "moderadas",
+        "arrojado",
+        "arrojada",
+        "arrojados",
+        "arrojadas"
+    ]
 # ============================================================
 # Carregamento dos dados
 # ============================================================
@@ -505,19 +550,19 @@ def motor_finassist(perfil, pergunta, dados):
     # 2) Histórico, Transações e Gastos
     # ========================================================
 
-    quer_historico = any(
+    quer_ultimo_atendimento = any(
         termo in pergunta_lower
         for termo in [
-            "atendimento",
-            "histórico",
-            "historico",
-            "recentemente",
             "último atendimento",
-            "ultimo atendimento"
+            "ultimo atendimento",
+            "último contato",
+            "ultimo contato",
+            "atendimento mais recente",
+            "atendimento recente"
         ]
     )
 
-    if quer_historico:
+    if quer_ultimo_atendimento:
 
         hist = historico[
             historico["id_cliente"] == perfil["id"]
@@ -533,10 +578,52 @@ def motor_finassist(perfil, pergunta, dados):
 
             resposta_final.append(
                 f"Seu último atendimento foi em "
-                f"{ultimo['data']}, "
-                f"tema: {ultimo['tema']}.\n"
+                f"{ultimo['data']} via {ultimo['canal']}.\n"
+                f"Tema: {ultimo['tema']}.\n"
                 f"Resumo: {ultimo['resumo']}."
             )
+
+
+    quer_historico = any(
+        termo in pergunta_lower
+        for termo in [
+            "histórico de atendimento",
+            "historico de atendimento",
+            "meu histórico",
+            "meu historico",
+            "todos os atendimentos",
+            "listar atendimentos"
+        ]
+    )
+
+    if quer_historico:
+
+        hist = historico[
+            historico["id_cliente"] == perfil["id"]
+        ]
+
+        if not hist.empty:
+
+            hist = hist.sort_values(
+                "data",
+                ascending=False
+            )
+
+            linhas = []
+
+            for _, atendimento in hist.iterrows():
+
+                linhas.append(
+                    f"- {atendimento['data']} | "
+                    f"{atendimento['tema']} | "
+                    f"{atendimento['canal']}"
+                )
+
+            resposta_final.append(
+                "Seu histórico de atendimento:\n"
+                + "\n".join(linhas)
+            )
+
 
     quer_transacoes = any(
         termo in pergunta_lower
@@ -700,19 +787,32 @@ def motor_finassist(perfil, pergunta, dados):
     # ========================================================
 
     perfil_detectado = None
+    perfil_negado = None
 
-    for termo in [
-        "conservador",
-        "conservadora",
-        "moderado",
-        "moderada",
-        "arrojado",
-        "arrojada"
-    ]:
+    for termo in perfil_tipos:
+        termo_busca = termo.lower()
 
-        if termo in pergunta_lower:
+        for indice, token in enumerate(tokens):
+            token_normalizado = token.lower()
+
+            # trata plural simples
+            if token_normalizado.endswith("es") or token_normalizado.endswith("as"):
+                token_normalizado = token_normalizado[:-2] 
+            elif token_normalizado.endswith("s"):
+                token_normalizado = token_normalizado[:-1]
+
+            if token_normalizado != termo_busca:
+                continue
+
+            # ignora perfis explicitamente negados
+            if termo_negado(tokens, indice):
+                perfil_negado = normalizar_perfil(termo)
+                break
 
             perfil_detectado = normalizar_perfil(termo)
+            break
+
+        if perfil_detectado:
             break
 
     # ========================================================
@@ -739,14 +839,13 @@ def motor_finassist(perfil, pergunta, dados):
     )
 
     if quer_investimento and perfil_detectado is None:
-
         perfil_detectado = perfil_cliente
-
+                
     # ========================================================
     # 7) Produtos pelo perfil
     # ========================================================
 
-    if perfil_detectado:
+    if (perfil_detectado and perfil_negado is None):
 
         risco_alvo = risco_por_perfil[
             perfil_detectado
@@ -785,6 +884,64 @@ def motor_finassist(perfil, pergunta, dados):
             )
 
     # ========================================================
+    # 7.1) Perfil negado
+    # ========================================================
+
+    if perfil_negado == perfil_cliente:
+
+        resposta_final.append(
+            "Seu perfil é "
+            f"'{perfil_cliente}', e você comentou de evitar "
+            "produtos para o seu perfil."
+        )
+
+    elif perfil_negado:
+        resposta_final.append(
+            f"Entendi que você prefere evitar "
+            f"investimentos com perfil '{perfil_negado}'."
+        )
+
+        sugestoes = []
+        if (
+            perfil_negado == "arrojado"
+            and perfil_cliente == "moderado"
+        ):
+            riscos = ["medio", "baixo"]
+
+        elif (
+            perfil_negado == "moderado"
+            and perfil_cliente == "conservador"
+        ):
+            riscos = ["baixo"]
+
+        else:
+            riscos = [risco_por_perfil[perfil_cliente]]
+
+        for risco in riscos:
+
+            produtos_risco = [
+
+                p["nome"]
+
+                for p in produtos
+
+                if p["risco"] == risco
+
+            ][:3]
+
+            sugestoes.extend(produtos_risco)
+
+        sugestoes = list(dict.fromkeys(sugestoes))
+
+        resposta_final.append(
+            "Talvez estas alternativas façam mais sentido:\n"
+            + "\n".join(
+                f"- {produto}"
+                for produto in sugestoes
+            )
+        )
+        
+    # ========================================================
     # 8) Sugestões acumuladas
     # ========================================================
 
@@ -822,24 +979,6 @@ def motor_finassist(perfil, pergunta, dados):
             sugestoes.extend(
                 chave_sugestoes[chave]
             )
-
-        # # procura sugestões pelos termos
-        # for termo in termos:
-
-        #     termo_normalizado = (
-        #         termo
-        #         .lower()
-        #         .replace(" ", "_")
-        #         .replace("/", "_")
-        #     )
-
-        #     if termo_normalizado in chave_sugestoes:
-
-        #         sugestoes.extend(
-        #             chave_sugestoes[
-        #                 termo_normalizado
-        #             ]
-        #         )
 
     # remove duplicidades
     sugestoes = list(dict.fromkeys(sugestoes))
