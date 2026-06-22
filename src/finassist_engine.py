@@ -515,66 +515,6 @@ def motor_finassist(perfil, pergunta, dados):
 
     if quer_investimento and perfil_detectado is None:
         perfil_detectado = perfil_cliente
-
-    # # ========================================================
-    # # 6.1) Perfil negado
-    # # ========================================================
-
-    # if perfil_negado:
-
-    #     resposta_final.append(
-    #         f"Entendi que você prefere evitar produtos "
-    #         f"do perfil '{perfil_negado}'."
-    #     )
-
-    #     #produtos_sugeridos = []
-
-    #     # Moderado evitando arrojado
-    #     if (
-    #         perfil_cliente == "moderado"
-    #         and perfil_negado == "arrojado"
-    #     ):
-
-    #         riscos_sugeridos = ["medio", "baixo"]
-
-    #     # Conservador evitando moderado
-    #     elif (
-    #         perfil_cliente == "conservador"
-    #         and perfil_negado == "moderado"
-    #     ):
-
-    #         riscos_sugeridos = ["baixo"]
-
-    #     # Conservador evitando arrojado
-    #     elif (
-    #         perfil_cliente == "conservador"
-    #         and perfil_negado == "arrojado"
-    #     ):
-
-    #         riscos_sugeridos = ["baixo"]
-
-    #     else:
-
-    #         riscos_sugeridos = [
-    #             risco_por_perfil[perfil_cliente]
-    #         ]
-
-    #     for risco in riscos_sugeridos:
-    #         produtos_risco = [
-    #             p["nome"]
-    #             for p in produtos
-    #             if p["risco"] == risco
-    #         ][:3]
-
-    #         if produtos_risco:
-    #             resposta_final.append(
-    #                 f"Produtos de risco {risco}:"
-    #             )
-
-    #             resposta_final.extend(
-    #                 f"- {p}"
-    #                 for p in produtos_risco
-    #             )
                 
     # ========================================================
     # 7) Produtos pelo perfil
@@ -714,24 +654,6 @@ def motor_finassist(perfil, pergunta, dados):
             sugestoes.extend(
                 chave_sugestoes[chave]
             )
-
-        # # procura sugestões pelos termos
-        # for termo in termos:
-
-        #     termo_normalizado = (
-        #         termo
-        #         .lower()
-        #         .replace(" ", "_")
-        #         .replace("/", "_")
-        #     )
-
-        #     if termo_normalizado in chave_sugestoes:
-
-        #         sugestoes.extend(
-        #             chave_sugestoes[
-        #                 termo_normalizado
-        #             ]
-        #         )
 
     # remove duplicidades
     sugestoes = list(dict.fromkeys(sugestoes))
