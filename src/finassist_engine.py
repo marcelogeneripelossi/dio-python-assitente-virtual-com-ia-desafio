@@ -641,18 +641,15 @@ def motor_finassist(perfil, pergunta, dados):
             perfil_negado == "arrojado"
             and perfil_cliente == "moderado"
         ):
-            print("DEBUG: Perfil moderado evitando arrojado.")
             riscos = ["medio", "baixo"]
 
         elif (
             perfil_negado == "moderado"
             and perfil_cliente == "conservador"
         ):
-            print("DEBUG: Perfil conservador evitando moderado.")
             riscos = ["baixo"]
 
         else:
-            print("DEBUG: Perfil conservador evitando arrojado.")
             riscos = [risco_por_perfil[perfil_cliente]]
 
         for risco in riscos:
