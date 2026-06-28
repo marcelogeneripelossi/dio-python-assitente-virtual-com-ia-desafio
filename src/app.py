@@ -2,6 +2,7 @@ import streamlit as st
 
 from finassist_engine import (
     carregar_dados,
+    inicializar_contexto,
     motor_finassist
 )
 
@@ -58,6 +59,7 @@ Se o usuário desviar para temas não financeiros, recuse educadamente e retorne
 # ==============================================================================
 
 dados = carregar_dados()
+inicializar_contexto(dados)
 perfis = dados["perfis"]
 
 st.title("Finassist - Assistente Financeiro Inteligente")
