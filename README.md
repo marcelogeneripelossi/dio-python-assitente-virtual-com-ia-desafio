@@ -191,6 +191,46 @@ Essas expressões são tratadas como negações válidas por meio da análise de
 
 
 ## ⚙️ Como Executar
+### Pré-requisitos
+
+1. Crie uma pasta chamada **Finassist** no local de sua preferência.
+
+Exemplo:
+
+```text
+C:\Projetos\Finassist
+```
+
+ou
+
+```text
+/home/usuario/Finassist
+```
+
+2. Obtenha o código-fonte do projeto utilizando uma das opções abaixo:
+
+* **Clone o repositório Git:**
+
+```bash
+git clone https://github.com/marcelogeneripelossi/dio-python-assitente-virtual-com-ia-desafio.git
+```
+
+* **Ou faça o download do arquivo ZIP do projeto**, copie-o para a pasta `Finassist` criada anteriormente e descompacte seu conteúdo.
+
+Após esse passo, a estrutura do projeto deverá estar semelhante a:
+
+```text
+Finassist/
+│
+├── data/
+├── docs/
+├── src/
+├── README.md
+└── ...
+```
+
+---
+
 ### 1. Configuração do Ambiente
 
 Instale as dependências necessárias:
