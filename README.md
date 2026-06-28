@@ -83,8 +83,9 @@ O Finassist pode operar em dois modos distintos:
 
 ## 📂 Estrutura do Projeto
 - `/data`: Arquivos de dados (JSON e CSV) com informações dos clientes, transações e produtos.
-- `/src`: Código-fonte (`app.py` para interface web e `finassist_engine.py` para simulação).
 - `/docs`: Documentação técnica, métricas e roteiros de avaliação.
+- `/notebook`: notebook utilizado para testes e simulações do motor de inferência.
+- `/src`: Código-fonte (`app.py` para interface web e `finassist_engine.py` para simulação).
 
 ## 🧠 Base de Conhecimento
 
@@ -224,6 +225,7 @@ Finassist/
 │
 ├── data/
 ├── docs/
+├── notebook/
 ├── src/
 ├── README.md
 └── ...
