@@ -1,4 +1,5 @@
-## Código a ser utilizado no Colab. No Notebook são gerados os arquivos de dados para utilização da simulação do Agente.
+
+## Código para validar toda a lógica do motor de inferência.
 ## Para simulação utilizando uma interface simples com Streamlit, é utilizado o app.py
 ## Versão: lê os dados já gravados em arquivos na pasta 'data/'
 
@@ -10,6 +11,7 @@ import re
 
 import os
 import subprocess
+
 
 # system_prompt = """
 # Você é o Finassist, um assistente virtual com IA especializado em educação financeira e planejamento de metas. Seu público-alvo são clientes que buscam organizar suas finanças de forma consciente.
@@ -26,6 +28,100 @@ import subprocess
 # 4. Escopo Fechado: Se o usuário tentar desviar o assunto para temas não financeiros (programação, culinária, etc.), recuse educadamente e retorne ao foco financeiro.
 # """
 #
+
+# ==========================================================
+# Contexto global
+# ==========================================================
+
+perfis = None
+produtos = None
+transacoes = None
+historico = None
+palavras_chave = None
+chave_sugestoes = None
+
+# ==========================================================
+# Constantes
+# ==========================================================
+
+mapa_risco_perfil = {
+    "baixo": "conservador",
+    "medio": "moderado",
+    "alto": "arrojado"
+}
+
+negacoes = {
+    "dispensar",
+    "dispenso",
+    "forma alguma",
+    "evitar",
+    "jamais",
+    "nada",
+    "não",
+    "nao",
+    "nem",
+    "nem pensar",
+    "nem quero",
+    "nem sequer",
+    "nunca"}
+
+perfil_tipos = [
+        "conservador",
+        "conservadora",
+        "conservadores",
+        "conservadoras",
+        "moderado",
+        "moderada",
+        "moderados",
+        "moderadas",
+        "arrojado",
+        "arrojada",
+        "arrojados",
+        "arrojadas"
+    ]
+
+# ==========================================================
+# Inicialização
+# ==========================================================
+
+def inicializar_contexto(dados):
+    global produtos
+    global transacoes
+    global historico
+    global palavras_chave
+    global chave_sugestoes
+    global perfis
+
+    produtos = dados["produtos"]
+    transacoes = dados["transacoes"]
+    historico = dados["historico"]
+    palavras_chave = dados["palavras_chave"]
+    chave_sugestoes = dados["chave_sugestoes"]
+    perfis = dados["perfis"]
+
+# ============================================================
+# Carregamento dos dados
+# ============================================================
+
+def carregar_dados():
+    with open('data/perfil_investidor.json', 'r', encoding='utf-8') as f:
+        perfis = json.load(f)
+    with open('data/produtos_financeiros.json', 'r', encoding='utf-8') as f:
+        produtos = json.load(f)
+    with open("data/palavras_chave.json", encoding="utf-8") as f:
+        palavras_chave = json.load(f)
+    with open("data/chave_sugestoes.json", encoding="utf-8") as f:
+        chave_sugestoes = json.load(f)
+    transacoes = pd.read_csv('data/transacoes.csv')
+    historico = pd.read_csv('data/historico_atendimento.csv')
+    return {
+        "perfis": perfis,
+        "produtos": produtos,
+        "transacoes": transacoes,
+        "historico": historico,
+        "palavras_chave": palavras_chave,
+        "chave_sugestoes": chave_sugestoes
+    }
 
 # ============================================================
 # Utilidades
@@ -75,21 +171,6 @@ def tokenizar(texto):
         texto.lower()
     )
 
-NEGACOES = {
-    "dispensar",
-    "dispenso",
-    "forma alguma",
-    "evitar",
-    "jamais",
-    "nada",
-    "não",
-    "nao",
-    "nem",
-    "nem pensar",
-    "nem quero",
-    "nem sequer",
-    "nunca"}
-
 def termo_negado(tokens, indice, janela=4):
     """
     Verifica se existe uma negação nas palavras imediatamente anteriores ao termo.
@@ -106,7 +187,7 @@ def termo_negado(tokens, indice, janela=4):
     # unigramas
     for token in trecho:
 
-        if token in NEGACOES:
+        if token in negacoes:
             return True
 
     # bigramas
@@ -114,55 +195,10 @@ def termo_negado(tokens, indice, janela=4):
 
         expressao = f"{trecho[i]} {trecho[i + 1]}"
 
-        if expressao in NEGACOES:
+        if expressao in negacoes:
             return True
 
     return False
-
-mapa_risco_perfil = {
-    "baixo": "conservador",
-    "medio": "moderado",
-    "alto": "arrojado"
-}
-
-perfil_tipos = [
-        "conservador",
-        "conservadora",
-        "conservadores",
-        "conservadoras",
-        "moderado",
-        "moderada",
-        "moderados",
-        "moderadas",
-        "arrojado",
-        "arrojada",
-        "arrojados",
-        "arrojadas"
-    ]
-
-# ============================================================
-# Carregamento dos dados
-# ============================================================
-
-def carregar_dados():
-    with open('data/perfil_investidor.json', 'r', encoding='utf-8') as f:
-        perfis = json.load(f)
-    with open('data/produtos_financeiros.json', 'r', encoding='utf-8') as f:
-        produtos = json.load(f)
-    with open("data/palavras_chave.json", encoding="utf-8") as f:
-        palavras_chave = json.load(f)
-    with open("data/chave_sugestoes.json", encoding="utf-8") as f:
-        chave_sugestoes = json.load(f)
-    transacoes = pd.read_csv('data/transacoes.csv')
-    historico = pd.read_csv('data/historico_atendimento.csv')
-    return {
-        "perfis": perfis,
-        "produtos": produtos,
-        "transacoes": transacoes,
-        "historico": historico,
-        "palavras_chave": palavras_chave,
-        "chave_sugestoes": chave_sugestoes
-    }
 
 # ============================================================
 # Motor do Finassist
@@ -232,6 +268,7 @@ def motor_finassist(perfil, pergunta, dados):
             "ultimo atendimento",
             "último contato",
             "ultimo contato",
+            "atendimento",
             "atendimento mais recente",
             "atendimento recente"
         ]
@@ -264,8 +301,11 @@ def motor_finassist(perfil, pergunta, dados):
         for termo in [
             "histórico de atendimento",
             "historico de atendimento",
+            "histórico",
+            "historico",
             "meu histórico",
             "meu historico",
+            "atendimentos",
             "todos os atendimentos",
             "listar atendimentos"
         ]
@@ -779,11 +819,13 @@ if __name__ == "__main__":
 
     dados = carregar_dados()
 
-    perfis = dados["perfis"]
-    produtos = dados["produtos"]
-    transacoes = dados["transacoes"]
-    historico = dados["historico"]  
-    palavras_chave = dados["palavras_chave"]
-    chave_sugestoes = dados["chave_sugestoes"]
+    inicializar_contexto(dados)
+
+    #perfis = dados["perfis"]
+    #produtos = dados["produtos"]
+    #transacoes = dados["transacoes"]
+    #historico = dados["historico"]  
+    #palavras_chave = dados["palavras_chave"]
+    #chave_sugestoes = dados["chave_sugestoes"]
 
     rodar_interacao(dados)
