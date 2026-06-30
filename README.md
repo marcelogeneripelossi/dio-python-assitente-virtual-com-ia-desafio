@@ -178,8 +178,10 @@ Essa lógica utiliza tokenização da pergunta, análise de proximidade (janela 
 
 Além das negações simples, o agente também reconhece algumas expressões compostas:
 * `Nem pensar em produtos arrojados.`
-* `jamais sugira produtos arrojados para investir.`
+* `Nem quero algo arriscado`
+* `Jamais sugira produtos arrojados para investir.`
 * `De forma alguma quero investimentos moderados.`
+* `Nem sequer me indique ações`
 
 Essas expressões são tratadas como negações válidas por meio da análise de bigramas próximos ao perfil identificado.
 
