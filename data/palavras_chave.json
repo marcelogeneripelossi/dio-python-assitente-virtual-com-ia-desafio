@@ -1,9 +1,41 @@
 {
-    "meta": [
-        "meta",
-        "objetivo",
-        "planejamento",
-        "alvo"
+    "acoes": [
+        "ações",
+        "arriscar",
+        "bolsa",
+        "mercado",
+        "volatilidade"
+    ],
+    "categoria": [
+            "gastando mais",
+            "maior despesa",
+            "categoria"
+    ],
+    "cdb": [
+        "cdb",
+        "certificado de depósito",
+        "liquidez diária"
+    ],
+    "fundo_acoes": [
+        "fundo de ações",
+        "ações tech",
+        "ações",
+        "variável"
+    ],
+    "fundo_multimercado": [
+        "multimercado",
+        "diversificação"
+    ], 
+    "gastos": [
+            "quanto gastei",
+            "total de despesas",
+            "despesas"
+    ],
+    "poupanca": [
+        "poupança",
+        "guardar dinheiro",
+        "economizar",
+        "poupar"
     ],
     "seguro": [
         "seguro",
@@ -13,29 +45,11 @@
         "lci/lca",
         "lci_lca"
     ],
-    "poupanca": [
-        "poupança",
-        "guardar dinheiro",
-        "economizar",
-        "poupar"
-    ],
-    "acoes": [
-        "ações",
-        "arriscar",
-        "bolsa",
-        "mercado",
-        "volatilidade"
-    ],
     "tesouro": [
         "tesouro",
         "selic",
         "direto",
         "título público"
-    ],
-    "cdb": [
-        "cdb",
-        "certificado de depósito",
-        "liquidez diária"
     ],
     "lci_lca": [
         "lci",
@@ -45,15 +59,11 @@
         "imobiliário",
         "agrícola"
     ],
-    "fundo_multimercado": [
-        "multimercado",
-        "diversificação"
-    ],
-    "fundo_acoes": [
-        "fundo de ações",
-        "ações tech",
-        "ações",
-        "variável"
+    "meta": [
+        "meta",
+        "objetivo",
+        "planejamento",
+        "alvo"
     ],
     "etf": [
         "etf",
@@ -66,5 +76,35 @@
         "investimento",
         "aplicar",
         "aplicação"
+    ],
+    "ultimo_atendimento": [
+        "último atendimento",
+        "ultimo atendimento",
+        "último contato",
+        "ultimo contato",
+        "atendimento",
+        "atendimento mais recente",
+        "atendimento recente"
+    ],
+    "historico_atendimento": [
+            "histórico de atendimento",
+            "historico de atendimento",
+            "histórico",
+            "historico",
+            "meu histórico",
+            "meu historico",
+            "atendimentos",
+            "todos os atendimentos",
+            "listar atendimentos"
+    ], 
+    "transacoes": [
+            "transação",
+            "transações",
+            "transacao",
+            "transacoes",
+            "movimentação",
+            "movimentações",
+            "movimentacao",
+            "movimentacoes"
     ]
 }
