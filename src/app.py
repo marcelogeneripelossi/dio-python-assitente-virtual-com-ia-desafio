@@ -64,7 +64,7 @@ perfis = dados["perfis"]
 
 st.title("Finassist - Assistente Financeiro Inteligente")
 
-nome_clientes = [p["nome"] for p in perfis]
+nome_clientes = [p["nome"] for p in sorted(perfis, key=lambda x: x["nome"])]
 
 cliente_selecionado = st.sidebar.selectbox(
     "Selecione o Cliente:",
