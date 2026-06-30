@@ -64,7 +64,7 @@ perfis = dados["perfis"]
 
 st.title("Finassist - Assistente Financeiro Inteligente")
 
-nome_clientes = [p["nome"] for p in sorted(perfis, key=lambda x: x["nome"])]
+nome_clientes = sorted([p["nome"] for p in perfis])
 
 cliente_selecionado = st.sidebar.selectbox(
     "Selecione o Cliente:",
@@ -104,7 +104,7 @@ if pergunta:
         {pergunta}
         
         RESPOSTA GERADA PELO MOTOR:
-        {resposta_motor}
+        {resposta}
         
         INSTRUÇÕES:
         - Não invente informações.
@@ -117,6 +117,7 @@ if pergunta:
             prompt
         )
 
+        st.markdown("### Finassist")
         st.write(resposta.text)
 
     else:
