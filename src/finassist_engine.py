@@ -7,6 +7,7 @@ import json
 import pandas as pd
 import random
 import re
+import unicodedata
 
 import os
 import subprocess
@@ -74,13 +75,26 @@ negacoes = {
     "evitar",
     "jamais",
     "nada",
-    "não",
     "nao",
     "nem",
     "nem pensar",
     "nem quero",
     "nem sequer",
     "nunca"}
+
+perfil_sinonimos = {
+    "arriscado": "arrojado",
+    "risco": "arrojado",
+    "acoes": "arrojado",
+    "ação": "arrojado",
+    "acao": "arrojado",
+    "bolsa": "arrojado",
+
+    "seguro": "conservador",
+    "segurança": "conservador",
+
+    "equilibrado": "moderado"
+}
 
 perfil_tipos = [
         "conservador",
@@ -184,6 +198,22 @@ def formatar_moeda(valor):
         .replace("_", ".")
     )
 
+def normalizar_texto(texto):
+    texto = texto.lower()
+
+    texto = unicodedata.normalize(
+        "NFD",
+        texto
+    )
+
+    texto = "".join(
+        c
+        for c in texto
+        if unicodedata.category(c) != "Mn"
+    )
+
+    return texto
+
 def normalizar_perfil(perfil):
     perfil = perfil.lower().strip()
 
@@ -207,9 +237,7 @@ def normalizar_perfil(perfil):
     return mapa.get(perfil, perfil)
 
 def tokenizar(texto):
-    """
-    Remove pontuação e devolve uma lista de palavras.
-    """
+    texto = normalizar_texto(texto)
 
     return re.findall(
         r'\b[\w/]+\b',
@@ -246,14 +274,21 @@ def termo_negado(tokens, indice, janela=4):
     return False
 
 def detectar_intencao(pergunta, chave):
-    return any(
-        termo in pergunta.lower()
-        for termo in palavras_chave.get(
-            chave,
-            []
-        )
+
+    pergunta_normalizada = normalizar_texto(
+        pergunta
     )
 
+    termos = palavras_chave.get(
+        chave,
+        []
+    )
+
+    return any(
+        normalizar_texto(termo)
+        in pergunta_normalizada
+        for termo in termos
+    )
 
 # ============================================================
 # Motor do Finassist
@@ -261,7 +296,7 @@ def detectar_intencao(pergunta, chave):
 
 def motor_finassist(perfil, pergunta, dados):
 
-    pergunta_lower = pergunta.lower()
+    pergunta_normalizada = normalizar_texto(pergunta)
 
     tokens = tokenizar(pergunta)
 
@@ -282,7 +317,7 @@ def motor_finassist(perfil, pergunta, dados):
     # ========================================================
 
     quer_metas = detectar_intencao(
-        pergunta_lower,
+        pergunta_normalizada,
         "meta"
     )
 
@@ -318,7 +353,7 @@ def motor_finassist(perfil, pergunta, dados):
 
     # Último atendimento
     quer_ultimo_atendimento = detectar_intencao(
-        pergunta_lower,
+        pergunta_normalizada,
         "ultimo_atendimento"
     )
 
@@ -346,7 +381,7 @@ def motor_finassist(perfil, pergunta, dados):
 
     # Histórico de atendimento
     quer_historico = detectar_intencao(
-        pergunta_lower,
+        pergunta_normalizada,
         "historico_atendimento"
     )
 
@@ -379,7 +414,7 @@ def motor_finassist(perfil, pergunta, dados):
             )
 
     quer_transacoes = detectar_intencao(
-        pergunta_lower,
+        pergunta_normalizada,
         "transacoes"
     )
 
@@ -414,7 +449,7 @@ def motor_finassist(perfil, pergunta, dados):
             )
 
     quer_gastos = detectar_intencao(
-        pergunta_lower,
+        pergunta_normalizada,
         "gastos"
     )
 
@@ -434,7 +469,7 @@ def motor_finassist(perfil, pergunta, dados):
         )
 
     quer_categoria = detectar_intencao(
-        pergunta_lower,
+        pergunta_normalizada,
         "categoria"
     )
 
@@ -469,8 +504,8 @@ def motor_finassist(perfil, pergunta, dados):
     # ========================================================
 
     if (
-        "risco" in pergunta_lower
-        or "volatilidade" in pergunta_lower
+        "risco" in pergunta_normalizada
+        or "volatilidade" in pergunta_normalizada
     ):
 
         # Cria uma cópia da lista de produtos e embaralha para garantir aleatoriedade
@@ -553,14 +588,30 @@ def motor_finassist(perfil, pergunta, dados):
             break
 
     # ========================================================
+    # 4.1) Sinônimos de Perfil
+    # ========================================================
+
+    if perfil_detectado is None and perfil_negado is None:
+
+        for termo, perfil_associado in perfil_sinonimos.items():
+
+            if termo not in pergunta_normalizada:
+                continue
+
+            indice = tokens.index(termo)
+
+            if termo_negado(tokens, indice):
+                perfil_negado = perfil_associado
+            else:
+                perfil_detectado = perfil_associado
+
+            break
+
+    # ========================================================
     # 5) Meu perfil
     # ========================================================
 
-    if (
-        perfil_detectado is None
-        and "perfil" in pergunta_lower
-    ):
-
+    if (perfil_detectado is None and "perfil" in pergunta_normalizada):
         perfil_detectado = perfil_cliente
 
     # ========================================================
@@ -568,7 +619,7 @@ def motor_finassist(perfil, pergunta, dados):
     # ========================================================
 
     quer_investimento = any(
-        termo in pergunta_lower
+        termo in pergunta_normalizada
         for termo in palavras_chave.get(
             "investir",
             []
