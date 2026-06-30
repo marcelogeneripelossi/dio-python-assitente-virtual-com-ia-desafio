@@ -1,6 +1,7 @@
 {
     "acoes": [
-        "ações",
+        "acoes",
+        "arriscado",
         "arriscar",
         "bolsa",
         "mercado",
@@ -13,23 +14,57 @@
     ],
     "cdb": [
         "cdb",
-        "certificado de depósito",
-        "liquidez diária"
+        "certificado de deposito",
+        "liquidez diaria"
+    ],
+    "etf": [
+        "etf",
+        "s&p",
+        "internacional",
+        "global"
     ],
     "fundo_acoes": [
-        "fundo de ações",
-        "ações tech",
-        "ações",
-        "variável"
+        "fundo de acoes",
+        "acoes tech",
+        "acoes",
+        "variavel"
     ],
     "fundo_multimercado": [
         "multimercado",
-        "diversificação"
+        "diversificacao"
     ], 
     "gastos": [
             "quanto gastei",
             "total de despesas",
             "despesas"
+    ],
+    "historico_atendimento": [
+            "historico de atendimento",
+            "historico",
+            "meu historico",
+            "atendimentos",
+            "todos os atendimentos",
+            "listar atendimentos"
+    ],
+    "investir": [
+        "investir",
+        "investimento",
+        "aplicar",
+        "aplicacao"
+    ],
+    "lci_lca": [
+        "lci",
+        "lca",
+        "lci/lca",
+        "letra de credito",
+        "imobiliario",
+        "agricola"
+    ],
+    "meta": [
+        "meta",
+        "objetivo",
+        "planejamento",
+        "alvo"
     ],
     "poupanca": [
         "poupança",
@@ -39,7 +74,6 @@
     ],
     "seguro": [
         "seguro",
-        "poupança",
         "poupanca",
         "selic",
         "lci/lca",
@@ -49,62 +83,20 @@
         "tesouro",
         "selic",
         "direto",
-        "título público"
-    ],
-    "lci_lca": [
-        "lci",
-        "lca",
-        "lci/lca",
-        "letra de crédito",
-        "imobiliário",
-        "agrícola"
-    ],
-    "meta": [
-        "meta",
-        "objetivo",
-        "planejamento",
-        "alvo"
-    ],
-    "etf": [
-        "etf",
-        "s&p",
-        "internacional",
-        "global"
-    ],
-    "investir": [
-        "investir",
-        "investimento",
-        "aplicar",
-        "aplicação"
+        "titulo publico"
+    ], 
+    "transacoes": [
+            "transacao",
+            "transacoes",
+            "movimentacao",
+            "movimentacoes",
+            "extrato"
     ],
     "ultimo_atendimento": [
-        "último atendimento",
         "ultimo atendimento",
-        "último contato",
         "ultimo contato",
         "atendimento",
         "atendimento mais recente",
         "atendimento recente"
-    ],
-    "historico_atendimento": [
-            "histórico de atendimento",
-            "historico de atendimento",
-            "histórico",
-            "historico",
-            "meu histórico",
-            "meu historico",
-            "atendimentos",
-            "todos os atendimentos",
-            "listar atendimentos"
-    ], 
-    "transacoes": [
-            "transação",
-            "transações",
-            "transacao",
-            "transacoes",
-            "movimentação",
-            "movimentações",
-            "movimentacao",
-            "movimentacoes"
     ]
 }
