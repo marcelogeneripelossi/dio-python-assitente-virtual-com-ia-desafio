@@ -1,5 +1,4 @@
-
-## Código para validar toda a lógica do motor de inferência.
+## Código a ser utilizado no Colab. No Notebook são gerados os arquivos de dados para utilização da simulação do Agente.
 ## Para simulação utilizando uma interface simples com Streamlit, é utilizado o app.py
 ## Versão: lê os dados já gravados em arquivos na pasta 'data/'
 
@@ -28,6 +27,24 @@ import subprocess
 # 4. Escopo Fechado: Se o usuário tentar desviar o assunto para temas não financeiros (programação, culinária, etc.), recuse educadamente e retorne ao foco financeiro.
 # """
 #
+
+
+# ==========================================================
+# Configurações
+# ==========================================================
+BASE_DIR = os.path.dirname(
+    os.path.abspath(__file__)
+)
+
+DATA_DIR = os.path.join(
+    BASE_DIR,
+    "..",
+    "data"
+)
+
+DATA_DIR = os.path.abspath(
+    DATA_DIR
+)
 
 # ==========================================================
 # Contexto global
@@ -104,16 +121,44 @@ def inicializar_contexto(dados):
 # ============================================================
 
 def carregar_dados():
-    with open('data/perfil_investidor.json', 'r', encoding='utf-8') as f:
+    with open(
+        os.path.join(
+            DATA_DIR,
+            "perfil_investidor.json"
+        ), 
+        'r', encoding='utf-8') as f:
         perfis = json.load(f)
-    with open('data/produtos_financeiros.json', 'r', encoding='utf-8') as f:
+    with open(
+        os.path.join(
+            DATA_DIR,
+            "produtos_financeiros.json"
+        ), 
+        'r', encoding='utf-8') as f:
         produtos = json.load(f)
-    with open("data/palavras_chave.json", encoding="utf-8") as f:
+    with open(
+        os.path.join(
+            DATA_DIR,
+            "palavras_chave.json"
+        ),
+        encoding="utf-8") as f:
         palavras_chave = json.load(f)
-    with open("data/chave_sugestoes.json", encoding="utf-8") as f:
+    with open(
+        os.path.join(
+            DATA_DIR,
+            "chave_sugestoes.json"
+        ),
+        encoding="utf-8") as f:
         chave_sugestoes = json.load(f)
-    transacoes = pd.read_csv('data/transacoes.csv')
-    historico = pd.read_csv('data/historico_atendimento.csv')
+    transacoes = pd.read_csv(
+            os.path.join(
+                DATA_DIR,
+                "transacoes.csv"
+            ))
+    historico = pd.read_csv(
+        os.path.join(
+            DATA_DIR,
+            "historico_atendimento.csv"
+        ))
     return {
         "perfis": perfis,
         "produtos": produtos,
@@ -200,6 +245,16 @@ def termo_negado(tokens, indice, janela=4):
 
     return False
 
+def detectar_intencao(pergunta, chave):
+    return any(
+        termo in pergunta.lower()
+        for termo in palavras_chave.get(
+            chave,
+            []
+        )
+    )
+
+
 # ============================================================
 # Motor do Finassist
 # ============================================================
@@ -226,9 +281,9 @@ def motor_finassist(perfil, pergunta, dados):
     # 1) Metas
     # ========================================================
 
-    quer_metas = any(
-        termo in pergunta_lower
-        for termo in palavras_chave.get("meta", [])
+    quer_metas = detectar_intencao(
+        pergunta_lower,
+        "meta"
     )
 
     if quer_metas:
@@ -261,17 +316,10 @@ def motor_finassist(perfil, pergunta, dados):
     # 2) Histórico, Transações e Gastos
     # ========================================================
 
-    quer_ultimo_atendimento = any(
-        termo in pergunta_lower
-        for termo in [
-            "último atendimento",
-            "ultimo atendimento",
-            "último contato",
-            "ultimo contato",
-            "atendimento",
-            "atendimento mais recente",
-            "atendimento recente"
-        ]
+    # Último atendimento
+    quer_ultimo_atendimento = detectar_intencao(
+        pergunta_lower,
+        "ultimo_atendimento"
     )
 
     if quer_ultimo_atendimento:
@@ -296,19 +344,10 @@ def motor_finassist(perfil, pergunta, dados):
             )
 
 
-    quer_historico = any(
-        termo in pergunta_lower
-        for termo in [
-            "histórico de atendimento",
-            "historico de atendimento",
-            "histórico",
-            "historico",
-            "meu histórico",
-            "meu historico",
-            "atendimentos",
-            "todos os atendimentos",
-            "listar atendimentos"
-        ]
+    # Histórico de atendimento
+    quer_historico = detectar_intencao(
+        pergunta_lower,
+        "historico_atendimento"
     )
 
     if quer_historico:
@@ -339,21 +378,12 @@ def motor_finassist(perfil, pergunta, dados):
                 + "\n".join(linhas)
             )
 
-
-    quer_transacoes = any(
-        termo in pergunta_lower
-        for termo in [
-            "transação",
-            "transações",
-            "transacao",
-            "transacoes",
-            "movimentação",
-            "movimentações",
-            "movimentacao",
-            "movimentacoes"
-        ]
+    quer_transacoes = detectar_intencao(
+        pergunta_lower,
+        "transacoes"
     )
 
+    # Transações
     if quer_transacoes:
 
         trans = transacoes[
@@ -383,13 +413,9 @@ def motor_finassist(perfil, pergunta, dados):
                 + "\n".join(linhas)
             )
 
-    quer_gastos = any(
-        termo in pergunta_lower
-        for termo in [
-            "quanto gastei",
-            "total de despesas",
-            "despesas"
-        ]
+    quer_gastos = detectar_intencao(
+        pergunta_lower,
+        "gastos"
     )
 
     if quer_gastos:
@@ -407,13 +433,9 @@ def motor_finassist(perfil, pergunta, dados):
             f"R$ {formatar_moeda(total)}."
         )
 
-    quer_categoria = any(
-        termo in pergunta_lower
-        for termo in [
-            "gastando mais",
-            "maior despesa",
-            "categoria"
-        ]
+    quer_categoria = detectar_intencao(
+        pergunta_lower,
+        "categoria"
     )
 
     if quer_categoria:
