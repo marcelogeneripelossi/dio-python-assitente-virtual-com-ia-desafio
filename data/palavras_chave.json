@@ -36,7 +36,8 @@
     "gastos": [
             "quanto gastei",
             "total de despesas",
-            "despesas"
+            "despesas",
+            "gasto"
     ],
     "historico_atendimento": [
             "historico de atendimento",
