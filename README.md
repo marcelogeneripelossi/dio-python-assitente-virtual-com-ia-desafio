@@ -82,10 +82,16 @@ O Finassist pode operar em dois modos distintos:
 
 
 ## 📂 Estrutura do Projeto
-- `/data`: Arquivos de dados (JSON e CSV) com informações dos clientes, transações e produtos.
-- `/docs`: Documentação técnica, métricas e roteiros de avaliação.
-- `/notebook`: notebook utilizado para testes e simulações do motor de inferência.
-- `/src`: Código-fonte (`app.py` para interface web e `finassist_engine.py` para simulação).
+* `/data`: Arquivos de dados (`JSON` e `CSV`) contendo informações dos clientes, produtos financeiros, transações, histórico de atendimentos, palavras-chave e sugestões utilizadas pelo motor de inferência.
+* `/docs`: Documentação técnica, métricas, apresentações e roteiros de avaliação do projeto.
+* `/notebook`: Ambiente de experimentação contendo o arquivo `analise_e_execucao.ipynb`, utilizado para testes, simulações e validação do motor de inferência.
+* `/src`: Código-fonte principal da aplicação:
+  * `app.py`: Interface web desenvolvida com Streamlit.
+  * `finassist_engine.py`: Motor principal de inferência e orquestração das respostas.
+  * `consultas_cliente.py`: Funções relacionadas à consulta de metas, gastos, transações e histórico do cliente.
+  * `utils.py`: Funções utilitárias de normalização, tokenização e formatação.
+  * `contexto.py`: Armazenamento das constantes e variáveis globais compartilhadas pela aplicação.
+
 
 ## 🧠 Base de Conhecimento
 
