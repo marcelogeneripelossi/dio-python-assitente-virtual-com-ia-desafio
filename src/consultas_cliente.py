@@ -1,13 +1,16 @@
+import contexto
+from util import formatar_moeda
+
 # ===================================
 # Métodos do Motor
 # ===================================
 
 def obter_gastos_maior_categoria(perfil):
 
-        saidas = transacoes[
-            (transacoes["id_cliente"] == perfil["id"])
+        saidas = contexto.transacoes[
+            (contexto.transacoes["id_cliente"] == perfil["id"])
             &
-            (transacoes["tipo"] == "saida")
+            (contexto.transacoes["tipo"] == "saida")
         ]
 
         if not saidas.empty:
@@ -29,10 +32,10 @@ def obter_gastos_maior_categoria(perfil):
             )
 
 def obter_gastos(perfil):
-        saidas = transacoes[
-            (transacoes["id_cliente"] == perfil["id"])
+        saidas = contexto.transacoes[
+            (contexto.transacoes["id_cliente"] == perfil["id"])
             &
-            (transacoes["tipo"] == "saida")
+            (contexto.transacoes["tipo"] == "saida")
         ]
 
         total = saidas["valor"].sum()
@@ -43,14 +46,14 @@ def obter_gastos(perfil):
         )
 
 def obter_historico(perfil):
-    hist = historico[
-        historico["id_cliente"] == perfil["id"]
+    hist = contexto.historico[
+        contexto.historico["id_cliente"] == perfil["id"]
     ]
 
     if hist.empty:
         return "Você não possui atendimentos registrados."
 
-    hist = hist.sort_values("data", ascending=False)    #.head(5)
+    hist = hist.sort_values("data", ascending=False).head(10)
 
     linhas = []
 
@@ -89,8 +92,8 @@ def obter_metas(perfil):
         )
 
 def obter_transacoes(perfil):
-        trans = transacoes[
-            transacoes["id_cliente"] == perfil["id"]
+        trans = contexto.transacoes[
+            contexto.transacoes["id_cliente"] == perfil["id"]
         ]
 
         if not trans.empty:
@@ -98,7 +101,7 @@ def obter_transacoes(perfil):
             ultimas = (
                 trans
                 .sort_values("data", ascending=False)
-                .head(3)
+                .head(10)
             )
 
             linhas = []
@@ -118,8 +121,8 @@ def obter_transacoes(perfil):
 
 
 def obter_ultimo_atendimento(perfil):
-    hist = historico[
-        historico["id_cliente"] == perfil["id"]
+    hist = contexto.historico[
+        contexto.historico["id_cliente"] == perfil["id"]
     ]
 
     if hist.empty:
