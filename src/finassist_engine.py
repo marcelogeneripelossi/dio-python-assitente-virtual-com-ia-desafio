@@ -291,14 +291,157 @@ def detectar_intencao(pergunta, chave):
     )
 
 # ============================================================
-# Motor do Finassist
+# Motor do Finassist 
 # ============================================================
+# ===================================
+# Métodos do Motor (início)
+# ===================================
+
+def obter_gastos_maior_categoria(perfil):
+
+        saidas = transacoes[
+            (transacoes["id_cliente"] == perfil["id"])
+            &
+            (transacoes["tipo"] == "saida")
+        ]
+
+        if not saidas.empty:
+
+            resumo = (
+                saidas
+                .groupby("categoria")["valor"]
+                .sum()
+            )
+
+            categoria = resumo.idxmax()
+
+            valor = resumo.max()
+
+            return (
+                f"Sua maior despesa está na categoria "
+                f"'{categoria}', totalizando "
+                f"R$ {formatar_moeda(valor)}."
+            )
+
+def obter_gastos(perfil):
+        saidas = transacoes[
+            (transacoes["id_cliente"] == perfil["id"])
+            &
+            (transacoes["tipo"] == "saida")
+        ]
+
+        total = saidas["valor"].sum()
+
+        return(
+            f"Suas despesas totalizam "
+            f"R$ {formatar_moeda(total)}."
+        )
+
+def obter_historico(perfil):
+    hist = historico[
+        historico["id_cliente"] == perfil["id"]
+    ]
+
+    if hist.empty:
+        return "Você não possui atendimentos registrados."
+
+    hist = hist.sort_values("data", ascending=False)    #.head(5)
+
+    linhas = []
+
+    for _, atendimento in hist.iterrows():
+
+        linhas.append(
+            f"- {atendimento['data']} | "
+            f"{atendimento['tema']} | "
+            f"{atendimento['canal']}"
+        )
+
+    return (
+        "Seu histórico de atendimento:\n"
+        + "\n".join(linhas)
+    )
+
+def obter_metas(perfil):
+    metas = perfil.get("metas", [])
+
+    if not metas:
+        return ("Você não possui metas cadastradas.")
+
+    if metas:
+        texto_metas = []
+
+        for meta in metas:
+            texto_metas.append(
+                f"- {meta['meta']} "
+                f"(R$ {formatar_moeda(meta['valor_necessario'])} "
+                f"até {meta['prazo']})"
+            )
+
+        return (
+            "Suas metas atuais são:\n"
+            + "\n".join(texto_metas)
+        )
+
+def obter_transacoes(perfil):
+        trans = transacoes[
+            transacoes["id_cliente"] == perfil["id"]
+        ]
+
+        if not trans.empty:
+
+            ultimas = (
+                trans
+                .sort_values("data", ascending=False)
+                .head(3)
+            )
+
+            linhas = []
+
+            for _, t in ultimas.iterrows():
+
+                linhas.append(
+                    f"- {t['data']} | "
+                    f"{t['descricao']} | "
+                    f"R$ {formatar_moeda(t['valor'])}"
+                )
+
+            return (
+                "Suas últimas transações foram:\n"
+                + "\n".join(linhas)
+            )
+
+
+def obter_ultimo_atendimento(perfil):
+    hist = historico[
+        historico["id_cliente"] == perfil["id"]
+    ]
+
+    if hist.empty:
+        return "Você não possui atendimentos registrados."
+
+    ultimo = (
+        hist
+        .sort_values("data")
+        .iloc[-1]
+    )
+
+    return (
+        f"Seu último atendimento foi em "
+        f"{ultimo['data']} via {ultimo['canal']}.\n"
+        f"Tema: {ultimo['tema']}.\n"
+        f"Resumo: {ultimo['resumo']}."
+    )
+
+# ===================================
+# Métodos do Motor (fim)
+# ===================================
 
 def motor_finassist(perfil, pergunta, dados):
 
     pergunta_normalizada = normalizar_texto(pergunta)
 
-    tokens = tokenizar(pergunta)
+    tokens = tokenizar(pergunta_normalizada)
 
     resposta_final = []
 
@@ -322,183 +465,84 @@ def motor_finassist(perfil, pergunta, dados):
     )
 
     if quer_metas:
-
-        metas = perfil.get("metas", [])
-
-        if metas:
-
-            texto_metas = []
-
-            for m in metas:
-                texto_metas.append(
-                    f"- {m['meta']} "
-                    f"(R$ {formatar_moeda(m['valor_necessario'])} "
-                    f"até {m['prazo']})"
-                )
-
-            resposta_final.append(
-                "Suas metas atuais são:\n"
-                + "\n".join(texto_metas)
-            )
-
-        else:
-
-            resposta_final.append(
-                "Você não possui metas cadastradas."
-            )
+        resposta = obter_metas(perfil)
+        resposta_final.append(resposta)
 
     # ========================================================
     # 2) Histórico, Transações e Gastos
     # ========================================================
 
+    #=====================
     # Último atendimento
+    #=====================
+
     quer_ultimo_atendimento = detectar_intencao(
         pergunta_normalizada,
         "ultimo_atendimento"
     )
 
     if quer_ultimo_atendimento:
+        resposta = obter_ultimo_atendimento(perfil)
+        resposta_final.append(resposta)
 
-        hist = historico[
-            historico["id_cliente"] == perfil["id"]
-        ]
-
-        if not hist.empty:
-
-            ultimo = (
-                hist
-                .sort_values("data")
-                .iloc[-1]
-            )
-
-            resposta_final.append(
-                f"Seu último atendimento foi em "
-                f"{ultimo['data']} via {ultimo['canal']}.\n"
-                f"Tema: {ultimo['tema']}.\n"
-                f"Resumo: {ultimo['resumo']}."
-            )
-
-
+    #=====================
     # Histórico de atendimento
+    #=====================
+
     quer_historico = detectar_intencao(
         pergunta_normalizada,
         "historico_atendimento"
     )
 
     if quer_historico:
+        resposta = obter_historico(perfil)
+        resposta_final.append(resposta)
 
-        hist = historico[
-            historico["id_cliente"] == perfil["id"]
-        ]
+    
+    #=====================
+    # Últimas transações, gastos e categoria de maior gasto
+    #=====================
 
-        if not hist.empty:
-
-            hist = hist.sort_values(
-                "data",
-                ascending=False
-            )
-
-            linhas = []
-
-            for _, atendimento in hist.iterrows():
-
-                linhas.append(
-                    f"- {atendimento['data']} | "
-                    f"{atendimento['tema']} | "
-                    f"{atendimento['canal']}"
-                )
-
-            resposta_final.append(
-                "Seu histórico de atendimento:\n"
-                + "\n".join(linhas)
-            )
+    #=======
+    # Transações
+    #=======
 
     quer_transacoes = detectar_intencao(
         pergunta_normalizada,
         "transacoes"
     )
 
-    # Transações
     if quer_transacoes:
+        resposta = obter_transacoes(perfil)
+        resposta_final.append(resposta)
 
-        trans = transacoes[
-            transacoes["id_cliente"] == perfil["id"]
-        ]
 
-        if not trans.empty:
-
-            ultimas = (
-                trans
-                .sort_values("data", ascending=False)
-                .head(3)
-            )
-
-            linhas = []
-
-            for _, t in ultimas.iterrows():
-
-                linhas.append(
-                    f"- {t['data']} | "
-                    f"{t['descricao']} | "
-                    f"R$ {formatar_moeda(t['valor'])}"
-                )
-
-            resposta_final.append(
-                "Suas últimas transações foram:\n"
-                + "\n".join(linhas)
-            )
-
+    #=======
+    # Gastos
+    #=======
+    
     quer_gastos = detectar_intencao(
         pergunta_normalizada,
         "gastos"
     )
 
     if quer_gastos:
+        resposta = obter_gastos(perfil)
+        resposta_final.append(resposta)
 
-        saidas = transacoes[
-            (transacoes["id_cliente"] == perfil["id"])
-            &
-            (transacoes["tipo"] == "saida")
-        ]
+    #=======
+    # Categoria de maior gasto
+    #=======
 
-        total = saidas["valor"].sum()
-
-        resposta_final.append(
-            f"Suas despesas totalizam "
-            f"R$ {formatar_moeda(total)}."
-        )
-
-    quer_categoria = detectar_intencao(
+    quer_categoria_maior_gasto = detectar_intencao(
         pergunta_normalizada,
         "categoria"
     )
 
-    if quer_categoria:
+    if quer_categoria_maior_gasto:
+        resposta = obter_gastos_maior_categoria(perfil)
+        resposta_final.append(resposta)
 
-        saidas = transacoes[
-            (transacoes["id_cliente"] == perfil["id"])
-            &
-            (transacoes["tipo"] == "saida")
-        ]
-
-        if not saidas.empty:
-
-            resumo = (
-                saidas
-                .groupby("categoria")["valor"]
-                .sum()
-            )
-
-            categoria = resumo.idxmax()
-
-            valor = resumo.max()
-
-            resposta_final.append(
-                f"Sua maior despesa está na categoria "
-                f"'{categoria}', totalizando "
-                f"R$ {formatar_moeda(valor)}."
-            )
-    
     # ========================================================
     # 3) Riscos
     # ========================================================
@@ -595,7 +639,7 @@ def motor_finassist(perfil, pergunta, dados):
 
         for termo, perfil_associado in perfil_sinonimos.items():
 
-            if termo not in pergunta_normalizada:
+            if termo not in tokens:
                 continue
 
             indice = tokens.index(termo)
