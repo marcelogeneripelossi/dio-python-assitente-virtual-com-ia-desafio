@@ -2,6 +2,7 @@
 # Utilidades
 # ============================================================
 
+import re
 import unicodedata
 
 import os
@@ -69,6 +70,18 @@ def normalizar_texto(texto):
         if unicodedata.category(c) != "Mn"
     )
 
+    texto = re.sub(
+        r"[^\w\s]",
+        " ",
+        texto
+    )
+
+    texto = re.sub(
+        r"\s+",
+        " ",
+        texto
+    ).strip()
+    
     return texto
 
 def normalizar_perfil(perfil):
