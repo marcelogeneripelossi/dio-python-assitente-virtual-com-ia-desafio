@@ -14,6 +14,7 @@ import contexto
 from util import (
     cls,
     detectar_intencao,
+    detectar_intencao_tokens,
     normalizar_perfil,
     normalizar_texto,
     termo_negado,
@@ -159,8 +160,8 @@ def motor_finassist(perfil, pergunta, dados):
     # 1) Metas
     # ========================================================
 
-    quer_metas = detectar_intencao(
-        pergunta_normalizada,
+    quer_metas = detectar_intencao_tokens(
+        tokens,
         "meta"
     )
 
@@ -207,8 +208,8 @@ def motor_finassist(perfil, pergunta, dados):
     # Transações
     #=======
 
-    quer_transacoes = detectar_intencao(
-        pergunta_normalizada,
+    quer_transacoes = detectar_intencao_tokens(
+        tokens,
         "transacoes"
     )
 
@@ -221,8 +222,8 @@ def motor_finassist(perfil, pergunta, dados):
     # Gastos
     #=======
     
-    quer_gastos = detectar_intencao(
-        pergunta_normalizada,
+    quer_gastos = detectar_intencao_tokens(
+        tokens,
         "gastos"
     )
 
@@ -310,12 +311,6 @@ def motor_finassist(perfil, pergunta, dados):
 
         for indice, token in enumerate(tokens):
             token_normalizado = token.lower()
-
-            # trata plural simples
-            if token_normalizado.endswith("es") or token_normalizado.endswith("as"):
-                token_normalizado = token_normalizado[:-2] 
-            elif token_normalizado.endswith("s"):
-                token_normalizado = token_normalizado[:-1]
 
             if token_normalizado != termo_busca:
                 continue
