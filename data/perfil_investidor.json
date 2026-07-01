@@ -72,8 +72,6 @@
     "patrimonio_total": 12000.00,
     "reserva_emergencia_atual": 8000.00,
     "aceita_risco": false,
-    "metas": [
-      {"meta": "Veículo seminovo", "valor_necessario": 40000.00, "prazo": "2026-10"}
-    ]
+    "metas": []
   }
 ]
