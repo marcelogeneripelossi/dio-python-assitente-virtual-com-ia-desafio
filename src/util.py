@@ -2,7 +2,6 @@
 # Utilidades
 # ============================================================
 
-import re
 import unicodedata
 
 import os
@@ -13,6 +12,40 @@ import contexto
 def cls():
     comando = 'cls' if os.name == 'nt' else 'clear'
     subprocess.run (comando, shell = True)
+
+def detectar_intencao(pergunta, chave):
+
+    pergunta_normalizada = normalizar_texto(
+        pergunta
+    )
+
+    termos = contexto.palavras_chave.get(
+        chave,
+        []
+    )
+
+    return any(
+        normalizar_texto(termo)
+        in pergunta_normalizada
+        for termo in termos
+    )
+
+def detectar_intencao_tokens(tokens, chave):
+
+    termos = contexto.palavras_chave.get(
+        chave,
+        []
+    )
+
+    termos_normalizados = [
+        normalizar_texto(termo)
+        for termo in termos
+    ]
+
+    return any(
+        termo in tokens
+        for termo in termos_normalizados
+    )
 
 def formatar_moeda(valor):
     return (
@@ -60,13 +93,48 @@ def normalizar_perfil(perfil):
 
     return mapa.get(perfil, perfil)
 
+def singularizar(token):
+
+    if len(token) <= 3:
+        return token
+
+    if token.endswith("oes"):
+        return token[:-3] + "ao"
+
+    if token.endswith("aes"):
+        return token[:-3] + "ao"
+
+    if token.endswith("ais"):
+        return token[:-3] + "al"
+
+    if token.endswith("eis"):
+        return token[:-3] + "el"
+
+    if token.endswith("is"):
+        return token[:-2] + "il"
+
+    if token.endswith("ns"):
+        return token[:-2] + "m"
+
+    if token.endswith("es"):
+        return token[:-2]
+
+    if token.endswith("s"):
+        return token[:-1]
+
+    return token
+
 def tokenizar(texto):
     texto = normalizar_texto(texto)
 
-    return re.findall(
-        r'\b[\w/]+\b',
-        texto.lower()
-    )
+    tokens = texto.split()
+
+    tokens_normalizados = [
+        singularizar(token)
+        for token in tokens
+    ]    
+    
+    return tokens_normalizados
 
 def termo_negado(tokens, indice, janela=4):
     """
@@ -97,19 +165,3 @@ def termo_negado(tokens, indice, janela=4):
 
     return False
 
-def detectar_intencao(pergunta, chave):
-
-    pergunta_normalizada = normalizar_texto(
-        pergunta
-    )
-
-    termos = contexto.palavras_chave.get(
-        chave,
-        []
-    )
-
-    return any(
-        normalizar_texto(termo)
-        in pergunta_normalizada
-        for termo in termos
-    )
