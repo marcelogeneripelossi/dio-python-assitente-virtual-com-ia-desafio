@@ -8,9 +8,13 @@
         "volatilidade"
     ],
     "categoria": [
-            "gastando mais",
-            "maior despesa",
-            "categoria"
+        "de gasto",
+        "gastando mais",
+        "gasto mais",
+        "maior despesa",
+        "maior gasto",
+        "mais gasto",
+        "categoria"
     ],
     "cdb": [
         "cdb",
@@ -88,9 +92,7 @@
     ], 
     "transacoes": [
             "transacao",
-            "transacoes",
             "movimentacao",
-            "movimentacoes",
             "extrato"
     ],
     "ultimo_atendimento": [
