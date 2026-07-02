@@ -180,7 +180,7 @@ def motor_finassist(perfil, pergunta, dados):
     quer_ultimo_atendimento = detectar_intencao(
         pergunta_normalizada,
         tokens,
-        "ultimo_atendimento"
+        "atendimento_ultimo"
     )
 
     if quer_ultimo_atendimento:
@@ -194,7 +194,7 @@ def motor_finassist(perfil, pergunta, dados):
     quer_historico = detectar_intencao(
         pergunta_normalizada,
         tokens,
-        "historico_atendimento"
+        "atendimento_historico"
     )
 
     if quer_historico:
@@ -413,7 +413,7 @@ def motor_finassist(perfil, pergunta, dados):
                 f"{perfil_detectado} são:\n"
                 + "\n".join(
                     f"- {p}"
-                    for p in sorted(produtos_perfil[:8])
+                    for p in sorted(produtos_perfil[:5])
                 )
             )
 
@@ -525,7 +525,7 @@ def motor_finassist(perfil, pergunta, dados):
             "Sugestões:\n"
             + "\n".join(
                 f"- {s}"
-                for s in sugestoes[:5]
+                for s in sugestoes[:1]
             )
         )
 
