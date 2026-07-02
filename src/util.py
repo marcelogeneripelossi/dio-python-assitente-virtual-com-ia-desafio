@@ -14,11 +14,11 @@ def cls():
     comando = 'cls' if os.name == 'nt' else 'clear'
     subprocess.run (comando, shell = True)
 
-def detectar_intencao(pergunta, chave):
-
-    pergunta_normalizada = normalizar_texto(
-        pergunta
-    )
+def detectar_intencao(
+    pergunta,
+    tokens,
+    chave
+):
 
     termos = contexto.palavras_chave.get(
         chave,
@@ -27,7 +27,13 @@ def detectar_intencao(pergunta, chave):
 
     return any(
         normalizar_texto(termo)
-        in pergunta_normalizada
+        in pergunta
+        for termo in termos
+    ) or any(
+        singularizar(
+            normalizar_texto(termo)
+        )
+        in tokens
         for termo in termos
     )
 
@@ -81,7 +87,7 @@ def normalizar_texto(texto):
         " ",
         texto
     ).strip()
-    
+
     return texto
 
 def normalizar_perfil(perfil):
@@ -146,7 +152,7 @@ def tokenizar(texto):
         singularizar(token)
         for token in tokens
     ]    
-    
+
     return tokens_normalizados
 
 def termo_negado(tokens, indice, janela=4):
