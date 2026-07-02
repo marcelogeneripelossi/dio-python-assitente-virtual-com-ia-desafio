@@ -1,90 +1,513 @@
 [
-  {
-    "nome": "Tesouro Selic",
-    "categoria": "renda_fixa",
-    "risco": "baixo",
-    "rentabilidade": "100% da Selic",
-    "aporte_minimo": 30.00,
-    "indicado_para": "Reserva de emergência e iniciantes"
-  },
-  {
-    "nome": "CDB Liquidez Diária",
-    "categoria": "renda_fixa",
-    "risco": "baixo",
-    "rentabilidade": "102% do CDI",
-    "aporte_minimo": 100.00,
-    "indicado_para": "Quem busca segurança com rendimento diário"
-  },
-  {
-    "nome": "LCI/LCA",
-    "categoria": "renda_fixa",
-    "risco": "baixo",
-    "rentabilidade": "95% do CDI",
-    "aporte_minimo": 1000.00,
-    "indicado_para": "Quem pode esperar 90 dias (isento de IR)"
-  },
-  {
-    "nome": "Fundo Multimercado",
-    "categoria": "fundo",
-    "risco": "medio",
-    "rentabilidade": "CDI + 2%",
-    "aporte_minimo": 500.00,
-    "indicado_para": "Perfil moderado que busca diversificação"
-  },
-  {
-    "nome": "Fundo de Ações",
-    "categoria": "fundo",
-    "risco": "alto",
-    "rentabilidade": "Variável",
-    "aporte_minimo": 100.00,
-    "indicado_para": "Perfil arrojado com foco no longo prazo"
-  },
 {
-   "nome":"Tesouro Selic 2029",
-   "categoria":"renda_fixa",
-   "risco":"baixo",
-   "rentabilidade":"100% Selic",
-   "aporte_minimo":30.00,
-   "indicado_para":"Reserva de emergência"
+"nome": "Tesouro Selic 2029",
+"categoria": "Tesouro Direto",
+"risco": "baixo",
+"rentabilidade": "SELIC",
+"aporte_minimo": 100,
+"indicado_para": "conservador",
+"tipo": "titulo_publico",
+"prazo": "curto"
 },
 {
-   "nome":"CDB Pós-Fixado 110%",
-   "categoria":"renda_fixa",
-   "risco":"baixo",
-   "rentabilidade":"110% CDI",
-   "aporte_minimo":500.00,
-   "indicado_para":"Curto/Médio prazo"
+"nome": "Tesouro IPCA+ 2035",
+"categoria": "Tesouro Direto",
+"risco": "baixo",
+"rentabilidade": "IPCA + juros",
+"aporte_minimo": 100,
+"indicado_para": "conservador",
+"tipo": "titulo_publico",
+"prazo": "longo"
 },
 {
-   "nome":"LCI Direto 95%",
-   "categoria":"renda_fixa",
-   "risco":"baixo",
-   "rentabilidade":"95% CDI (Isento IR)",
-   "aporte_minimo":1000.00,
-   "indicado_para":"Prazo mínimo de 90 dias"
+"nome": "Tesouro Prefixado 2031",
+"categoria": "Tesouro Direto",
+"risco": "baixo",
+"rentabilidade": "prefixada",
+"aporte_minimo": 100,
+"indicado_para": "conservador",
+"tipo": "titulo_publico",
+"prazo": "medio"
 },
 {
-   "nome":"Fundo Multimercado Agressivo",
-   "categoria":"fundo",
-   "risco":"medio",
-   "rentabilidade":"CDI + 3.5%",
-   "aporte_minimo":200.00,
-   "indicado_para":"Diversificação moderada"
+"nome": "CDB Liquidez Diária Premium",
+"categoria": "CDB",
+"risco": "baixo",
+"rentabilidade": "102% do CDI",
+"aporte_minimo": 500,
+"indicado_para": "conservador",
+"tipo": "renda_fixa_bancaria",
+"prazo": "curto"
 },
 {
-   "nome":"Fundo de Ações Tech",
-   "categoria":"fundo",
-   "risco":"alto",
-   "rentabilidade":"Variável",
-   "aporte_minimo":100.00,
-   "indicado_para":"Longuíssimo prazo"
+"nome": "CDB Prefixado 3 Anos",
+"categoria": "CDB",
+"risco": "baixo",
+"rentabilidade": "12,30% a.a.",
+"aporte_minimo": 1000,
+"indicado_para": "conservador",
+"tipo": "renda_fixa_bancaria",
+"prazo": "medio"
 },
 {
-   "nome":"ETF S&P 500",
-   "categoria":"fundo",
-   "risco":"alto",
-   "rentabilidade":"Dólar + Variação Global",
-   "aporte_minimo":50.00,
-   "indicado_para":"Exposição internacional"
+"nome": "CDB CDI Plus 5 Anos",
+"categoria": "CDB",
+"risco": "baixo",
+"rentabilidade": "110% do CDI",
+"aporte_minimo": 2000,
+"indicado_para": "conservador",
+"tipo": "renda_fixa_bancaria",
+"prazo": "longo"
+},
+{
+"nome": "LCI Residencial 2028",
+"categoria": "LCI",
+"risco": "baixo",
+"rentabilidade": "94% do CDI",
+"aporte_minimo": 5000,
+"indicado_para": "conservador",
+"tipo": "credito_imobiliario",
+"prazo": "medio"
+},
+{
+"nome": "LCI Premium 2030",
+"categoria": "LCI",
+"risco": "baixo",
+"rentabilidade": "IPCA + juros",
+"aporte_minimo": 10000,
+"indicado_para": "conservador",
+"tipo": "credito_imobiliario",
+"prazo": "longo"
+},
+{
+"nome": "LCA Agronegócio Brasil",
+"categoria": "LCA",
+"risco": "baixo",
+"rentabilidade": "95% do CDI",
+"aporte_minimo": 5000,
+"indicado_para": "conservador",
+"tipo": "credito_agro",
+"prazo": "medio"
+},
+{
+"nome": "LCA Agro Plus",
+"categoria": "LCA",
+"risco": "baixo",
+"rentabilidade": "IPCA + juros",
+"aporte_minimo": 10000,
+"indicado_para": "conservador",
+"tipo": "credito_agro",
+"prazo": "longo"
+},
+{
+"nome": "RDB Garantido 24 Meses",
+"categoria": "RDB",
+"risco": "baixo",
+"rentabilidade": "103% do CDI",
+"aporte_minimo": 1000,
+"indicado_para": "conservador",
+"tipo": "renda_fixa_bancaria",
+"prazo": "medio"
+},
+{
+"nome": "Fundo DI Reserva Imediata",
+"categoria": "Fundo DI",
+"risco": "baixo",
+"rentabilidade": "CDI",
+"aporte_minimo": 100,
+"indicado_para": "conservador",
+"tipo": "fundo",
+"prazo": "curto"
+},
+{
+"nome": "Fundo Renda Fixa Conservador",
+"categoria": "Fundo de Renda Fixa",
+"risco": "baixo",
+"rentabilidade": "105% do CDI",
+"aporte_minimo": 500,
+"indicado_para": "conservador",
+"tipo": "fundo",
+"prazo": "medio"
+},
+{
+"nome": "Previdência Horizonte Seguro",
+"categoria": "Previdência Privada",
+"risco": "baixo",
+"rentabilidade": "CDI",
+"aporte_minimo": 100,
+"indicado_para": "conservador",
+"tipo": "previdencia",
+"prazo": "longo"
+},
+{
+"nome": "Fundo Multimercado Equilíbrio",
+"categoria": "Multimercado",
+"risco": "medio",
+"rentabilidade": "CDI + estratégia ativa",
+"aporte_minimo": 1000,
+"indicado_para": "moderado",
+"tipo": "fundo",
+"prazo": "medio"
+},
+{
+"nome": "Fundo Multimercado Estratégia Global",
+"categoria": "Multimercado",
+"risco": "medio",
+"rentabilidade": "retorno absoluto",
+"aporte_minimo": 5000,
+"indicado_para": "moderado",
+"tipo": "fundo",
+"prazo": "longo"
+},
+{
+"nome": "ETF Renda Fixa Brasil",
+"categoria": "ETF",
+"risco": "medio",
+"rentabilidade": "indice de renda fixa",
+"aporte_minimo": 200,
+"indicado_para": "moderado",
+"tipo": "etf",
+"prazo": "medio"
+},
+{
+"nome": "ETF Carteira Balanceada",
+"categoria": "ETF",
+"risco": "medio",
+"rentabilidade": "diversificada",
+"aporte_minimo": 200,
+"indicado_para": "moderado",
+"tipo": "etf",
+"prazo": "longo"
+},
+{
+"nome": "Debênture Incentivada Infraestrutura",
+"categoria": "Debênture",
+"risco": "medio",
+"rentabilidade": "IPCA + juros",
+"aporte_minimo": 5000,
+"indicado_para": "moderado",
+"tipo": "credito_privado",
+"prazo": "longo"
+},
+{
+"nome": "Debênture Energia Brasil",
+"categoria": "Debênture",
+"risco": "medio",
+"rentabilidade": "IPCA + juros",
+"aporte_minimo": 10000,
+"indicado_para": "moderado",
+"tipo": "credito_privado",
+"prazo": "longo"
+},
+{
+"nome": "COE Capital Protegido",
+"categoria": "COE",
+"risco": "medio",
+"rentabilidade": "estruturada",
+"aporte_minimo": 5000,
+"indicado_para": "moderado",
+"tipo": "estruturado",
+"prazo": "medio"
+},
+{
+"nome": "Previdência Horizonte Balanceado",
+"categoria": "Previdência Privada",
+"risco": "medio",
+"rentabilidade": "balanceada",
+"aporte_minimo": 100,
+"indicado_para": "moderado",
+"tipo": "previdencia",
+"prazo": "longo"
+},
+{
+"nome": "Fundo Ações Brasil Dividendos",
+"categoria": "Fundo de Ações",
+"risco": "alto",
+"rentabilidade": "variável",
+"aporte_minimo": 1000,
+"indicado_para": "arrojado",
+"tipo": "fundo",
+"prazo": "longo"
+},
+{
+"nome": "Fundo Ações Valor Nacional",
+"categoria": "Fundo de Ações",
+"risco": "alto",
+"rentabilidade": "variável",
+"aporte_minimo": 1000,
+"indicado_para": "arrojado",
+"tipo": "fundo",
+"prazo": "longo"
+},
+{
+"nome": "Fundo Small Caps Brasil",
+"categoria": "Fundo de Ações",
+"risco": "alto",
+"rentabilidade": "variável",
+"aporte_minimo": 2000,
+"indicado_para": "arrojado",
+"tipo": "fundo",
+"prazo": "longo"
+},
+{
+"nome": "Fundo Ações Sustentabilidade ESG",
+"categoria": "Fundo de Ações",
+"risco": "alto",
+"rentabilidade": "variável",
+"aporte_minimo": 1500,
+"indicado_para": "arrojado",
+"tipo": "fundo",
+"prazo": "longo"
+},
+{
+"nome": "Fundo Internacional América do Norte",
+"categoria": "Fundo Internacional",
+"risco": "alto",
+"rentabilidade": "mercado internacional",
+"aporte_minimo": 3000,
+"indicado_para": "arrojado",
+"tipo": "fundo",
+"prazo": "longo"
+},
+{
+"nome": "Fundo Internacional Tecnologia Global",
+"categoria": "Fundo Internacional",
+"risco": "alto",
+"rentabilidade": "mercado internacional",
+"aporte_minimo": 5000,
+"indicado_para": "arrojado",
+"tipo": "fundo",
+"prazo": "longo"
+},
+{
+"nome": "ETF Ibovespa Brasil",
+"categoria": "ETF",
+"risco": "alto",
+"rentabilidade": "indice ibovespa",
+"aporte_minimo": 100,
+"indicado_para": "arrojado",
+"tipo": "etf",
+"prazo": "longo"
+},
+{
+"nome": "ETF Small Caps Brasil",
+"categoria": "ETF",
+"risco": "alto",
+"rentabilidade": "indice small caps",
+"aporte_minimo": 100,
+"indicado_para": "arrojado",
+"tipo": "etf",
+"prazo": "longo"
+},
+{
+"nome": "ETF Dividendos Brasil",
+"categoria": "ETF",
+"risco": "alto",
+"rentabilidade": "indice dividendos",
+"aporte_minimo": 100,
+"indicado_para": "arrojado",
+"tipo": "etf",
+"prazo": "longo"
+},
+{
+"nome": "ETF S&P 500 Internacional",
+"categoria": "ETF",
+"risco": "alto",
+"rentabilidade": "indice internacional",
+"aporte_minimo": 200,
+"indicado_para": "arrojado",
+"tipo": "etf",
+"prazo": "longo"
+},
+{
+"nome": "ETF Nasdaq Tecnologia",
+"categoria": "ETF",
+"risco": "alto",
+"rentabilidade": "indice internacional",
+"aporte_minimo": 200,
+"indicado_para": "arrojado",
+"tipo": "etf",
+"prazo": "longo"
+},
+{
+"nome": "Carteira Ações Energia",
+"categoria": "Ações",
+"risco": "alto",
+"rentabilidade": "variável",
+"aporte_minimo": 500,
+"indicado_para": "arrojado",
+"tipo": "renda_variavel",
+"prazo": "longo"
+},
+{
+"nome": "Carteira Ações Bancos",
+"categoria": "Ações",
+"risco": "alto",
+"rentabilidade": "variável",
+"aporte_minimo": 500,
+"indicado_para": "arrojado",
+"tipo": "renda_variavel",
+"prazo": "longo"
+},
+{
+"nome": "Carteira Ações Consumo",
+"categoria": "Ações",
+"risco": "alto",
+"rentabilidade": "variável",
+"aporte_minimo": 500,
+"indicado_para": "arrojado",
+"tipo": "renda_variavel",
+"prazo": "longo"
+},
+{
+"nome": "Carteira Ações Exportadoras",
+"categoria": "Ações",
+"risco": "alto",
+"rentabilidade": "variável",
+"aporte_minimo": 500,
+"indicado_para": "arrojado",
+"tipo": "renda_variavel",
+"prazo": "longo"
+},
+{
+"nome": "Carteira Ações Tecnologia",
+"categoria": "Ações",
+"risco": "alto",
+"rentabilidade": "variável",
+"aporte_minimo": 1000,
+"indicado_para": "arrojado",
+"tipo": "renda_variavel",
+"prazo": "longo"
+},
+{
+"nome": "FII Renda Corporativa",
+"categoria": "Fundo Imobiliário",
+"risco": "alto",
+"rentabilidade": "aluguéis e valorização",
+"aporte_minimo": 200,
+"indicado_para": "arrojado",
+"tipo": "fii",
+"prazo": "longo"
+},
+{
+"nome": "FII Galpões Logísticos",
+"categoria": "Fundo Imobiliário",
+"risco": "alto",
+"rentabilidade": "aluguéis e valorização",
+"aporte_minimo": 200,
+"indicado_para": "arrojado",
+"tipo": "fii",
+"prazo": "longo"
+},
+{
+"nome": "FII Shoppings Premium",
+"categoria": "Fundo Imobiliário",
+"risco": "alto",
+"rentabilidade": "aluguéis e valorização",
+"aporte_minimo": 200,
+"indicado_para": "arrojado",
+"tipo": "fii",
+"prazo": "longo"
+},
+{
+"nome": "FII Recebíveis Imobiliários",
+"categoria": "Fundo Imobiliário",
+"risco": "alto",
+"rentabilidade": "rendimentos imobiliários",
+"aporte_minimo": 200,
+"indicado_para": "arrojado",
+"tipo": "fii",
+"prazo": "longo"
+},
+{
+"nome": "BDR Tecnologia Norte-Americana",
+"categoria": "BDR",
+"risco": "alto",
+"rentabilidade": "mercado internacional",
+"aporte_minimo": 500,
+"indicado_para": "arrojado",
+"tipo": "bdr",
+"prazo": "longo"
+},
+{
+"nome": "BDR Consumo Global",
+"categoria": "BDR",
+"risco": "alto",
+"rentabilidade": "mercado internacional",
+"aporte_minimo": 500,
+"indicado_para": "arrojado",
+"tipo": "bdr",
+"prazo": "longo"
+},
+{
+"nome": "BDR Saúde Global",
+"categoria": "BDR",
+"risco": "alto",
+"rentabilidade": "mercado internacional",
+"aporte_minimo": 500,
+"indicado_para": "arrojado",
+"tipo": "bdr",
+"prazo": "longo"
+},
+{
+"nome": "Fundo Cambial Dólar",
+"categoria": "Fundo Cambial",
+"risco": "alto",
+"rentabilidade": "variação cambial",
+"aporte_minimo": 1000,
+"indicado_para": "arrojado",
+"tipo": "fundo",
+"prazo": "medio"
+},
+{
+"nome": "Fundo Cambial Euro",
+"categoria": "Fundo Cambial",
+"risco": "alto",
+"rentabilidade": "variação cambial",
+"aporte_minimo": 1000,
+"indicado_para": "arrojado",
+"tipo": "fundo",
+"prazo": "medio"
+},
+{
+"nome": "Fundo Commodities Global",
+"categoria": "Fundo Multimercado",
+"risco": "alto",
+"rentabilidade": "commodities internacionais",
+"aporte_minimo": 3000,
+"indicado_para": "arrojado",
+"tipo": "fundo",
+"prazo": "longo"
+},
+{
+"nome": "Fundo Ouro Internacional",
+"categoria": "Fundo Multimercado",
+"risco": "alto",
+"rentabilidade": "ouro internacional",
+"aporte_minimo": 3000,
+"indicado_para": "arrojado",
+"tipo": "fundo",
+"prazo": "longo"
+},
+{
+"nome": "Previdência Horizonte Dinâmico",
+"categoria": "Previdência Privada",
+"risco": "alto",
+"rentabilidade": "renda variável",
+"aporte_minimo": 100,
+"indicado_para": "arrojado",
+"tipo": "previdencia",
+"prazo": "longo"
+},
+{
+"nome": "Previdência Horizonte Global",
+"categoria": "Previdência Privada",
+"risco": "alto",
+"rentabilidade": "mercado internacional",
+"aporte_minimo": 100,
+"indicado_para": "arrojado",
+"tipo": "previdencia",
+"prazo": "longo"
 }
 ]
+
