@@ -406,12 +406,14 @@ def motor_finassist(perfil, pergunta, dados):
                     "habitualmente recomendado para você."
                 )
 
+            random.shuffle(produtos_perfil)
+
             resposta_final.append(
                 f"Investimentos para o perfil "
                 f"{perfil_detectado} são:\n"
                 + "\n".join(
                     f"- {p}"
-                    for p in produtos_perfil
+                    for p in sorted(produtos_perfil[:8])
                 )
             )
 
@@ -517,11 +519,13 @@ def motor_finassist(perfil, pergunta, dados):
 
     if sugestoes:
 
+        random.shuffle(sugestoes)
+
         resposta_final.append(
             "Sugestões:\n"
             + "\n".join(
                 f"- {s}"
-                for s in sugestoes
+                for s in sugestoes[:5]
             )
         )
 
