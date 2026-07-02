@@ -1,77 +1,354 @@
 [
-  {
-    "id": 1,
-    "nome": "João Silva",
-    "idade": 32,
-    "profissao": "Analista de Sistemas",
-    "renda_mensal": 5000.00,
-    "perfil_investidor": "moderado",
-    "objetivo_principal": "Construir reserva de emergência",
-    "patrimonio_total": 15000.00,
-    "reserva_emergencia_atual": 10000.00,
-    "aceita_risco": false,
-    "metas": [
-      {"meta": "Completar reserva de emergência", "valor_necessario": 15000.00, "prazo": "2026-06"},
-      {"meta": "Entrada do apartamento", "valor_necessario": 50000.00, "prazo": "2027-12"}
-    ]
-  },
-  {
-    "id": 2,
-    "nome": "Maria Souza",
-    "idade": 25,
-    "profissao": "Designer",
-    "renda_mensal": 3000.00,
-    "perfil_investidor": "conservador",
-    "objetivo_principal": "Viagem internacional",
-    "patrimonio_total": 5000.00,
-    "reserva_emergencia_atual": 2000.00,
-    "aceita_risco": false,
-    "metas": [
-      {"meta": "Viagem para Europa", "valor_necessario": 12000.00, "prazo": "2026-12"}
-    ]
-  },
-  {
-    "id": 3,
-    "nome": "Carlos Mendes",
-    "idade": 45,
-    "profissao": "Gerente de Projetos",
-    "renda_mensal": 12000.00,
-    "perfil_investidor": "arrojado",
-    "objetivo_principal": "Aposentadoria antecipada",
-    "patrimonio_total": 250000.00,
-    "reserva_emergencia_atual": 50000.00,
-    "aceita_risco": true,
-    "metas": [
-      {"meta": "Aposentadoria FIRE", "valor_necessario": 1000000.00, "prazo": "2035-01"},
-      {"meta": "Intercâmbio filhos", "valor_necessario": 80000.00, "prazo": "2028-05"}
-    ]
-  },
-  {
-    "id": 4,
-    "nome": "Ana Oliveira",
-    "idade": 35,
-    "profissao": "Advogada",
-    "renda_mensal": 7500.00,
-    "perfil_investidor": "moderado",
-    "objetivo_principal": "Quitação de dívidas",
-    "patrimonio_total": 20000.00,
-    "reserva_emergencia_atual": 5000.00,
-    "aceita_risco": false,
-    "metas": [
-      {"meta": "Quitação Financiamento", "valor_necessario": 30000.00, "prazo": "2027-01"}
-    ]
-  },
-  {
-    "id": 5,
-    "nome": "Pedro Lima",
-    "idade": 30,
-    "profissao": "Engenheiro Civil",
-    "renda_mensal": 4500.00,
-    "perfil_investidor": "conservador",
-    "objetivo_principal": "Compra de veículo",
-    "patrimonio_total": 12000.00,
-    "reserva_emergencia_atual": 8000.00,
-    "aceita_risco": false,
-    "metas": []
-  }
+    {
+        "id": 1,
+        "nome": "João Silva",
+        "idade": 32,
+        "profissao": "Analista de Sistemas",
+        "renda_mensal": 5000,
+        "perfil_investidor": "moderado",
+        "objetivo_principal": "Construir reserva de emergência",
+        "patrimonio_total": 15000,
+        "reserva_emergencia_atual": 10000,
+        "aceita_risco": false,
+        "metas": [
+            {
+                "meta": "Completar reserva de emergência",
+                "valor_necessario": 15000,
+                "prazo": "2026-06"
+            },
+            {
+                "meta": "Entrada do apartamento",
+                "valor_necessario": 50000,
+                "prazo": "2027-12"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "nome": "Maria Souza",
+        "idade": 25,
+        "profissao": "Designer",
+        "renda_mensal": 3000,
+        "perfil_investidor": "conservador",
+        "objetivo_principal": "Viagem internacional",
+        "patrimonio_total": 5000,
+        "reserva_emergencia_atual": 2000,
+        "aceita_risco": false,
+        "metas": [
+            {
+                "meta": "Viagem para Europa",
+                "valor_necessario": 12000,
+                "prazo": "2026-12"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "nome": "Carlos Mendes",
+        "idade": 45,
+        "profissao": "Gerente de Projetos",
+        "renda_mensal": 12000,
+        "perfil_investidor": "arrojado",
+        "objetivo_principal": "Aposentadoria antecipada",
+        "patrimonio_total": 250000,
+        "reserva_emergencia_atual": 50000,
+        "aceita_risco": true,
+        "metas": [
+            {
+                "meta": "Aposentadoria FIRE",
+                "valor_necessario": 1000000,
+                "prazo": "2035-01"
+            },
+            {
+                "meta": "Intercâmbio dos filhos",
+                "valor_necessario": 80000,
+                "prazo": "2028-05"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "nome": "Ana Oliveira",
+        "idade": 35,
+        "profissao": "Advogada",
+        "renda_mensal": 7500,
+        "perfil_investidor": "moderado",
+        "objetivo_principal": "Quitação de dívidas",
+        "patrimonio_total": 20000,
+        "reserva_emergencia_atual": 5000,
+        "aceita_risco": false,
+        "metas": [
+            {
+                "meta": "Quitação do financiamento",
+                "valor_necessario": 30000,
+                "prazo": "2027-01"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "nome": "Pedro Lima",
+        "idade": 30,
+        "profissao": "Engenheiro Civil",
+        "renda_mensal": 4500,
+        "perfil_investidor": "conservador",
+        "objetivo_principal": "Compra de veículo",
+        "patrimonio_total": 12000,
+        "reserva_emergencia_atual": 8000,
+        "aceita_risco": false,
+        "metas": [
+            {
+                "meta": "Compra do veículo",
+                "valor_necessario": 70000,
+                "prazo": "2027-08"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "nome": "Fernanda Costa",
+        "idade": 29,
+        "profissao": "Enfermeira",
+        "renda_mensal": 6200,
+        "perfil_investidor": "conservador",
+        "objetivo_principal": "Reserva de emergência",
+        "patrimonio_total": 28000,
+        "reserva_emergencia_atual": 18000,
+        "aceita_risco": false,
+        "metas": [
+            {
+                "meta": "Reserva de 12 meses",
+                "valor_necessario": 50000,
+                "prazo": "2027-06"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "nome": "Ricardo Martins",
+        "idade": 41,
+        "profissao": "Servidor Público",
+        "renda_mensal": 9800,
+        "perfil_investidor": "conservador",
+        "objetivo_principal": "Preservação patrimonial",
+        "patrimonio_total": 320000,
+        "reserva_emergencia_atual": 70000,
+        "aceita_risco": false,
+        "metas": [
+            {
+                "meta": "Proteção patrimonial",
+                "valor_necessario": 500000,
+                "prazo": "2030-12"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "nome": "Luciana Ferreira",
+        "idade": 37,
+        "profissao": "Contadora",
+        "renda_mensal": 8700,
+        "perfil_investidor": "conservador",
+        "objetivo_principal": "Educação dos filhos",
+        "patrimonio_total": 85000,
+        "reserva_emergencia_atual": 25000,
+        "aceita_risco": false,
+        "metas": [
+            {
+                "meta": "Faculdade dos filhos",
+                "valor_necessario": 180000,
+                "prazo": "2035-12"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "nome": "Marcos Vinicius Alves",
+        "idade": 52,
+        "profissao": "Dentista",
+        "renda_mensal": 18000,
+        "perfil_investidor": "conservador",
+        "objetivo_principal": "Aposentadoria",
+        "patrimonio_total": 600000,
+        "reserva_emergencia_atual": 120000,
+        "aceita_risco": false,
+        "metas": [
+            {
+                "meta": "Complementar aposentadoria",
+                "valor_necessario": 1200000,
+                "prazo": "2038-01"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "nome": "Juliana Ribeiro",
+        "idade": 28,
+        "profissao": "Arquiteta",
+        "renda_mensal": 7600,
+        "perfil_investidor": "moderado",
+        "objetivo_principal": "Compra de imóvel",
+        "patrimonio_total": 42000,
+        "reserva_emergencia_atual": 12000,
+        "aceita_risco": true,
+        "metas": [
+            {
+                "meta": "Entrada do apartamento",
+                "valor_necessario": 120000,
+                "prazo": "2029-12"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "nome": "Roberto Nascimento",
+        "idade": 39,
+        "profissao": "Administrador",
+        "renda_mensal": 11500,
+        "perfil_investidor": "moderado",
+        "objetivo_principal": "Independência financeira",
+        "patrimonio_total": 170000,
+        "reserva_emergencia_atual": 40000,
+        "aceita_risco": true,
+        "metas": [
+            {
+                "meta": "Renda passiva",
+                "valor_necessario": 900000,
+                "prazo": "2038-12"
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "nome": "Patrícia Gomes",
+        "idade": 34,
+        "profissao": "Farmacêutica",
+        "renda_mensal": 9300,
+        "perfil_investidor": "moderado",
+        "objetivo_principal": "Educação dos filhos",
+        "patrimonio_total": 110000,
+        "reserva_emergencia_atual": 30000,
+        "aceita_risco": true,
+        "metas": [
+            {
+                "meta": "Universidade dos filhos",
+                "valor_necessario": 220000,
+                "prazo": "2036-12"
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "nome": "Bruno Carvalho",
+        "idade": 31,
+        "profissao": "Professor",
+        "renda_mensal": 5800,
+        "perfil_investidor": "moderado",
+        "objetivo_principal": "Viagem internacional",
+        "patrimonio_total": 35000,
+        "reserva_emergencia_atual": 10000,
+        "aceita_risco": true,
+        "metas": [
+            {
+                "meta": "Viagem ao Japão",
+                "valor_necessario": 30000,
+                "prazo": "2027-10"
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "nome": "Camila Rocha",
+        "idade": 43,
+        "profissao": "Médica",
+        "renda_mensal": 22000,
+        "perfil_investidor": "moderado",
+        "objetivo_principal": "Aposentadoria",
+        "patrimonio_total": 650000,
+        "reserva_emergencia_atual": 120000,
+        "aceita_risco": true,
+        "metas": [
+            {
+                "meta": "Aposentadoria confortável",
+                "valor_necessario": 2500000,
+                "prazo": "2045-01"
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "nome": "Eduardo Barros",
+        "idade": 27,
+        "profissao": "Desenvolvedor de Software",
+        "renda_mensal": 9800,
+        "perfil_investidor": "arrojado",
+        "objetivo_principal": "Independência financeira",
+        "patrimonio_total": 95000,
+        "reserva_emergencia_atual": 30000,
+        "aceita_risco": true,
+        "metas": [
+            {
+                "meta": "Independência financeira",
+                "valor_necessario": 2000000,
+                "prazo": "2040-01"
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "nome": "Tatiane Moreira",
+        "idade": 33,
+        "profissao": "Empresária",
+        "renda_mensal": 35000,
+        "perfil_investidor": "arrojado",
+        "objetivo_principal": "Expansão empresarial",
+        "patrimonio_total": 1200000,
+        "reserva_emergencia_atual": 150000,
+        "aceita_risco": true,
+        "metas": [
+            {
+                "meta": "Abrir nova unidade",
+                "valor_necessario": 600000,
+                "prazo": "2028-06"
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "nome": "Gustavo Henrique Pereira",
+        "idade": 38,
+        "profissao": "Trader Profissional",
+        "renda_mensal": 28000,
+        "perfil_investidor": "arrojado",
+        "objetivo_principal": "Maximização patrimonial",
+        "patrimonio_total": 1800000,
+        "reserva_emergencia_atual": 200000,
+        "aceita_risco": true,
+        "metas": [
+            {
+                "meta": "Patrimônio de R$ 5 milhões",
+                "valor_necessario": 5000000,
+                "prazo": "2035-12"
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "nome": "Vanessa Almeida",
+        "idade": 40,
+        "profissao": "Executiva Comercial",
+        "renda_mensal": 24000,
+        "perfil_investidor": "arrojado",
+        "objetivo_principal": "Renda passiva",
+        "patrimonio_total": 900000,
+        "reserva_emergencia_atual": 180000,
+        "aceita_risco": true,
+        "metas": [
+            {
+                "meta": "Renda passiva mensal de R$ 25 mil",
+                "valor_necessario": 4500000,
+                "prazo": "2040-12"
+            }
+        ]
+    }
 ]
