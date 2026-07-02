@@ -14,7 +14,6 @@ import contexto
 from util import (
     cls,
     detectar_intencao,
-    detectar_intencao_tokens,
     normalizar_perfil,
     normalizar_texto,
     termo_negado,
@@ -143,7 +142,7 @@ def motor_finassist(perfil, pergunta, dados):
     pergunta_normalizada = normalizar_texto(pergunta)
 
     tokens = tokenizar(pergunta_normalizada)
-
+    
     resposta_final = []
 
     perfil_cliente = normalizar_perfil(
@@ -160,7 +159,8 @@ def motor_finassist(perfil, pergunta, dados):
     # 1) Metas
     # ========================================================
 
-    quer_metas = detectar_intencao_tokens(
+    quer_metas = detectar_intencao(
+        pergunta_normalizada,
         tokens,
         "meta"
     )
@@ -179,6 +179,7 @@ def motor_finassist(perfil, pergunta, dados):
 
     quer_ultimo_atendimento = detectar_intencao(
         pergunta_normalizada,
+        tokens,
         "ultimo_atendimento"
     )
 
@@ -192,6 +193,7 @@ def motor_finassist(perfil, pergunta, dados):
 
     quer_historico = detectar_intencao(
         pergunta_normalizada,
+        tokens,
         "historico_atendimento"
     )
 
@@ -208,7 +210,8 @@ def motor_finassist(perfil, pergunta, dados):
     # Transações
     #=======
 
-    quer_transacoes = detectar_intencao_tokens(
+    quer_transacoes = detectar_intencao(
+        pergunta_normalizada,
         tokens,
         "transacoes"
     )
@@ -222,7 +225,8 @@ def motor_finassist(perfil, pergunta, dados):
     # Gastos
     #=======
     
-    quer_gastos = detectar_intencao_tokens(
+    quer_gastos = detectar_intencao(
+        pergunta_normalizada,
         tokens,
         "gastos"
     )
@@ -237,6 +241,7 @@ def motor_finassist(perfil, pergunta, dados):
 
     quer_categoria_maior_gasto = detectar_intencao(
         pergunta_normalizada,
+        tokens,
         "categoria"
     )
 
