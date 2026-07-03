@@ -1,17 +1,652 @@
 id_cliente,data,descricao,categoria,valor,tipo
-1,2025-10-01,Salário,receita,5000.00,entrada
-1,2025-10-02,Aluguel,moradia,1200.00,saida
-1,2025-10-03,Supermercado,alimentacao,450.00,saida
-2,2025-10-01,Salário,receita,3000.00,entrada
-2,2025-10-05,Netflix,lazer,55.90,saida
-2,2025-10-10,Ifood,alimentacao,120.00,saida
-3,2025-10-01,Salário,receita,12000.00,entrada
-3,2025-10-15,Investimento Ações,investimento,2000.00,saida
-3,2025-10-20,Manutenção carro,transporte,400.00,saida
-4,2025-10-01,Salário,receita,7500.00,entrada
-4,2025-10-07,Farmácia,saude,89.00,saida
-4,2025-10-12,Uber,transporte,45.00,saida
-5,2025-10-01,Salário,receita,4500.00,entrada
-5,2025-10-15,Conta de Luz,moradia,180.00,saida
-5,2025-10-18,Internet,moradia,120.00,saida
-5,2025-10-30,Poupança,investimento,500.00,saida
+1,2026-01-05,Salário Empresa Tecnologia,Renda,5000.00,entrada
+1,2026-01-06,Aporte Tesouro Selic,Investimentos,500.00,saida
+1,2026-01-07,Netflix,Assinaturas,39.90,saida
+1,2026-01-08,Plano de Saúde,Saúde,350.00,saida
+1,2026-01-10,Conta de Energia,Contas,145.00,saida
+1,2026-01-12,Supermercado Extra,Alimentação,420.00,saida
+1,2026-01-18,Posto Shell,Transporte,220.00,saida
+1,2026-01-22,Restaurante Japonês,Lazer,110.00,saida
+2,2026-01-05,Salário Agência Criativa,Renda,3000.00,entrada
+2,2026-01-06,Aporte CDB Liquidez Diária Premium,Investimentos,250.00,saida
+2,2026-01-07,Netflix,Assinaturas,39.90,saida
+2,2026-01-09,Conta de Energia,Contas,98.00,saida
+2,2026-01-11,Supermercado Carrefour,Alimentação,320.00,saida
+2,2026-01-17,Uber,Transporte,82.00,saida
+2,2026-01-23,Reserva Viagem Europa,Investimentos,300.00,saida
+2,2026-01-28,Spotify,Assinaturas,21.90,saida
+1,2026-02-05,Salário Empresa Tecnologia,Renda,5000.00,entrada
+1,2026-02-06,Aporte Tesouro Selic,Investimentos,500.00,saida
+1,2026-02-07,Netflix,Assinaturas,39.90,saida
+1,2026-02-08,Plano de Saúde,Saúde,350.00,saida
+1,2026-02-10,Conta de Energia,Contas,152.00,saida
+1,2026-02-12,Supermercado Extra,Alimentação,438.00,saida
+1,2026-02-18,Posto Shell,Transporte,240.00,saida
+1,2026-02-26,CDB Liquidez Diária Premium,Investimentos,300.00,saida
+2,2026-02-05,Salário Agência Criativa,Renda,3000.00,entrada
+2,2026-02-06,Aporte CDB Liquidez Diária Premium,Investimentos,250.00,saida
+2,2026-02-07,Netflix,Assinaturas,39.90,saida
+2,2026-02-09,Conta de Energia,Contas,102.00,saida
+2,2026-02-11,Supermercado Carrefour,Alimentação,338.00,saida
+2,2026-02-17,Uber,Transporte,90.00,saida
+2,2026-02-23,Reserva Viagem Europa,Investimentos,300.00,saida
+2,2026-02-27,Spotify,Assinaturas,21.90,saida
+1,2026-03-05,Salário Empresa Tecnologia,Renda,5000.00,entrada
+1,2026-03-06,Aporte Tesouro Selic,Investimentos,500.00,saida
+1,2026-03-07,Netflix,Assinaturas,39.90,saida
+1,2026-03-08,Plano de Saúde,Saúde,350.00,saida
+1,2026-03-10,Conta de Energia,Contas,148.00,saida
+1,2026-03-12,Supermercado Extra,Alimentação,451.00,saida
+1,2026-03-18,Posto Shell,Transporte,228.00,saida
+1,2026-03-25,Entrada Apartamento - Reserva,Investimentos,700.00,saida
+2,2026-03-05,Salário Agência Criativa,Renda,3000.00,entrada
+2,2026-03-06,Aporte CDB Liquidez Diária Premium,Investimentos,250.00,saida
+2,2026-03-07,Netflix,Assinaturas,39.90,saida
+2,2026-03-09,Conta de Energia,Contas,105.00,saida
+2,2026-03-11,Supermercado Carrefour,Alimentação,345.00,saida
+2,2026-03-17,Uber,Transporte,84.00,saida
+2,2026-03-23,Reserva Viagem Europa,Investimentos,300.00,saida
+2,2026-03-28,Spotify,Assinaturas,21.90,saida
+3,2026-01-05,Salário Empresa Projetos,Renda,12000.00,entrada
+3,2026-01-06,Aporte ETF S&P 500,Investimentos,2000.00,saida
+3,2026-01-07,Aporte Fundo Small Caps Brasil,Investimentos,1500.00,saida
+3,2026-01-08,Aporte ETF Dividendos Brasil,Investimentos,1000.00,saida
+3,2026-01-09,Plano de Saúde Familiar,Saúde,950.00,saida
+3,2026-01-10,Conta de Energia,Contas,245.00,saida
+3,2026-01-12,Supermercado Carrefour,Alimentação,780.00,saida
+3,2026-01-15,Condomínio,Moradia,850.00,saida
+3,2026-01-18,Posto Shell,Transporte,390.00,saida
+3,2026-01-25,Dividendos Recebidos,Investimentos,210.00,entrada
+3,2026-02-05,Salário Empresa Projetos,Renda,12000.00,entrada
+3,2026-02-06,Aporte ETF S&P 500,Investimentos,2000.00,saida
+3,2026-02-07,Aporte Fundo Small Caps Brasil,Investimentos,1500.00,saida
+3,2026-02-08,Aporte ETF Dividendos Brasil,Investimentos,1000.00,saida
+3,2026-02-09,Plano de Saúde Familiar,Saúde,950.00,saida
+3,2026-02-10,Conta de Energia,Contas,252.00,saida
+3,2026-02-12,Supermercado Carrefour,Alimentação,765.00,saida
+3,2026-02-15,Condomínio,Moradia,850.00,saida
+3,2026-02-18,Posto Shell,Transporte,415.00,saida
+3,2026-02-24,Dividendos Recebidos,Investimentos,235.00,entrada
+3,2026-03-05,Salário Empresa Projetos,Renda,12000.00,entrada
+3,2026-03-06,Aporte ETF S&P 500,Investimentos,2000.00,saida
+3,2026-03-07,Aporte Fundo Small Caps Brasil,Investimentos,1500.00,saida
+3,2026-03-08,Aporte ETF Dividendos Brasil,Investimentos,1000.00,saida
+3,2026-03-09,Plano de Saúde Familiar,Saúde,950.00,saida
+3,2026-03-10,Conta de Energia,Contas,248.00,saida
+3,2026-03-12,Supermercado Carrefour,Alimentação,790.00,saida
+3,2026-03-15,Condomínio,Moradia,850.00,saida
+3,2026-03-18,Posto Shell,Transporte,405.00,saida
+3,2026-03-28,Dividendos Recebidos,Investimentos,260.00,entrada
+
+4,2026-01-05,Salário Escritório Jurídico,Renda,7500.00,entrada
+4,2026-01-06,Aporte Tesouro IPCA+,Investimentos,1000.00,saida
+4,2026-01-07,Aporte Fundo Multimercado Estratégia,Investimentos,700.00,saida
+4,2026-01-08,Financiamento Imobiliário,Moradia,1800.00,saida
+4,2026-01-09,Plano de Saúde,Saúde,540.00,saida
+4,2026-01-10,Conta de Energia,Contas,185.00,saida
+4,2026-01-12,Supermercado Pão de Açúcar,Alimentação,520.00,saida
+4,2026-01-16,Netflix,Assinaturas,39.90,saida
+4,2026-01-19,Uber,Transporte,140.00,saida
+4,2026-01-27,Reserva Quitação Financiamento,Investimentos,600.00,saida
+4,2026-02-05,Salário Escritório Jurídico,Renda,7500.00,entrada
+4,2026-02-06,Aporte Tesouro IPCA+,Investimentos,1000.00,saida
+4,2026-02-07,Aporte Fundo Multimercado Estratégia,Investimentos,700.00,saida
+4,2026-02-08,Financiamento Imobiliário,Moradia,1800.00,saida
+4,2026-02-09,Plano de Saúde,Saúde,540.00,saida
+4,2026-02-10,Conta de Energia,Contas,192.00,saida
+4,2026-02-12,Supermercado Pão de Açúcar,Alimentação,545.00,saida
+4,2026-02-16,Netflix,Assinaturas,39.90,saida
+4,2026-02-18,Uber,Transporte,132.00,saida
+4,2026-02-27,Reserva Quitação Financiamento,Investimentos,600.00,saida
+4,2026-03-05,Salário Escritório Jurídico,Renda,7500.00,entrada
+4,2026-03-06,Aporte Tesouro IPCA+,Investimentos,1000.00,saida
+4,2026-03-07,Aporte Fundo Multimercado Estratégia,Investimentos,700.00,saida
+4,2026-03-08,Financiamento Imobiliário,Moradia,1800.00,saida
+4,2026-03-09,Plano de Saúde,Saúde,540.00,saida
+4,2026-03-10,Conta de Energia,Contas,188.00,saida
+4,2026-03-12,Supermercado Pão de Açúcar,Alimentação,535.00,saida
+4,2026-03-16,Netflix,Assinaturas,39.90,saida
+4,2026-03-20,Uber,Transporte,138.00,saida
+4,2026-03-28,Reserva Quitação Financiamento,Investimentos,600.00,saida
+
+5,2026-01-05,Salário Construtora Horizonte,Renda,4500.00,entrada
+5,2026-01-06,Aporte CDB Liquidez Diária Premium,Investimentos,400.00,saida
+5,2026-01-07,Reserva Compra Veículo,Investimentos,500.00,saida
+5,2026-01-08,Plano de Saúde,Saúde,280.00,saida
+5,2026-01-09,Conta de Energia,Contas,132.00,saida
+5,2026-01-11,Supermercado Assaí,Alimentação,410.00,saida
+5,2026-01-15,Posto Ipiranga,Transporte,250.00,saida
+5,2026-01-18,Internet Fibra,Contas,99.90,saida
+5,2026-01-21,Netflix,Assinaturas,39.90,saida
+5,2026-01-27,Manutenção Veículo,Transporte,180.00,saida
+5,2026-02-05,Salário Construtora Horizonte,Renda,4500.00,entrada
+5,2026-02-06,Aporte CDB Liquidez Diária Premium,Investimentos,400.00,saida
+5,2026-02-07,Reserva Compra Veículo,Investimentos,500.00,saida
+5,2026-02-08,Plano de Saúde,Saúde,280.00,saida
+5,2026-02-09,Conta de Energia,Contas,128.00,saida
+5,2026-02-11,Supermercado Assaí,Alimentação,435.00,saida
+5,2026-02-15,Posto Ipiranga,Transporte,265.00,saida
+5,2026-02-18,Internet Fibra,Contas,99.90,saida
+5,2026-02-21,Netflix,Assinaturas,39.90,saida
+5,2026-02-26,Seguro Automóvel,Transporte,145.00,saida
+5,2026-03-05,Salário Construtora Horizonte,Renda,4500.00,entrada
+5,2026-03-06,Aporte CDB Liquidez Diária Premium,Investimentos,400.00,saida
+5,2026-03-07,Reserva Compra Veículo,Investimentos,500.00,saida
+5,2026-03-08,Plano de Saúde,Saúde,280.00,saida
+5,2026-03-09,Conta de Energia,Contas,136.00,saida
+5,2026-03-11,Supermercado Assaí,Alimentação,428.00,saida
+5,2026-03-15,Posto Ipiranga,Transporte,258.00,saida
+5,2026-03-18,Internet Fibra,Contas,99.90,saida
+5,2026-03-21,Netflix,Assinaturas,39.90,saida
+5,2026-03-28,Licenciamento Veículo,Transporte,210.00,saida
+
+6,2026-01-05,Salário Hospital Vida,Renda,6200.00,entrada
+6,2026-01-06,Aporte Tesouro Selic,Investimentos,700.00,saida
+6,2026-01-07,Aporte Previdência Horizonte Seguro,Investimentos,500.00,saida
+6,2026-01-08,Plano de Saúde Familiar,Saúde,620.00,saida
+6,2026-01-09,Conta de Energia,Contas,175.00,saida
+6,2026-01-11,Supermercado Carrefour,Alimentação,650.00,saida
+6,2026-01-14,Mensalidade Escolar,Educação,850.00,saida
+6,2026-01-18,Internet Fibra,Contas,119.90,saida
+6,2026-01-22,Netflix,Assinaturas,39.90,saida
+6,2026-01-27,Reserva Educação Filhos,Investimentos,600.00,saida
+6,2026-02-05,Salário Hospital Vida,Renda,6200.00,entrada
+6,2026-02-06,Aporte Tesouro Selic,Investimentos,700.00,saida
+6,2026-02-07,Aporte Previdência Horizonte Seguro,Investimentos,500.00,saida
+6,2026-02-08,Plano de Saúde Familiar,Saúde,620.00,saida
+6,2026-02-09,Conta de Energia,Contas,182.00,saida
+6,2026-02-11,Supermercado Carrefour,Alimentação,672.00,saida
+6,2026-02-14,Mensalidade Escolar,Educação,850.00,saida
+6,2026-02-18,Internet Fibra,Contas,119.90,saida
+6,2026-02-22,Netflix,Assinaturas,39.90,saida
+6,2026-02-26,Reserva Educação Filhos,Investimentos,600.00,saida
+6,2026-03-05,Salário Hospital Vida,Renda,6200.00,entrada
+6,2026-03-06,Aporte Tesouro Selic,Investimentos,700.00,saida
+6,2026-03-07,Aporte Previdência Horizonte Seguro,Investimentos,500.00,saida
+6,2026-03-08,Plano de Saúde Familiar,Saúde,620.00,saida
+6,2026-03-09,Conta de Energia,Contas,178.00,saida
+6,2026-03-11,Supermercado Carrefour,Alimentação,665.00,saida
+6,2026-03-14,Mensalidade Escolar,Educação,850.00,saida
+6,2026-03-18,Internet Fibra,Contas,119.90,saida
+6,2026-03-22,Netflix,Assinaturas,39.90,saida
+6,2026-03-28,Reserva Educação Filhos,Investimentos,600.00,saida
+
+7,2026-01-05,Salário Empresa Digital,Renda,11000.00,entrada
+7,2026-01-06,Aporte Tesouro Selic,Investimentos,1000.00,saida
+7,2026-01-07,Aporte Fundo Multimercado Estratégia,Investimentos,1200.00,saida
+7,2026-01-08,Aporte ETF Ibovespa,Investimentos,800.00,saida
+7,2026-01-09,Plano de Saúde Familiar,Saúde,720.00,saida
+7,2026-01-10,Conta de Energia,Contas,210.00,saida
+7,2026-01-12,Supermercado Pão de Açúcar,Alimentação,690.00,saida
+7,2026-01-15,Condomínio,Moradia,890.00,saida
+7,2026-01-18,Uber,Transporte,130.00,saida
+7,2026-01-22,Netflix,Assinaturas,44.90,saida
+7,2026-01-24,Spotify,Assinaturas,21.90,saida
+7,2026-01-28,Reserva Emergência,Investimentos,700.00,saida
+7,2026-02-05,Salário Empresa Digital,Renda,11000.00,entrada
+7,2026-02-06,Aporte Tesouro Selic,Investimentos,1000.00,saida
+7,2026-02-07,Aporte Fundo Multimercado Estratégia,Investimentos,1200.00,saida
+7,2026-02-08,Aporte ETF Ibovespa,Investimentos,800.00,saida
+7,2026-02-09,Plano de Saúde Familiar,Saúde,720.00,saida
+7,2026-02-10,Conta de Energia,Contas,218.00,saida
+7,2026-02-12,Supermercado Pão de Açúcar,Alimentação,710.00,saida
+7,2026-02-15,Condomínio,Moradia,890.00,saida
+7,2026-02-18,Uber,Transporte,145.00,saida
+7,2026-02-22,Netflix,Assinaturas,44.90,saida
+7,2026-02-24,Spotify,Assinaturas,21.90,saida
+7,2026-02-27,Reserva Emergência,Investimentos,700.00,saida
+7,2026-03-05,Salário Empresa Digital,Renda,11000.00,entrada
+7,2026-03-06,Aporte Tesouro Selic,Investimentos,1000.00,saida
+7,2026-03-07,Aporte Fundo Multimercado Estratégia,Investimentos,1200.00,saida
+7,2026-03-08,Aporte ETF Ibovespa,Investimentos,800.00,saida
+7,2026-03-09,Plano de Saúde Familiar,Saúde,720.00,saida
+7,2026-03-10,Conta de Energia,Contas,214.00,saida
+7,2026-03-12,Supermercado Pão de Açúcar,Alimentação,702.00,saida
+7,2026-03-15,Condomínio,Moradia,890.00,saida
+7,2026-03-18,Uber,Transporte,138.00,saida
+7,2026-03-22,Netflix,Assinaturas,44.90,saida
+7,2026-03-24,Spotify,Assinaturas,21.90,saida
+7,2026-03-28,Reserva Emergência,Investimentos,700.00,saida
+
+8,2026-01-05,Salário Empresa Financeira,Renda,12500.00,entrada
+8,2026-01-06,Aporte Tesouro IPCA+,Investimentos,1500.00,saida
+8,2026-01-07,Aporte Fundo Imobiliário Dividendos Plus,Investimentos,1000.00,saida
+8,2026-01-08,Aporte Fundo Multimercado Balanceado,Investimentos,1200.00,saida
+8,2026-01-09,Plano de Saúde Familiar,Saúde,850.00,saida
+8,2026-01-10,Conta de Energia,Contas,230.00,saida
+8,2026-01-12,Supermercado St Marche,Alimentação,760.00,saida
+8,2026-01-15,Condomínio,Moradia,1200.00,saida
+8,2026-01-18,Dividendos FIIs,Investimentos,180.00,entrada
+8,2026-01-22,Netflix,Assinaturas,44.90,saida
+8,2026-01-26,Restaurante Coco Bambu,Lazer,240.00,saida
+8,2026-01-29,Reserva Compra Imóvel,Investimentos,1200.00,saida
+8,2026-02-05,Salário Empresa Financeira,Renda,12500.00,entrada
+8,2026-02-06,Aporte Tesouro IPCA+,Investimentos,1500.00,saida
+8,2026-02-07,Aporte Fundo Imobiliário Dividendos Plus,Investimentos,1000.00,saida
+8,2026-02-08,Aporte Fundo Multimercado Balanceado,Investimentos,1200.00,saida
+8,2026-02-09,Plano de Saúde Familiar,Saúde,850.00,saida
+8,2026-02-10,Conta de Energia,Contas,236.00,saida
+8,2026-02-12,Supermercado St Marche,Alimentação,742.00,saida
+8,2026-02-15,Condomínio,Moradia,1200.00,saida
+8,2026-02-18,Dividendos FIIs,Investimentos,195.00,entrada
+8,2026-02-22,Netflix,Assinaturas,44.90,saida
+8,2026-02-25,Restaurante Coco Bambu,Lazer,255.00,saida
+8,2026-02-28,Reserva Compra Imóvel,Investimentos,1200.00,saida
+8,2026-03-05,Salário Empresa Financeira,Renda,12500.00,entrada
+8,2026-03-06,Aporte Tesouro IPCA+,Investimentos,1500.00,saida
+8,2026-03-07,Aporte Fundo Imobiliário Dividendos Plus,Investimentos,1000.00,saida
+8,2026-03-08,Aporte Fundo Multimercado Balanceado,Investimentos,1200.00,saida
+8,2026-03-09,Plano de Saúde Familiar,Saúde,850.00,saida
+8,2026-03-10,Conta de Energia,Contas,228.00,saida
+8,2026-03-12,Supermercado St Marche,Alimentação,755.00,saida
+8,2026-03-15,Condomínio,Moradia,1200.00,saida
+8,2026-03-18,Dividendos FIIs,Investimentos,205.00,entrada
+8,2026-03-22,Netflix,Assinaturas,44.90,saida
+8,2026-03-27,Restaurante Coco Bambu,Lazer,248.00,saida
+8,2026-03-30,Reserva Compra Imóvel,Investimentos,1200.00,saida
+
+
+9,2026-01-05,Salário Empresa Consultoria,Renda,9500.00,entrada
+9,2026-01-06,Aporte Tesouro IPCA+,Investimentos,1200.00,saida
+9,2026-01-07,Aporte ETF Dividendos Brasil,Investimentos,900.00,saida
+9,2026-01-08,Aporte Fundo Multimercado Estratégia,Investimentos,1000.00,saida
+9,2026-01-09,Plano de Saúde Familiar,Saúde,690.00,saida
+9,2026-01-10,Conta de Energia,Contas,205.00,saida
+9,2026-01-12,Supermercado Carrefour,Alimentação,640.00,saida
+9,2026-01-15,Condomínio,Moradia,980.00,saida
+9,2026-01-18,Dividendos Recebidos,Investimentos,125.00,entrada
+9,2026-01-22,Netflix,Assinaturas,44.90,saida
+9,2026-01-25,Academia Smart Fit,Saúde,129.90,saida
+9,2026-01-29,Reserva Independência Financeira,Investimentos,800.00,saida
+
+9,2026-02-05,Salário Empresa Consultoria,Renda,9500.00,entrada
+9,2026-02-06,Aporte Tesouro IPCA+,Investimentos,1200.00,saida
+9,2026-02-07,Aporte ETF Dividendos Brasil,Investimentos,900.00,saida
+9,2026-02-08,Aporte Fundo Multimercado Estratégia,Investimentos,1000.00,saida
+9,2026-02-09,Plano de Saúde Familiar,Saúde,690.00,saida
+9,2026-02-10,Conta de Energia,Contas,214.00,saida
+9,2026-02-12,Supermercado Carrefour,Alimentação,655.00,saida
+9,2026-02-15,Condomínio,Moradia,980.00,saida
+9,2026-02-18,Dividendos Recebidos,Investimentos,138.00,entrada
+9,2026-02-22,Netflix,Assinaturas,44.90,saida
+9,2026-02-25,Academia Smart Fit,Saúde,129.90,saida
+9,2026-02-28,Reserva Independência Financeira,Investimentos,800.00,saida
+
+9,2026-03-05,Salário Empresa Consultoria,Renda,9500.00,entrada
+9,2026-03-06,Aporte Tesouro IPCA+,Investimentos,1200.00,saida
+9,2026-03-07,Aporte ETF Dividendos Brasil,Investimentos,900.00,saida
+9,2026-03-08,Aporte Fundo Multimercado Estratégia,Investimentos,1000.00,saida
+9,2026-03-09,Plano de Saúde Familiar,Saúde,690.00,saida
+9,2026-03-10,Conta de Energia,Contas,208.00,saida
+9,2026-03-12,Supermercado Carrefour,Alimentação,648.00,saida
+9,2026-03-15,Condomínio,Moradia,980.00,saida
+9,2026-03-18,Dividendos Recebidos,Investimentos,145.00,entrada
+9,2026-03-22,Netflix,Assinaturas,44.90,saida
+9,2026-03-25,Academia Smart Fit,Saúde,129.90,saida
+9,2026-03-29,Reserva Independência Financeira,Investimentos,800.00,saida
+
+10,2026-01-05,Salário Empresa Tecnologia,Renda,18000.00,entrada
+10,2026-01-06,Aporte ETF Nasdaq Tech,Investimentos,3000.00,saida
+10,2026-01-07,Aporte Fundo Small Caps Brasil,Investimentos,2500.00,saida
+10,2026-01-08,Aporte ETF S&P 500,Investimentos,2000.00,saida
+10,2026-01-09,Plano de Saúde Executivo,Saúde,980.00,saida
+10,2026-01-10,Conta de Energia,Contas,285.00,saida
+10,2026-01-12,Supermercado St Marche,Alimentação,810.00,saida
+10,2026-01-15,Condomínio,Moradia,1650.00,saida
+10,2026-01-18,Dividendos Recebidos,Investimentos,420.00,entrada
+10,2026-01-22,Netflix,Assinaturas,44.90,saida
+10,2026-01-24,Restaurante Coco Bambu,Lazer,310.00,saida
+10,2026-01-29,Reserva Aposentadoria FIRE,Investimentos,1500.00,saida
+
+10,2026-02-05,Salário Empresa Tecnologia,Renda,18000.00,entrada
+10,2026-02-06,Aporte ETF Nasdaq Tech,Investimentos,3000.00,saida
+10,2026-02-07,Aporte Fundo Small Caps Brasil,Investimentos,2500.00,saida
+10,2026-02-08,Aporte ETF S&P 500,Investimentos,2000.00,saida
+10,2026-02-09,Plano de Saúde Executivo,Saúde,980.00,saida
+10,2026-02-10,Conta de Energia,Contas,294.00,saida
+10,2026-02-12,Supermercado St Marche,Alimentação,835.00,saida
+10,2026-02-15,Condomínio,Moradia,1650.00,saida
+10,2026-02-18,Dividendos Recebidos,Investimentos,455.00,entrada
+10,2026-02-22,Netflix,Assinaturas,44.90,saida
+10,2026-02-25,Restaurante Coco Bambu,Lazer,325.00,saida
+10,2026-02-28,Reserva Aposentadoria FIRE,Investimentos,1500.00,saida
+
+10,2026-03-05,Salário Empresa Tecnologia,Renda,18000.00,entrada
+10,2026-03-06,Aporte ETF Nasdaq Tech,Investimentos,3000.00,saida
+10,2026-03-07,Aporte Fundo Small Caps Brasil,Investimentos,2500.00,saida
+10,2026-03-08,Aporte ETF S&P 500,Investimentos,2000.00,saida
+10,2026-03-09,Plano de Saúde Executivo,Saúde,980.00,saida
+10,2026-03-10,Conta de Energia,Contas,288.00,saida
+10,2026-03-12,Supermercado St Marche,Alimentação,825.00,saida
+10,2026-03-15,Condomínio,Moradia,1650.00,saida
+10,2026-03-18,Dividendos Recebidos,Investimentos,480.00,entrada
+10,2026-03-22,Netflix,Assinaturas,44.90,saida
+10,2026-03-25,Restaurante Coco Bambu,Lazer,318.00,saida
+10,2026-03-29,Reserva Aposentadoria FIRE,Investimentos,1500.00,saida
+
+11,2026-01-05,Salário Empresa Administradora,Renda,11500.00,entrada
+11,2026-01-06,Aporte Fundo Imobiliário Dividendos Plus,Investimentos,1200.00,saida
+11,2026-01-07,Aporte ETF Ibovespa,Investimentos,900.00,saida
+11,2026-01-08,Aporte Tesouro IPCA+,Investimentos,1000.00,saida
+11,2026-01-09,Plano de Saúde Familiar,Saúde,780.00,saida
+11,2026-01-10,Conta de Energia,Contas,205.00,saida
+11,2026-01-12,Supermercado Pão de Açúcar,Alimentação,548.00,saida
+11,2026-01-15,Condomínio,Moradia,980.00,saida
+11,2026-01-18,Dividendos FIIs,Investimentos,165.00,entrada
+11,2026-01-21,Academia Smart Fit,Saúde,129.90,saida
+11,2026-01-25,Restaurante Madero,Lazer,145.00,saida
+11,2026-01-28,Reserva Patrimonial,Investimentos,800.00,saida
+
+11,2026-02-05,Salário Empresa Administradora,Renda,11500.00,entrada
+11,2026-02-06,Aporte Fundo Imobiliário Dividendos Plus,Investimentos,1200.00,saida
+11,2026-02-07,Aporte ETF Ibovespa,Investimentos,900.00,saida
+11,2026-02-08,Aporte Tesouro IPCA+,Investimentos,1000.00,saida
+11,2026-02-09,Plano de Saúde Familiar,Saúde,780.00,saida
+11,2026-02-10,Conta de Energia,Contas,214.00,saida
+11,2026-02-12,Supermercado Pão de Açúcar,Alimentação,556.00,saida
+11,2026-02-15,Condomínio,Moradia,980.00,saida
+11,2026-02-18,Dividendos FIIs,Investimentos,178.00,entrada
+11,2026-02-21,Academia Smart Fit,Saúde,129.90,saida
+11,2026-02-25,Restaurante Madero,Lazer,152.00,saida
+11,2026-02-28,Reserva Patrimonial,Investimentos,800.00,saida
+
+11,2026-03-05,Salário Empresa Administradora,Renda,11500.00,entrada
+11,2026-03-06,Aporte Fundo Imobiliário Dividendos Plus,Investimentos,1200.00,saida
+11,2026-03-07,Aporte ETF Ibovespa,Investimentos,900.00,saida
+11,2026-03-08,Aporte Tesouro IPCA+,Investimentos,1000.00,saida
+11,2026-03-09,Plano de Saúde Familiar,Saúde,780.00,saida
+11,2026-03-10,Conta de Energia,Contas,208.00,saida
+11,2026-03-12,Supermercado Pão de Açúcar,Alimentação,542.60,saida
+11,2026-03-15,Condomínio,Moradia,980.00,saida
+11,2026-03-18,Dividendos FIIs,Investimentos,180.00,entrada
+11,2026-03-21,Academia Smart Fit,Saúde,129.90,saida
+11,2026-03-25,Restaurante Madero,Lazer,134.90,saida
+11,2026-03-28,Reserva Patrimonial,Investimentos,800.00,saida
+
+12,2026-01-05,Salário Farmácia Vida,Renda,9300.00,entrada
+12,2026-01-06,Aporte ETF Global Equity,Investimentos,1500.00,saida
+12,2026-01-07,Aporte Tesouro IPCA+,Investimentos,1000.00,saida
+12,2026-01-08,Reserva Educação Filhos,Investimentos,700.00,saida
+12,2026-01-09,Plano de Saúde Familiar,Saúde,890.00,saida
+12,2026-01-10,Conta de Energia,Contas,182.00,saida
+12,2026-01-12,Supermercado Carrefour,Alimentação,472.00,saida
+12,2026-01-14,Mensalidade Escolar,Educação,1650.00,saida
+12,2026-01-18,Dividendos ETF Internacional,Investimentos,80.00,entrada
+12,2026-01-21,Netflix,Assinaturas,44.90,saida
+12,2026-01-25,Restaurante Coco Bambu,Lazer,225.00,saida
+12,2026-01-28,Uber,Transporte,74.00,saida
+
+12,2026-02-05,Salário Farmácia Vida,Renda,9300.00,entrada
+12,2026-02-06,Aporte ETF Global Equity,Investimentos,1500.00,saida
+12,2026-02-07,Aporte Tesouro IPCA+,Investimentos,1000.00,saida
+12,2026-02-08,Reserva Educação Filhos,Investimentos,700.00,saida
+12,2026-02-09,Plano de Saúde Familiar,Saúde,890.00,saida
+12,2026-02-10,Conta de Energia,Contas,188.00,saida
+12,2026-02-12,Supermercado Carrefour,Alimentação,485.00,saida
+12,2026-02-14,Mensalidade Escolar,Educação,1650.00,saida
+12,2026-02-18,Dividendos ETF Internacional,Investimentos,92.00,entrada
+12,2026-02-21,Netflix,Assinaturas,44.90,saida
+12,2026-02-25,Restaurante Coco Bambu,Lazer,240.00,saida
+12,2026-02-28,Uber,Transporte,72.80,saida
+
+12,2026-03-05,Salário Farmácia Vida,Renda,9300.00,entrada
+12,2026-03-06,Aporte ETF Global Equity,Investimentos,1500.00,saida
+12,2026-03-07,Aporte Tesouro IPCA+,Investimentos,1000.00,saida
+12,2026-03-08,Reserva Educação Filhos,Investimentos,700.00,saida
+12,2026-03-09,Plano de Saúde Familiar,Saúde,890.00,saida
+12,2026-03-10,Conta de Energia,Contas,184.00,saida
+12,2026-03-12,Supermercado Carrefour,Alimentação,488.70,saida
+12,2026-03-14,Mensalidade Escolar,Educação,1650.00,saida
+12,2026-03-18,Dividendos ETF Internacional,Investimentos,95.00,entrada
+12,2026-03-21,Netflix,Assinaturas,44.90,saida
+12,2026-03-25,Restaurante Coco Bambu,Lazer,248.00,saida
+12,2026-03-28,Uber,Transporte,72.80,saida
+
+13,2026-01-05,Salário Empresa Tecnologia,Renda,22000.00,entrada
+13,2026-01-06,Aporte ETF Nasdaq Tech,Investimentos,3500.00,saida
+13,2026-01-07,Aporte Fundo Small Caps Brasil,Investimentos,2500.00,saida
+13,2026-01-08,Aporte ETF S&P 500,Investimentos,2500.00,saida
+13,2026-01-09,Aporte Fundo Ações Dividendos Brasil,Investimentos,1800.00,saida
+13,2026-01-10,Plano de Saúde Executivo,Saúde,1150.00,saida
+13,2026-01-12,Supermercado St Marche,Alimentação,980.00,saida
+13,2026-01-15,Condomínio,Moradia,2100.00,saida
+13,2026-01-18,Dividendos Recebidos,Investimentos,620.00,entrada
+13,2026-01-20,Conta de Energia,Contas,340.00,saida
+13,2026-01-24,Restaurante Coco Bambu,Lazer,420.00,saida
+13,2026-01-28,Reserva Independência Financeira,Investimentos,2000.00,saida
+
+13,2026-02-05,Salário Empresa Tecnologia,Renda,22000.00,entrada
+13,2026-02-06,Aporte ETF Nasdaq Tech,Investimentos,3500.00,saida
+13,2026-02-07,Aporte Fundo Small Caps Brasil,Investimentos,2500.00,saida
+13,2026-02-08,Aporte ETF S&P 500,Investimentos,2500.00,saida
+13,2026-02-09,Aporte Fundo Ações Dividendos Brasil,Investimentos,1800.00,saida
+13,2026-02-10,Plano de Saúde Executivo,Saúde,1150.00,saida
+13,2026-02-12,Supermercado St Marche,Alimentação,1015.00,saida
+13,2026-02-15,Condomínio,Moradia,2100.00,saida
+13,2026-02-18,Dividendos Recebidos,Investimentos,685.00,entrada
+13,2026-02-20,Conta de Energia,Contas,352.00,saida
+13,2026-02-24,Restaurante Coco Bambu,Lazer,455.00,saida
+13,2026-02-28,Reserva Independência Financeira,Investimentos,2000.00,saida
+
+13,2026-03-05,Salário Empresa Tecnologia,Renda,22000.00,entrada
+13,2026-03-06,Aporte ETF Nasdaq Tech,Investimentos,3500.00,saida
+13,2026-03-07,Aporte Fundo Small Caps Brasil,Investimentos,2500.00,saida
+13,2026-03-08,Aporte ETF S&P 500,Investimentos,2500.00,saida
+13,2026-03-09,Aporte Fundo Ações Dividendos Brasil,Investimentos,1800.00,saida
+13,2026-03-10,Plano de Saúde Executivo,Saúde,1150.00,saida
+13,2026-03-12,Supermercado St Marche,Alimentação,995.00,saida
+13,2026-03-15,Condomínio,Moradia,2100.00,saida
+13,2026-03-18,Dividendos Recebidos,Investimentos,720.00,entrada
+13,2026-03-20,Conta de Energia,Contas,346.00,saida
+13,2026-03-24,Restaurante Coco Bambu,Lazer,438.00,saida
+13,2026-03-28,Reserva Independência Financeira,Investimentos,2000.00,saida
+
+14,2026-01-05,Salário Empresa Contábil,Renda,6800.00,entrada
+14,2026-01-06,Aporte Tesouro Selic,Investimentos,1000.00,saida
+14,2026-01-07,Aporte CDB Liquidez Diária Premium,Investimentos,800.00,saida
+14,2026-01-08,Aporte LCI Direto 95 CDI,Investimentos,700.00,saida
+14,2026-01-09,Plano de Saúde,Saúde,620.00,saida
+14,2026-01-10,Conta de Energia,Contas,165.00,saida
+14,2026-01-12,Supermercado Carrefour,Alimentação,540.00,saida
+14,2026-01-15,Condomínio,Moradia,760.00,saida
+14,2026-01-18,Netflix,Assinaturas,44.90,saida
+14,2026-01-22,Academia Smart Fit,Saúde,129.90,saida
+14,2026-01-24,Farmácia,Diversos,96.00,saida
+14,2026-01-28,Reserva Emergência,Investimentos,500.00,saida
+
+14,2026-02-05,Salário Empresa Contábil,Renda,6800.00,entrada
+14,2026-02-06,Aporte Tesouro Selic,Investimentos,1000.00,saida
+14,2026-02-07,Aporte CDB Liquidez Diária Premium,Investimentos,800.00,saida
+14,2026-02-08,Aporte LCI Direto 95 CDI,Investimentos,700.00,saida
+14,2026-02-09,Plano de Saúde,Saúde,620.00,saida
+14,2026-02-10,Conta de Energia,Contas,172.00,saida
+14,2026-02-12,Supermercado Carrefour,Alimentação,556.00,saida
+14,2026-02-15,Condomínio,Moradia,760.00,saida
+14,2026-02-18,Netflix,Assinaturas,44.90,saida
+14,2026-02-22,Academia Smart Fit,Saúde,129.90,saida
+14,2026-02-24,Farmácia,Diversos,104.00,saida
+14,2026-02-28,Reserva Emergência,Investimentos,500.00,saida
+
+14,2026-03-05,Salário Empresa Contábil,Renda,6800.00,entrada
+14,2026-03-06,Aporte Tesouro Selic,Investimentos,1000.00,saida
+14,2026-03-07,Aporte CDB Liquidez Diária Premium,Investimentos,800.00,saida
+14,2026-03-08,Aporte LCI Direto 95 CDI,Investimentos,700.00,saida
+14,2026-03-09,Plano de Saúde,Saúde,620.00,saida
+14,2026-03-10,Conta de Energia,Contas,168.00,saida
+14,2026-03-12,Supermercado Carrefour,Alimentação,548.00,saida
+14,2026-03-15,Condomínio,Moradia,760.00,saida
+14,2026-03-18,Netflix,Assinaturas,44.90,saida
+14,2026-03-22,Academia Smart Fit,Saúde,129.90,saida
+14,2026-03-24,Farmácia,Diversos,99.00,saida
+14,2026-03-28,Reserva Emergência,Investimentos,500.00,saida
+
+15,2026-01-05,Salário Prefeitura Municipal,Renda,7200.00,entrada
+15,2026-01-06,Aporte Tesouro Selic,Investimentos,1200.00,saida
+15,2026-01-07,Aporte CDB Liquidez Diária Premium,Investimentos,1000.00,saida
+15,2026-01-08,Aporte LCA Agronegócio Premium,Investimentos,800.00,saida
+15,2026-01-09,Plano de Saúde Familiar,Saúde,650.00,saida
+15,2026-01-10,Conta de Energia,Contas,185.00,saida
+15,2026-01-12,Supermercado Assaí,Alimentação,520.00,saida
+15,2026-01-15,Condomínio,Moradia,690.00,saida
+15,2026-01-18,Internet Fibra,Contas,119.90,saida
+15,2026-01-20,Netflix,Assinaturas,44.90,saida
+15,2026-01-24,Farmácia,Diversos,88.00,saida
+15,2026-01-28,Reserva Aposentadoria,Investimentos,600.00,saida
+
+15,2026-02-05,Salário Prefeitura Municipal,Renda,7200.00,entrada
+15,2026-02-06,Aporte Tesouro Selic,Investimentos,1200.00,saida
+15,2026-02-07,Aporte CDB Liquidez Diária Premium,Investimentos,1000.00,saida
+15,2026-02-08,Aporte LCA Agronegócio Premium,Investimentos,800.00,saida
+15,2026-02-09,Plano de Saúde Familiar,Saúde,650.00,saida
+15,2026-02-10,Conta de Energia,Contas,192.00,saida
+15,2026-02-12,Supermercado Assaí,Alimentação,538.00,saida
+15,2026-02-15,Condomínio,Moradia,690.00,saida
+15,2026-02-18,Internet Fibra,Contas,119.90,saida
+15,2026-02-20,Netflix,Assinaturas,44.90,saida
+15,2026-02-24,Farmácia,Diversos,93.00,saida
+15,2026-02-28,Reserva Aposentadoria,Investimentos,600.00,saida
+
+15,2026-03-05,Salário Prefeitura Municipal,Renda,7200.00,entrada
+15,2026-03-06,Aporte Tesouro Selic,Investimentos,1200.00,saida
+15,2026-03-07,Aporte CDB Liquidez Diária Premium,Investimentos,1000.00,saida
+15,2026-03-08,Aporte LCA Agronegócio Premium,Investimentos,800.00,saida
+15,2026-03-09,Plano de Saúde Familiar,Saúde,650.00,saida
+15,2026-03-10,Conta de Energia,Contas,188.00,saida
+15,2026-03-12,Supermercado Assaí,Alimentação,529.00,saida
+15,2026-03-15,Condomínio,Moradia,690.00,saida
+15,2026-03-18,Internet Fibra,Contas,119.90,saida
+15,2026-03-20,Netflix,Assinaturas,44.90,saida
+15,2026-03-24,Farmácia,Diversos,90.00,saida
+15,2026-03-28,Reserva Aposentadoria,Investimentos,600.00,saida
+
+16,2026-01-05,Salário Empresa Tecnologia Financeira,Renda,24500.00,entrada
+16,2026-01-06,Aporte ETF Nasdaq Tech,Investimentos,4000.00,saida
+16,2026-01-07,Aporte Fundo Small Caps Brasil,Investimentos,3000.00,saida
+16,2026-01-08,Aporte ETF S&P 500,Investimentos,2800.00,saida
+16,2026-01-09,Aporte Fundo Ações Dividendos Brasil,Investimentos,2200.00,saida
+16,2026-01-10,Plano de Saúde Executivo,Saúde,1250.00,saida
+16,2026-01-12,Supermercado St Marche,Alimentação,1150.00,saida
+16,2026-01-15,Condomínio,Moradia,2400.00,saida
+16,2026-01-18,Dividendos Recebidos,Investimentos,780.00,entrada
+16,2026-01-20,Conta de Energia,Contas,395.00,saida
+16,2026-01-22,Netflix,Assinaturas,44.90,saida
+16,2026-01-25,Restaurante Figueira Rubaiyat,Lazer,520.00,saida
+16,2026-01-29,Reserva Independência Financeira,Investimentos,2500.00,saida
+
+16,2026-02-05,Salário Empresa Tecnologia Financeira,Renda,24500.00,entrada
+16,2026-02-06,Aporte ETF Nasdaq Tech,Investimentos,4000.00,saida
+16,2026-02-07,Aporte Fundo Small Caps Brasil,Investimentos,3000.00,saida
+16,2026-02-08,Aporte ETF S&P 500,Investimentos,2800.00,saida
+16,2026-02-09,Aporte Fundo Ações Dividendos Brasil,Investimentos,2200.00,saida
+16,2026-02-10,Plano de Saúde Executivo,Saúde,1250.00,saida
+16,2026-02-12,Supermercado St Marche,Alimentação,1185.00,saida
+16,2026-02-15,Condomínio,Moradia,2400.00,saida
+16,2026-02-18,Dividendos Recebidos,Investimentos,835.00,entrada
+16,2026-02-20,Conta de Energia,Contas,410.00,saida
+16,2026-02-22,Netflix,Assinaturas,44.90,saida
+16,2026-02-25,Restaurante Figueira Rubaiyat,Lazer,545.00,saida
+16,2026-02-28,Reserva Independência Financeira,Investimentos,2500.00,saida
+
+16,2026-03-05,Salário Empresa Tecnologia Financeira,Renda,24500.00,entrada
+16,2026-03-06,Aporte ETF Nasdaq Tech,Investimentos,4000.00,saida
+16,2026-03-07,Aporte Fundo Small Caps Brasil,Investimentos,3000.00,saida
+16,2026-03-08,Aporte ETF S&P 500,Investimentos,2800.00,saida
+16,2026-03-09,Aporte Fundo Ações Dividendos Brasil,Investimentos,2200.00,saida
+16,2026-03-10,Plano de Saúde Executivo,Saúde,1250.00,saida
+16,2026-03-12,Supermercado St Marche,Alimentação,1160.00,saida
+16,2026-03-15,Condomínio,Moradia,2400.00,saida
+16,2026-03-18,Dividendos Recebidos,Investimentos,910.00,entrada
+16,2026-03-20,Conta de Energia,Contas,402.00,saida
+16,2026-03-22,Netflix,Assinaturas,44.90,saida
+16,2026-03-25,Restaurante Figueira Rubaiyat,Lazer,535.00,saida
+16,2026-03-29,Reserva Independência Financeira,Investimentos,2500.00,saida
+
+17,2026-01-05,Pró-labore Empresa Comercial,Renda,14800.00,entrada
+17,2026-01-06,Aporte ETF Carteira Balanceada,Investimentos,1800.00,saida
+17,2026-01-07,Aporte Fundo Multimercado Estratégia Brasil,Investimentos,1500.00,saida
+17,2026-01-08,Aporte Tesouro IPCA+,Investimentos,1200.00,saida
+17,2026-01-09,Aporte Fundo Imobiliário Dividendos Plus,Investimentos,1000.00,saida
+17,2026-01-10,Plano de Saúde Familiar Premium,Saúde,950.00,saida
+17,2026-01-12,Supermercado Sam's Club,Alimentação,820.00,saida
+17,2026-01-15,Condomínio,Moradia,1350.00,saida
+17,2026-01-18,Dividendos FIIs,Investimentos,220.00,entrada
+17,2026-01-20,Conta de Energia,Contas,295.00,saida
+17,2026-01-22,Netflix,Assinaturas,44.90,saida
+17,2026-01-24,Spotify Premium,Assinaturas,21.90,saida
+17,2026-01-26,Restaurante Outback,Lazer,245.00,saida
+17,2026-01-28,Reserva Educação Filhos,Investimentos,1000.00,saida
+
+17,2026-02-05,Pró-labore Empresa Comercial,Renda,14800.00,entrada
+17,2026-02-06,Aporte ETF Carteira Balanceada,Investimentos,1800.00,saida
+17,2026-02-07,Aporte Fundo Multimercado Estratégia Brasil,Investimentos,1500.00,saida
+17,2026-02-08,Aporte Tesouro IPCA+,Investimentos,1200.00,saida
+17,2026-02-09,Aporte Fundo Imobiliário Dividendos Plus,Investimentos,1000.00,saida
+17,2026-02-10,Plano de Saúde Familiar Premium,Saúde,950.00,saida
+17,2026-02-12,Supermercado Sam's Club,Alimentação,845.00,saida
+17,2026-02-15,Condomínio,Moradia,1350.00,saida
+17,2026-02-18,Dividendos FIIs,Investimentos,240.00,entrada
+17,2026-02-20,Conta de Energia,Contas,308.00,saida
+17,2026-02-22,Netflix,Assinaturas,44.90,saida
+17,2026-02-24,Spotify Premium,Assinaturas,21.90,saida
+17,2026-02-26,Restaurante Outback,Lazer,262.00,saida
+17,2026-02-28,Reserva Educação Filhos,Investimentos,1000.00,saida
+
+17,2026-03-05,Pró-labore Empresa Comercial,Renda,14800.00,entrada
+17,2026-03-06,Aporte ETF Carteira Balanceada,Investimentos,1800.00,saida
+17,2026-03-07,Aporte Fundo Multimercado Estratégia Brasil,Investimentos,1500.00,saida
+17,2026-03-08,Aporte Tesouro IPCA+,Investimentos,1200.00,saida
+17,2026-03-09,Aporte Fundo Imobiliário Dividendos Plus,Investimentos,1000.00,saida
+17,2026-03-10,Plano de Saúde Familiar Premium,Saúde,950.00,saida
+17,2026-03-12,Supermercado Sam's Club,Alimentação,832.00,saida
+17,2026-03-15,Condomínio,Moradia,1350.00,saida
+17,2026-03-18,Dividendos FIIs,Investimentos,255.00,entrada
+17,2026-03-20,Conta de Energia,Contas,299.00,saida
+17,2026-03-22,Netflix,Assinaturas,44.90,saida
+17,2026-03-24,Spotify Premium,Assinaturas,21.90,saida
+17,2026-03-26,Restaurante Outback,Lazer,238.00,saida
+17,2026-03-28,Reserva Educação Filhos,Investimentos,1000.00,saida
+
+18,2026-01-05,Salário Banco de Investimentos,Renda,32000.00,entrada
+18,2026-01-06,Aporte ETF Nasdaq Tech,Investimentos,5000.00,saida
+18,2026-01-07,Aporte ETF S&P 500,Investimentos,4000.00,saida
+18,2026-01-08,Aporte Fundo Small Caps Brasil,Investimentos,3500.00,saida
+18,2026-01-09,Aporte Fundo Ações Dividendos Brasil,Investimentos,2500.00,saida
+18,2026-01-10,Aporte Fundo Tecnologia Global,Investimentos,2500.00,saida
+18,2026-01-11,Plano de Saúde Executivo Premium,Saúde,1450.00,saida
+18,2026-01-12,Supermercado St Marche,Alimentação,1380.00,saida
+18,2026-01-15,Condomínio,Moradia,3200.00,saida
+18,2026-01-18,Dividendos Recebidos,Investimentos,1150.00,entrada
+18,2026-01-20,Conta de Energia,Contas,470.00,saida
+18,2026-01-22,Netflix,Assinaturas,44.90,saida
+18,2026-01-24,Restaurante Fasano,Lazer,780.00,saida
+18,2026-01-28,Reserva Independência Financeira,Investimentos,3000.00,saida
+
+18,2026-02-05,Salário Banco de Investimentos,Renda,32000.00,entrada
+18,2026-02-06,Aporte ETF Nasdaq Tech,Investimentos,5000.00,saida
+18,2026-02-07,Aporte ETF S&P 500,Investimentos,4000.00,saida
+18,2026-02-08,Aporte Fundo Small Caps Brasil,Investimentos,3500.00,saida
+18,2026-02-09,Aporte Fundo Ações Dividendos Brasil,Investimentos,2500.00,saida
+18,2026-02-10,Aporte Fundo Tecnologia Global,Investimentos,2500.00,saida
+18,2026-02-11,Plano de Saúde Executivo Premium,Saúde,1450.00,saida
+18,2026-02-12,Supermercado St Marche,Alimentação,1425.00,saida
+18,2026-02-15,Condomínio,Moradia,3200.00,saida
+18,2026-02-18,Dividendos Recebidos,Investimentos,1280.00,entrada
+18,2026-02-20,Conta de Energia,Contas,495.00,saida
+18,2026-02-22,Netflix,Assinaturas,44.90,saida
+18,2026-02-24,Restaurante Fasano,Lazer,840.00,saida
+18,2026-02-28,Reserva Independência Financeira,Investimentos,3000.00,saida
+
+18,2026-03-05,Salário Banco de Investimentos,Renda,32000.00,entrada
+18,2026-03-06,Aporte ETF Nasdaq Tech,Investimentos,5000.00,saida
+18,2026-03-07,Aporte ETF S&P 500,Investimentos,4000.00,saida
+18,2026-03-08,Aporte Fundo Small Caps Brasil,Investimentos,3500.00,saida
+18,2026-03-09,Aporte Fundo Ações Dividendos Brasil,Investimentos,2500.00,saida
+18,2026-03-10,Aporte Fundo Tecnologia Global,Investimentos,2500.00,saida
+18,2026-03-11,Plano de Saúde Executivo Premium,Saúde,1450.00,saida
+18,2026-03-12,Supermercado St Marche,Alimentação,1390.00,saida
+18,2026-03-15,Condomínio,Moradia,3200.00,saida
+18,2026-03-18,Dividendos Recebidos,Investimentos,1360.00,entrada
+18,2026-03-20,Conta de Energia,Contas,485.00,saida
+18,2026-03-22,Netflix,Assinaturas,44.90,saida
+18,2026-03-24,Restaurante Fasano,Lazer,810.00,saida
+18,2026-03-28,Reserva Independência Financeira,Investimentos,3000.00,saida
