@@ -1,105 +1,271 @@
 {
-    "acoes": [
-        "acoes",
-        "arriscado",
-        "arriscar",
-        "bolsa",
-        "mercado",
-        "volatilidade"
-    ],
-    "categoria": [
-        "de gasto",
-        "gastando mais",
-        "gasto mais",
-        "maior despesa",
-        "maior gasto",
-        "mais gasto",
-        "categoria"
-    ],
-    "cdb": [
-        "cdb",
-        "certificado de deposito",
-        "liquidez diaria"
-    ],
-    "etf": [
-        "etf",
-        "s&p",
-        "internacional",
-        "global"
-    ],
-    "fundo_acoes": [
-        "fundo de acoes",
-        "acoes tech",
-        "acoes",
-        "variavel"
-    ],
-    "fundo_multimercado": [
-        "multimercado",
-        "diversificacao"
-    ], 
-    "gastos": [
-            "quanto gastei",
-            "total de despesas",
-            "despesas",
-            "gasto"
-    ],
-    "historico_atendimento": [
-            "historico de atendimento",
-            "historico",
-            "meu historico",
-            "atendimentos",
-            "todos os atendimentos",
-            "listar atendimentos"
-    ],
-    "investir": [
-        "investir",
-        "investimento",
-        "aplicar",
-        "aplicacao"
-    ],
-    "lci_lca": [
-        "lci",
-        "lca",
-        "lci/lca",
-        "letra de credito",
-        "imobiliario",
-        "agricola"
-    ],
-    "meta": [
-        "meta",
-        "objetivo",
-        "planejamento",
-        "alvo"
-    ],
-    "poupanca": [
-        "poupança",
-        "guardar dinheiro",
-        "economizar",
-        "poupar"
-    ],
-    "seguro": [
-        "seguro",
-        "poupanca",
-        "selic",
-        "lci/lca",
-        "lci_lca"
-    ],
-    "tesouro": [
-        "tesouro",
-        "selic",
-        "direto",
-        "titulo publico"
-    ], 
-    "transacoes": [
-            "transacao",
-            "movimentacao",
-            "extrato"
-    ],
-    "ultimo_atendimento": [
-        "ultimo atendimento",
-        "ultimo contato",
-        "atendimento",
-        "atendimento mais recente",
-        "atendimento recente"
-    ]
+"acoes": [
+"acoes",
+"acao",
+"bolsa",
+"mercado acionario",
+"renda variavel",
+"volatilidade",
+"arriscado",
+"arriscar",
+"alto risco",
+"ibovespa",
+"b3",
+"papel",
+"papeis",
+"mercado de acoes"
+],
+
+"atendimento_historico": [
+    "atendimentos",
+    "historico",
+    "historico de atendimento",
+    "historico de contatos",
+    "meu historico",
+    "todos os atendimentos",
+    "listar atendimentos",
+    "atendimentos anteriores",
+    "consultas anteriores",
+    "conversas anteriores"
+],
+
+"atendimento_ultimo": [
+    "ultimo atendimento",
+    "ultimo contato",
+    "ultimo suporte",
+    "atendimento recente",
+    "atendimento mais recente",
+    "ultimo registro",
+    "ultima conversa",
+    "ultimo historico"
+],
+
+"categoria": [
+    "categoria",
+    "categoria de gasto",
+    "categoria de despesas",
+    "gastando mais",
+    "gasto mais",
+    "maior gasto",
+    "maior despesa",
+    "onde gasto mais",
+    "onde estou gastando mais",
+    "qual categoria gasto mais",
+    "meus maiores gastos",
+    "principal despesa"
+],
+
+"cdb": [
+    "cdb",
+    "certificado de deposito",
+    "certificado de deposito bancario",
+    "liquidez diaria",
+    "renda fixa bancaria"
+],
+
+"etf": [
+    "etf",
+    "indice",
+    "fundo de indice",
+    "ibovespa",
+    "sp500",
+    "s&p",
+    "internacional",
+    "global",
+    "nasdaq"
+],
+
+"fundo_acoes": [
+    "fundo de acoes",
+    "fundos de acoes",
+    "acoes tech",
+    "acoes",
+    "renda variavel",
+    "fundo agressivo",
+    "fundo arrojado"
+],
+
+"fundo_multimercado": [
+    "multimercado",
+    "diversificacao",
+    "diversificar",
+    "carteira diversificada",
+    "misturar investimentos"
+],
+
+"gastos": [
+    "gasto",
+    "gastos",
+    "despesa",
+    "despesas",
+    "quanto gastei",
+    "quanto estou gastando",
+    "quanto eu gastei",
+    "quanto ja gastei",
+    "total gasto",
+    "total de gastos",
+    "total de despesas",
+    "quanto saiu da conta",
+    "quanto saiu"
+],
+
+"investir": [
+    "investir",
+    "investimento",
+    "investimentos",
+    "aplicar",
+    "aplicacao",
+    "aplicacoes",
+    "onde investir",
+    "onde aplicar",
+    "como investir",
+    "como aplicar",
+    "fazer dinheiro render",
+    "rentabilizar",
+    "melhor investimento",
+    "melhores investimentos",
+    "onde colocar meu dinheiro"
+],
+
+"lci_lca": [
+    "lci",
+    "lca",
+    "lci lca",
+    "letra de credito",
+    "credito imobiliario",
+    "credito agricola",
+    "isento de imposto",
+    "investimento isento"
+],
+
+"meta": [
+    "meta",
+    "metas",
+    "objetivo",
+    "objetivos",
+    "planejamento",
+    "planejar",
+    "alvo",
+    "sonho",
+    "projeto",
+    "projetos",
+    "guardar dinheiro",
+    "juntar dinheiro",
+    "economizar",
+    "acumular patrimonio",
+    "organizar financas",
+    "planejamento financeiro",
+    "construir patrimonio",
+    "crescer patrimonio"
+],
+
+"poupanca": [
+    "poupanca",
+    "guardar dinheiro",
+    "economizar",
+    "poupar",
+    "reserva",
+    "guardar na poupanca"
+],
+
+"seguro": [
+    "seguro",
+    "seguranca",
+    "baixo risco",
+    "conservador",
+    "protecao",
+    "estabilidade",
+    "preservar patrimonio",
+    "nao quero arriscar"
+],
+
+"tesouro": [
+    "tesouro",
+    "tesouro direto",
+    "selic",
+    "titulo publico",
+    "titulo do governo",
+    "tesouro selic",
+    "tesouro ipca"
+],
+
+"transacoes": [
+    "transacao",
+    "transacoes",
+    "movimentacao",
+    "movimentacoes",
+    "extrato",
+    "lancamentos",
+    "movimentos",
+    "movimento financeiro",
+    "movimentacao financeira"
+],
+
+"viagem": [
+    "viajar",
+    "viagem",
+    "ferias",
+    "turismo"
+],
+
+"carro": [
+    "carro",
+    "automovel",
+    "veiculo"
+],
+
+"imovel": [
+    "apartamento",
+    "casa",
+    "imovel",
+    "moradia"
+],
+
+"aposentadoria": [
+    "aposentadoria",
+    "aposentar",
+    "parar de trabalhar",
+    "previdencia"
+],
+
+"emergencia": [
+    "reserva de emergencia",
+    "emergencia",
+    "imprevisto",
+    "seguranca financeira"
+],
+
+"filhos": [
+    "filhos",
+    "faculdade",
+    "educacao",
+    "estudos"
+],
+
+"renda_extra": [
+    "renda extra",
+    "segunda renda",
+    "renda passiva"
+],
+
+"dividas": [
+    "divida",
+    "dividas",
+    "endividamento",
+    "devendo",
+    "emprestimo"
+],
+
+"cartao": [
+    "cartao",
+    "cartao de credito",
+    "fatura"
+],
+
+"orcamento": [
+    "orcamento",
+    "controle financeiro",
+    "planejamento financeiro",
+    "controle de gastos"
+]
 }
