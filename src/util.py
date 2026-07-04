@@ -25,17 +25,20 @@ def detectar_intencao(
         []
     )
 
-    return any(
-        normalizar_texto(termo)
-        in pergunta
-        for termo in termos
-    ) or any(
-        singularizar(
-            normalizar_texto(termo)
-        )
-        in tokens
+    resultado_termo_no_texto = any(
+        normalizar_texto(termo) in pergunta
         for termo in termos
     )
+
+    if resultado_termo_no_texto:
+        return True     
+
+    resultado_singular_nos_tokens = any(
+        singularizar(normalizar_texto(termo)) in tokens
+        for termo in termos
+    )
+
+    return resultado_termo_no_texto or resultado_singular_nos_tokens
 
 def detectar_intencao_tokens(tokens, chave):
 
