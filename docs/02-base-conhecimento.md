@@ -7,8 +7,11 @@ A base de conhecimento é composta por arquivos estruturados que permitem a aná
 
 - **`perfil_investidor.json`**: Contém os dados demográficos, objetivos financeiros, nível de tolerância ao risco e metas específicas de cada cliente.
 - **`produtos_financeiros.json`**: Catálogo curado de produtos de investimento, incluindo categoria, nível de risco, rentabilidade e público-alvo.
-- **`palavras_chave.json`**: Dicionário de termos e sinônimos utilizados pelo motor de inferência para identificar intenções de busca do usuário (ex: gastos, investimentos, dúvidas) de forma rápida e eficiente.
+- **`palavras_chave.json`**: Dicionário de termos e sinônimos utilizados pelo motor de inferência para identificar intenções de busca do usuário de forma rápida e eficiente, e contém palavras e expressões utilizadas para identificar o objetivo da pergunta do usuário.
+- **`palavras_chave_produtos.json`**: Dicionário específico para identificação de produtos financeiros. Relaciona palavras e expressões informadas pelo usuário às categorias de produtos existentes no catálogo, permitindo localizar investimentos.
 - **`chave_sugestoes.json`**: Estrutura de mapeamento que associa intenções específicas do usuário a recomendações de produtos ou ações pré-configuradas, garantindo consistência nas sugestões do agente.
+- **`normalizacao_palavras.json`**: Define exceções de singularização (palavras que não passarão pela singularização) e normalização de palavras. Evita transformações incorretas durante a tokenização (por exemplo: ações → ação, cartões → cartão, transações → transação).
+- **`normalizacao_expressoes.json`**: Mapeia expressões compostas para uma representação padronizada antes da análise da pergunta. Exemplos: certificado de depósito → cdb, guardando dinheiro → guardar dinheiro, estou juntando → juntar.
 - **`transacoes.csv`**: Registro histórico de movimentações financeiras (receitas e despesas), contendo `id_cliente`, data, categoria e valor.
 - **`historico_atendimento.csv`**: Logs de interações anteriores com o cliente, permitindo que o Finassist compreenda o contexto de atendimentos prévios e o status de resoluções de problemas.
 
