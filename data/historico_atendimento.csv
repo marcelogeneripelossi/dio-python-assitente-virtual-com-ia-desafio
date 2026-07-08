@@ -1,18 +1,216 @@
 id_cliente,data,canal,tema,resumo,resolvido
 1,2025-09-01,chat,CDB,Explicação sobre impostos no CDB,sim
-2,2025-09-05,telefone,App,Erro de login resolvido,sim
-3,2025-09-10,chat,Tesouro,Dúvida sobre taxa de custódia,sim
-4,2025-09-15,email,Investimento,Consulta sobre LCI,sim
-5,2025-09-15,chat,CDB,Cliente perguntou sobre rentabilidade e prazos,sim
-4,2025-09-22,telefone,Problema no app,Erro ao visualizar extrato foi corrigido,sim
-3,2025-10-01,chat,Tesouro Selic,Cliente pediu explicação sobre o funcionamento do Tesouro Direto,sim
-2,2025-10-01,chat,Metas,Ajuste de meta de reserva,sim
-1,2025-10-05,telefone,Cartão,Bloqueio por suspeita de fraude,sim
-4,2025-10-10,chat,Fundo,Rentabilidade do multimercado,sim
-2,2025-10-12,chat,Metas financeiras,Cliente acompanhou o progresso da reserva de emergência,sim
-3,2025-10-15,chat,Perfil,Atualização de renda mensal,sim
-5,2025-10-20,email,Documento,Envio de comprovante,sim
-4,2025-10-25,email,Atualização cadastral,Cliente atualizou e-mail e telefone,sim
-2,2025-10-25,chat,Ações,Dúvida sobre volatilidade,sim
-1,2025-11-01,telefone,Investimento,Resgate antecipado,não
-3,2025-11-05,chat,Metas,Configuração de débito automático,sim
+1,2025-10-05,telefone,Cartão,Bloqueio preventivo por suspeita de fraude,sim
+1,2025-11-11,chat,Reserva de emergência,Cliente revisou estratégia de liquidez diária,sim
+1,2026-01-14,email,Metas,Acompanhamento da entrada do apartamento,sim
+
+2,2025-09-05,telefone,Aplicativo,Erro de login resolvido,sim
+2,2025-10-01,chat,Metas,Ajuste da meta da viagem internacional,sim
+2,2025-10-25,chat,Ações,Dúvida sobre volatilidade da bolsa,sim
+2,2026-02-03,chat,Reserva financeira,Orientações sobre aumento da reserva de emergência,sim
+
+3,2025-09-10,chat,Tesouro Direto,Dúvida sobre taxa de custódia,sim
+3,2025-10-15,chat,Perfil,Atualização da renda mensal,sim
+3,2025-11-05,chat,Metas,Configuração de débito automático para investimentos,sim
+3,2026-02-20,telefone,ETF,Explicação sobre ETFs internacionais,sim
+
+4,2025-09-15,email,Investimentos,Consulta sobre LCI e prazo mínimo,sim
+4,2025-10-10,chat,Fundos,Rentabilidade do fundo multimercado,sim
+4,2025-10-25,email,Cadastro,Atualização de telefone e e-mail,sim
+4,2026-03-02,chat,Dívidas,Planejamento para quitação antecipada,sim
+
+5,2025-09-15,chat,CDB,Dúvidas sobre rentabilidade e prazo,sim
+5,2025-11-18,telefone,Veículo,Planejamento financeiro para compra do carro,sim
+5,2026-01-05,chat,Reserva de emergência,Reforço da importância da liquidez,sim
+5,2026-02-25,email,Perfil,Atualização de patrimônio,sim
+
+6,2025-10-02,chat,Tesouro Selic,Explicação sobre reserva de emergência,sim
+6,2025-11-08,chat,Previdência,Cliente avaliou previdência privada,sim
+6,2026-01-20,telefone,Metas,Revisão da meta de intercâmbio,sim
+6,2026-03-11,chat,CDB,Dúvidas sobre liquidez diária,sim
+
+7,2025-09-18,chat,ETF,Primeiro contato sobre investimentos internacionais,sim
+7,2025-11-02,chat,Perfil moderado,Cliente buscou diversificação da carteira,sim
+7,2026-01-07,email,Fundos,Explicação sobre multimercados,sim
+7,2026-03-18,chat,Investimentos,Rebalanceamento de carteira,sim
+
+8,2025-10-07,telefone,Tesouro IPCA,Esclarecimento sobre marcação a mercado,sim
+8,2025-11-19,chat,Fundos imobiliários,Dúvidas sobre dividendos mensais,sim
+8,2026-01-15,email,Planejamento,Objetivo de compra de imóvel,sim
+8,2026-03-25,chat,Perfil moderado,Revisão do perfil de risco,sim
+
+9,2025-09-22,email,ETF,Diversificação internacional,sim
+9,2025-10-30,chat,Previdência,Avaliação de previdência complementar,sim
+9,2026-02-12,telefone,Carteira,Análise da distribuição entre renda fixa e variável,sim
+9,2026-03-27,chat,Objetivos,Acompanhamento das metas financeiras,sim
+
+10,2025-09-11,chat,Ações,Primeiras orientações sobre renda variável,sim
+10,2025-10-14,chat,ETF,Dúvidas sobre índice Ibovespa,sim
+10,2025-12-03,telefone,Carteira,Sugestão de diversificação,sim
+10,2026-02-16,chat,Dividendos,Funcionamento dos dividendos,sim
+
+11,2025-09-28,chat,Fundos imobiliários,Cliente conheceu FIIs pela primeira vez,sim
+11,2025-11-21,email,ETF,Comparação entre ETFs brasileiros e americanos,sim
+11,2026-01-30,chat,Perfil arrojado,Revisão do percentual em renda variável,sim
+11,2026-03-09,telefone,Ações,Dúvidas sobre small caps,sim
+
+12,2025-10-06,chat,Investimentos internacionais,Explicação sobre exposição cambial,sim
+12,2025-11-27,email,ETF Global,Cliente avaliou investimento no exterior,sim
+12,2026-01-18,chat,Carteira,Revisão da diversificação internacional,sim
+12,2026-03-29,chat,Risco,Discussão sobre volatilidade,sim
+
+13,2025-09-12,chat,Ações,Dúvidas sobre setores da bolsa,sim
+13,2025-10-22,telefone,Small Caps,Explicação sobre potencial de valorização,sim
+13,2026-01-25,chat,ETF,Diversificação por índices,sim
+13,2026-03-17,email,Perfil arrojado,Revisão de objetivos de longo prazo,sim
+
+14,2025-09-20,chat,Fundos de ações,Comparação entre fundos e ETFs,sim
+14,2025-11-01,chat,Dividendos,Funcionamento dos dividendos,sim
+14,2026-01-11,telefone,Carteira,Aumento da exposição em renda variável,sim
+14,2026-03-20,chat,Investimentos internacionais,Dúvidas sobre mercado americano,sim
+
+15,2025-10-09,chat,ETF,Explicação sobre rebalanceamento automático,sim
+15,2025-11-23,email,Perfil arrojado,Cliente confirmou tolerância ao risco,sim
+15,2026-02-14,chat,Ações,Análise de volatilidade histórica,sim
+15,2026-03-22,chat,Objetivos,Planejamento para independência financeira,sim
+
+16,2025-09-17,chat,Fundos,Dúvidas sobre fundos setoriais,sim
+16,2025-10-31,telefone,ETF Internacional,Primeiro investimento global,sim
+16,2026-01-28,chat,Carteira,Revisão trimestral dos investimentos,sim
+16,2026-03-30,email,Risco,Revisão da estratégia de longo prazo,sim
+
+17,2025-09-26,chat,Ações,Dúvidas sobre empresas pagadoras de dividendos,sim
+17,2025-11-13,chat,Small Caps,Cliente avaliou empresas de crescimento,sim
+17,2026-02-01,telefone,ETF,Diversificação internacional,sim
+17,2026-03-24,chat,Investimentos,Acompanhamento da carteira,sim
+
+18,2025-09-30,chat,Planejamento financeiro,Definição de metas patrimoniais,sim
+18,2025-11-29,email,Fundos de ações,Explicação sobre gestão ativa,sim
+18,2026-01-21,chat,ETF,Comparação entre ETFs e fundos,sim
+18,2026-03-31,telefone,Carteira,Revisão anual da estratégia de investimentos,sim
+
+1,2026-01-08,chat,Tesouro Selic,Dúvida sobre liquidez diária do Tesouro Selic,sim
+1,2026-02-11,telefone,Reserva de Emergência,Orientação para completar reserva financeira,sim
+1,2026-03-14,chat,Meta imobiliária,Simulação para entrada do apartamento,sim
+1,2026-04-20,email,CDB,Comparação entre CDB e Tesouro Selic,sim
+1,2026-06-02,chat,Perfil,Confirmação do perfil moderado,não
+1,2026-08-18,telefone,Investimentos,Dúvida sobre diversificação,sim
+
+2,2026-01-10,chat,Viagem Internacional,Planejamento financeiro para viagem à Europa,sim
+2,2026-02-15,chat,Reserva Financeira,Orientação sobre poupança mensal,sim
+2,2026-03-18,email,CDB,Dúvida sobre rendimento líquido,sim
+2,2026-05-04,telefone,Tesouro Selic,Explicação sobre segurança do Tesouro,sim
+2,2026-07-21,chat,Meta financeira,Acompanhamento da meta da viagem,sim
+2,2026-10-11,email,Atualização cadastral,Alteração de telefone e e-mail,sim
+
+3,2026-01-09,chat,ETF Internacional,Dúvida sobre exposição internacional,sim
+3,2026-02-13,telefone,Dividendos,Explicação sobre reinvestimento de dividendos,sim
+3,2026-03-25,chat,Aposentadoria FIRE,Revisão da estratégia de longo prazo,sim
+3,2026-05-15,email,Tributação,Dúvidas sobre imposto em ETFs,sim
+3,2026-08-12,chat,Perfil Arrojado,Revisão do nível de risco aceito,sim
+3,2026-11-03,telefone,Intercâmbio filhos,Planejamento financeiro futuro,sim
+
+4,2026-01-07,chat,Quitação,Dúvidas sobre antecipação de parcelas,sim
+4,2026-02-09,telefone,Meta financeira,Revisão da meta de quitação,sim
+4,2026-03-18,email,CDB,Comparação entre alternativas conservadoras,sim
+4,2026-04-30,chat,Perfil Moderado,Explicação sobre investimentos moderados,sim
+4,2026-07-12,telefone,Investimentos,Diversificação da carteira,sim
+4,2026-10-22,email,Aplicativo,Dificuldade para visualizar extrato,sim
+
+5,2026-01-06,chat,Compra de veículo,Planejamento financeiro para veículo,sim
+5,2026-02-10,chat,Tesouro Selic,Dúvidas sobre liquidez diária,sim
+5,2026-03-14,email,CDB,Explicação sobre garantia FGC,sim
+5,2026-06-18,telefone,Perfil Conservador,Revisão do perfil de risco,sim
+5,2026-09-20,chat,Meta financeira,Acompanhamento da compra do carro,sim
+5,2026-11-08,email,Cadastro,Atualização cadastral,sim
+
+6,2026-01-05,chat,LCI,Dúvidas sobre isenção de imposto,sim
+6,2026-02-18,telefone,Reserva financeira,Planejamento da reserva de emergência,sim
+6,2026-04-11,email,Tesouro IPCA,Explicação sobre inflação,sim
+6,2026-05-23,chat,Objetivos financeiros,Revisão das metas do cliente,sim
+6,2026-08-14,telefone,Perfil Conservador,Confirmação do perfil,sim
+6,2026-10-29,chat,Investimentos,Ajuste da estratégia de aportes,sim
+
+7,2026-01-12,chat,Fundo Multimercado,Dúvidas sobre composição do fundo,sim
+7,2026-02-22,email,ETF Balanceado,Explicação da estratégia do ETF,sim
+7,2026-03-19,telefone,Carteira,Revisão da diversificação,sim
+7,2026-06-16,chat,Objetivos financeiros,Acompanhamento de metas,sim
+7,2026-08-20,email,Perfil Moderado,Validação do perfil do investidor,sim
+7,2026-11-12,telefone,Investimentos,Sugestão de rebalanceamento,sim
+
+8,2026-01-14,chat,Imóvel,Planejamento da entrada do imóvel,sim
+8,2026-02-17,telefone,Tesouro IPCA,Explicação sobre títulos indexados à inflação,sim
+8,2026-03-23,email,Investimentos,Diversificação da carteira,sim
+8,2026-05-10,chat,Meta financeira,Acompanhamento do objetivo imobiliário,sim
+8,2026-08-18,telefone,Perfil Moderado,Revisão anual do perfil,sim
+8,2026-11-07,email,Aplicativo,Dúvida sobre rentabilidade exibida,sim
+
+9,2026-01-09,chat,Ações,Dúvidas sobre volatilidade do mercado,sim
+9,2026-02-20,telefone,ETF Internacional,Explicação sobre exposição global,sim
+9,2026-03-28,chat,Dividendos,Orientação sobre reinvestimento,sim
+9,2026-05-22,email,Perfil Arrojado,Confirmação do perfil do investidor,sim
+9,2026-08-17,chat,Tributação,Dúvidas sobre declaração de investimentos,sim
+9,2026-11-21,telefone,Carteira,Rebalanceamento da carteira,sim
+
+10,2026-01-08,chat,Ações,Dúvida sobre momento de entrada na bolsa,sim
+10,2026-02-14,telefone,ETF Internacional,Explicação sobre diversificação global,sim
+10,2026-03-19,chat,Dividendos,Orientação sobre reinvestimento de dividendos,sim
+10,2026-05-11,email,Tributação,Dúvida sobre imposto sobre ganhos em ações,sim
+10,2026-08-09,chat,Perfil Arrojado,Revisão do perfil de risco,sim
+10,2026-11-16,telefone,Carteira,Sugestão de rebalanceamento da carteira,sim
+
+11,2026-01-06,chat,Tesouro Selic,Explicação sobre liquidez diária e segurança,sim
+11,2026-02-12,email,CDB,Dúvida sobre cobertura do FGC,sim
+11,2026-03-20,telefone,Reserva de Emergência,Planejamento da reserva financeira,sim
+11,2026-05-05,chat,LCI,Explicação sobre isenção de IR,sim
+11,2026-08-15,email,Perfil Conservador,Confirmação do perfil do investidor,sim
+11,2026-11-10,telefone,Investimentos,Revisão dos aportes mensais,sim
+
+12,2026-01-09,chat,Fundo Multimercado,Dúvida sobre composição da carteira,sim
+12,2026-02-16,telefone,ETF Balanceado,Explicação sobre diversificação,sim
+12,2026-03-24,email,Tesouro IPCA,Dúvida sobre proteção contra inflação,sim
+12,2026-05-13,chat,Objetivos Financeiros,Revisão das metas do cliente,sim
+12,2026-08-21,telefone,Perfil Moderado,Atualização do perfil de risco,sim
+12,2026-11-12,email,Carteira,Sugestão de rebalanceamento,sim
+
+13,2026-01-07,chat,ETF Nasdaq Tech,Dúvida sobre exposição ao setor de tecnologia,sim
+13,2026-02-18,telefone,Small Caps,Explicação sobre volatilidade das small caps,sim
+13,2026-03-27,chat,Dividendos,Orientação sobre reinvestimento dos dividendos,sim
+13,2026-05-20,email,Investimentos Internacionais,Dúvida sobre ativos no exterior,sim
+13,2026-08-14,chat,Independência Financeira,Planejamento para antecipação da aposentadoria,sim
+13,2026-11-18,telefone,Perfil Arrojado,Confirmação do apetite a risco,sim
+
+14,2026-01-10,chat,Tesouro Selic,Dúvida sobre rendimento diário,sim
+14,2026-02-15,email,CDB Liquidez,Comparação entre CDB e Tesouro Selic,sim
+14,2026-03-18,telefone,LCI,Explicação sobre prazos mínimos,sim
+14,2026-05-08,chat,Reserva de Emergência,Acompanhamento da evolução da reserva,sim
+14,2026-08-12,email,Perfil Conservador,Validação do perfil do cliente,sim
+14,2026-11-09,telefone,Aplicativo,Dificuldade ao acessar extrato mensal,sim
+
+15,2026-01-08,chat,Tesouro Selic,Dúvidas sobre investimento inicial,sim
+15,2026-02-17,telefone,CDB,Explicação sobre rentabilidade pós-fixada,sim
+15,2026-03-22,email,LCA,Dúvida sobre funcionamento das LCAs,sim
+15,2026-05-14,chat,Aposentadoria,Planejamento da aposentadoria complementar,sim
+15,2026-08-18,telefone,Perfil Conservador,Revisão anual do perfil,sim
+15,2026-11-20,email,Investimentos,Ajuste dos aportes programados,sim
+
+16,2026-01-06,chat,ETF Nasdaq,Dúvida sobre exposição ao mercado americano,sim
+16,2026-02-19,telefone,Fundo de Ações,Explicação sobre estratégia do fundo,sim
+16,2026-03-26,chat,Dividendos,Orientação sobre reinvestimento automático,sim
+16,2026-05-19,email,Tributação,Dúvidas sobre declaração de renda variável,sim
+16,2026-08-17,chat,Independência Financeira,Revisão das projeções financeiras,sim
+16,2026-11-22,telefone,Perfil Arrojado,Confirmação do perfil e da estratégia,sim
+
+17,2026-01-07,chat,ETF Balanceado,Dúvidas sobre composição do ETF,sim
+17,2026-02-20,telefone,Fundo Multimercado,Explicação sobre diversificação da carteira,sim
+17,2026-03-28,email,Tesouro IPCA,Orientação sobre proteção inflacionária,sim
+17,2026-05-17,chat,Meta Educacional,Planejamento financeiro para educação dos filhos,sim
+17,2026-08-16,telefone,Perfil Moderado,Revisão do perfil de risco,sim
+17,2026-11-24,email,Carteira,Sugestão de rebalanceamento da carteira,sim
+
+18,2026-01-09,chat,ETF Internacional,Dúvidas sobre alocação internacional,sim
+18,2026-02-21,telefone,Fundo Tecnologia Global,Explicação sobre concentração setorial,sim
+18,2026-03-30,chat,Dividendos,Orientação sobre reinvestimento dos proventos,sim
+18,2026-05-23,email,Tributação Internacional,Dúvidas sobre ativos no exterior,sim
+18,2026-08-20,chat,Independência Financeira,Revisão da estratégia patrimonial,sim
+18,2026-11-26,telefone,Perfil Arrojado,Validação da estratégia de longo prazo,sim
