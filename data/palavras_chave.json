@@ -1,46 +1,94 @@
 {
-"acoes": [
-"acoes",
+"acao": [
 "acao",
-"bolsa",
-"mercado acionario",
-"renda variavel",
-"volatilidade",
+"alto risco",
 "arriscado",
 "arriscar",
-"alto risco",
-"ibovespa",
 "b3",
-"papel",
+"bolsa",
+"ibovespa",
+"mercado acionario",
+"mercado de acoes",
 "papeis",
-"mercado de acoes"
+"papel",
+"renda variavel",
+"volatilidade"
+],
+
+"ajuda": [
+    "ajuda",
+    "me ajude",
+    "me ajudar",
+    "pode me ajudar",
+    "você pode me ajudar",
+    "preciso de ajuda",
+    "quero ajuda",
+    "como funciona",
+    "como faço",
+    "o que devo fazer",
+    "por onde começo",
+    "não entendi",
+    "explique",
+    "me explique",
+    "gostaria de entender",
+    "tenho uma dúvida",
+    "estou com dúvida",
+    "não sei como",
+    "pode orientar",
+    "me oriente",
+    "quero aprender",
+    "preciso de orientação",
+    "me oriente",
+    "me explique melhor",
+    "me orientar"
+],
+
+"aposentadoria": [
+    "aposentadoria",
+    "aposentar",
+    "parar de trabalhar",
+    "previdencia"
 ],
 
 "atendimento_historico": [
-    "atendimentos",
+    "assunto",
+    "atendimentos anteriores",
+    "consultas anteriores",
+    "conversas anteriores",
     "historico",
     "historico de atendimento",
     "historico de contatos",
+    "listar atendimentos",
     "meu historico",
     "todos os atendimentos",
-    "listar atendimentos",
-    "atendimentos anteriores",
-    "consultas anteriores",
-    "conversas anteriores"
+    "ultimos atendimentos"
 ],
 
 "atendimento_ultimo": [
+    "atendimento",
+    "atendimento mais recente",
+    "atendimento recente",
+    "ultima conversa",
     "ultimo atendimento",
     "ultimo contato",
+    "ultimo historico",
     "ultimo suporte",
-    "atendimento recente",
-    "atendimento mais recente",
-    "ultimo registro",
-    "ultima conversa",
-    "ultimo historico"
+    "ultimo registro"
 ],
 
-"categoria": [
+"carro": [
+    "carro",
+    "automovel",
+    "veiculo"
+],
+
+"cartao": [
+    "cartao",
+    "cartao de credito",
+    "fatura"
+],
+
+"maior_gasto": [
     "categoria",
     "categoria de gasto",
     "categoria de despesas",
@@ -55,47 +103,30 @@
     "principal despesa"
 ],
 
-"cdb": [
-    "cdb",
-    "certificado de deposito",
-    "certificado de deposito bancario",
-    "liquidez diaria",
-    "renda fixa bancaria"
+"dividas": [
+    "divida",
+    "dividas",
+    "endividamento",
+    "devendo",
+    "emprestimo"
 ],
 
-"etf": [
-    "etf",
-    "indice",
-    "fundo de indice",
-    "ibovespa",
-    "sp500",
-    "s&p",
-    "internacional",
-    "global",
-    "nasdaq"
+"emergencia": [
+    "reserva de emergencia",
+    "emergencia",
+    "imprevisto",
+    "seguranca financeira"
 ],
 
-"fundo_acoes": [
-    "fundo de acoes",
-    "fundos de acoes",
-    "acoes tech",
-    "acoes",
-    "renda variavel",
-    "fundo agressivo",
-    "fundo arrojado"
-],
-
-"fundo_multimercado": [
-    "multimercado",
-    "diversificacao",
-    "diversificar",
-    "carteira diversificada",
-    "misturar investimentos"
+"filhos": [
+    "filhos",
+    "faculdade",
+    "educacao",
+    "estudos"
 ],
 
 "gastos": [
     "gasto",
-    "gastos",
     "despesa",
     "despesas",
     "quanto gastei",
@@ -107,6 +138,13 @@
     "total de despesas",
     "quanto saiu da conta",
     "quanto saiu"
+],
+
+"imovel": [
+    "apartamento",
+    "casa",
+    "imovel",
+    "moradia"
 ],
 
 "investir": [
@@ -125,17 +163,6 @@
     "melhor investimento",
     "melhores investimentos",
     "onde colocar meu dinheiro"
-],
-
-"lci_lca": [
-    "lci",
-    "lca",
-    "lci lca",
-    "letra de credito",
-    "credito imobiliario",
-    "credito agricola",
-    "isento de imposto",
-    "investimento isento"
 ],
 
 "meta": [
@@ -159,6 +186,13 @@
     "crescer patrimonio"
 ],
 
+"orcamento": [
+    "orcamento",
+    "controle financeiro",
+    "planejamento financeiro",
+    "controle de gastos"
+],
+
 "poupanca": [
     "poupanca",
     "guardar dinheiro",
@@ -166,6 +200,37 @@
     "poupar",
     "reserva",
     "guardar na poupanca"
+],
+
+"previdencia": [
+    "previdencia",
+    "aposentadoria",
+    "aposentar",
+    "parar de trabalhar",
+    "plano de aposentadoria",
+    "plano de previdencia",
+    "plano de aposentadoria privada"
+],
+
+"receitas": [
+    "quanto entrou na conta",
+    "quanto entrou",
+    "quanto recebi",
+    "quanto estou recebendo",
+    "quanto eu recebi",
+    "quanto ja recebi",
+    "receita",
+    "renda",
+    "rendas",
+    "total recebido",
+    "total de receitas",
+    "total de renda"
+],
+
+"renda_extra": [
+    "renda extra",
+    "segunda renda",
+    "renda passiva"
 ],
 
 "seguro": [
@@ -179,14 +244,41 @@
     "nao quero arriscar"
 ],
 
-"tesouro": [
-    "tesouro",
-    "tesouro direto",
-    "selic",
-    "titulo publico",
-    "titulo do governo",
-    "tesouro selic",
-    "tesouro ipca"
+"sugestoes": [
+    "indique",
+    "o que voce recomenda",
+    "o que recomenda",
+    "o que sugere",
+    "perfil",
+    "sugestao",
+    "sugira",
+    "recomendacoes"
+],
+
+"suporte": [
+    "suporte",
+    "atendimento",
+    "atendente",
+    "consultor",
+    "especialista",
+    "falar com um atendente",
+    "falar com um consultor",
+    "falar com um especialista",
+    "falar com alguém",
+    "entrar em contato",
+    "entre em contato",
+    "como entro em contato",
+    "como falar com vocês",
+    "central de atendimento",
+    "central de relacionamento",
+    "canal de atendimento",
+    "preciso de suporte",
+    "preciso de atendimento",
+    "quero suporte",
+    "quero atendimento",
+    "não consegui resolver",
+    "não resolveu meu problema",
+    "preciso de ajuda humana"
 ],
 
 "transacoes": [
@@ -206,66 +298,5 @@
     "viagem",
     "ferias",
     "turismo"
-],
-
-"carro": [
-    "carro",
-    "automovel",
-    "veiculo"
-],
-
-"imovel": [
-    "apartamento",
-    "casa",
-    "imovel",
-    "moradia"
-],
-
-"aposentadoria": [
-    "aposentadoria",
-    "aposentar",
-    "parar de trabalhar",
-    "previdencia"
-],
-
-"emergencia": [
-    "reserva de emergencia",
-    "emergencia",
-    "imprevisto",
-    "seguranca financeira"
-],
-
-"filhos": [
-    "filhos",
-    "faculdade",
-    "educacao",
-    "estudos"
-],
-
-"renda_extra": [
-    "renda extra",
-    "segunda renda",
-    "renda passiva"
-],
-
-"dividas": [
-    "divida",
-    "dividas",
-    "endividamento",
-    "devendo",
-    "emprestimo"
-],
-
-"cartao": [
-    "cartao",
-    "cartao de credito",
-    "fatura"
-],
-
-"orcamento": [
-    "orcamento",
-    "controle financeiro",
-    "planejamento financeiro",
-    "controle de gastos"
 ]
 }
