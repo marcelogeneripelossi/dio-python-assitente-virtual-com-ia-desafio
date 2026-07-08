@@ -14,6 +14,33 @@ def cls():
     comando = 'cls' if os.name == 'nt' else 'clear'
     subprocess.run (comando, shell = True)
 
+def detectar_chaves(
+    pergunta,
+    tokens,
+    dicionario
+):
+
+    chaves_encontradas = []
+
+    for chave, termos in dicionario.items():
+
+        encontrou_texto = any(
+            normalizar_texto(termo) in pergunta
+            for termo in termos
+        )
+
+        encontrou_token = any(
+            singularizar(
+                normalizar_texto(termo)
+            ) in tokens
+            for termo in termos
+        )
+
+        if encontrou_texto or encontrou_token:
+            chaves_encontradas.append(chave)
+
+    return chaves_encontradas
+
 def detectar_intencao(
     pergunta,
     tokens,
@@ -24,7 +51,6 @@ def detectar_intencao(
         chave,
         []
     )
-
     resultado_termo_no_texto = any(
         normalizar_texto(termo) in pergunta
         for termo in termos
@@ -33,6 +59,9 @@ def detectar_intencao(
     if resultado_termo_no_texto:
         return True     
 
+    for termo in termos:
+        singularizar(normalizar_texto(termo)) in tokens
+
     resultado_singular_nos_tokens = any(
         singularizar(normalizar_texto(termo)) in tokens
         for termo in termos
@@ -40,22 +69,36 @@ def detectar_intencao(
 
     return resultado_termo_no_texto or resultado_singular_nos_tokens
 
-def detectar_intencao_tokens(tokens, chave):
+def detectar_intencao_DEBUG(pergunta, tokens, chave):
 
-    termos = contexto.palavras_chave.get(
-        chave,
-        []
-    )
+    termos = contexto.palavras_chave.get(chave, [])
 
-    termos_normalizados = [
-        normalizar_texto(termo)
+    resultado_termo_no_texto = any(
+        normalizar_texto(termo) in pergunta
         for termo in termos
-    ]
-
-    return any(
-        termo in tokens
-        for termo in termos_normalizados
     )
+
+    resultado_singular_nos_tokens = any(
+        singularizar(normalizar_texto(termo)) in tokens
+        for termo in termos
+    )
+
+    if resultado_termo_no_texto or resultado_singular_nos_tokens:
+        print(f"\nCHAVE: {chave}")
+
+        for termo in termos:
+            print(
+                f"{termo!r}",
+                normalizar_texto(termo) in pergunta,
+                singularizar(normalizar_texto(termo)) in tokens
+            )
+
+        print(
+            "texto =", resultado_termo_no_texto,
+            "tokens =", resultado_singular_nos_tokens
+        )
+
+    return resultado_termo_no_texto or resultado_singular_nos_tokens
 
 def formatar_moeda(valor):
     return (
@@ -64,6 +107,18 @@ def formatar_moeda(valor):
         .replace(".", ",")
         .replace("_", ".")
     )
+
+def normalizar_expressao(texto):
+
+    #texto = normalizar_texto(texto)
+
+    for origem, destino in contexto.normalizacao_expressoes.items():
+        texto = texto.replace(
+            origem,
+            destino
+        )
+
+    return texto
 
 def normalizar_texto(texto):
     texto = texto.lower()
@@ -115,11 +170,63 @@ def normalizar_perfil(perfil):
 
     return mapa.get(perfil, perfil)
 
+def obter_produtos(
+    campo,
+    valor
+):
+    return [
+        produto
+        for produto in contexto.produtos
+        if produto[campo] == valor
+    ]
+
+def obter_produtos_por_tag(tag):
+    produto = [
+        produto for produto in contexto.produtos
+                if tag in produto.get("tags", [])
+                ]
+    
+    return produto
+
+def obter_produtos_por_tipo(tipo):
+
+    return [
+        produto
+        for produto in contexto.produtos
+        if produto["tipo"] == tipo
+    ]
+
+import random
+def obter_resposta(resposta_final, chave_sugestoes):
+    if resposta_final:
+        return "\n\n".join(resposta_final)
+
+    # Se não houver conteúdo em resposta_final, junta todas as sugestões
+    todas_sugestoes = []
+    for lista in chave_sugestoes.values():
+        todas_sugestoes.extend(lista)
+
+    if todas_sugestoes:
+        sugestao = random.choice(todas_sugestoes)
+
+    # Caso não haja nenhuma sugestão em nenhuma chave
+        return (
+            "Sinto muito, mas não tenho essa informação detalhada no momento. Posso ajudar com suas metas ou sugestões de investimento?\n"
+            f"{sugestao}"
+        )
+
 def singularizar(token):
+
+    token = normalizar_texto(token)
 
     if len(token) <= 3:
         return token
 
+    # Exceções definidas no JSON
+    if token in contexto.normalizacao_palavras:
+        return contexto.normalizacao_palavras[token]
+
+    # Plurais irregulares comuns
     if token.endswith("oes"):
         return token[:-3] + "ao"
 
@@ -132,16 +239,17 @@ def singularizar(token):
     if token.endswith("eis"):
         return token[:-3] + "el"
 
-    if token.endswith("is"):
+    if token.endswith("is") and not token.endswith("ais"):
         return token[:-2] + "il"
 
     if token.endswith("ns"):
         return token[:-2] + "m"
 
-    if token.endswith("es"):
-        return token[:-2]
-
-    if token.endswith("s"):
+    # plural simples
+    if (
+        token.endswith("s")
+        and not token.endswith("ss")
+    ):
         return token[:-1]
 
     return token
