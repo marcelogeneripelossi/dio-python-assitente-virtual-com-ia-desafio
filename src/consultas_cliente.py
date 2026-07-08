@@ -1,3 +1,5 @@
+import random
+
 import contexto
 from util import formatar_moeda
 
@@ -5,7 +7,15 @@ from util import formatar_moeda
 # Métodos do Motor
 # ===================================
 
-def obter_gastos_maior_categoria(perfil):
+def obter_ajuda():
+    ajudas = [ajuda for ajuda in contexto.chave_sugestoes.get("ajuda", [])]
+    ajuda = random.choice(ajudas)
+
+    return (
+        f"{ajuda}\n"
+    )
+
+def obter_despesas_maior_categoria(perfil):
 
         saidas = contexto.transacoes[
             (contexto.transacoes["id_cliente"] == perfil["id"])
@@ -29,9 +39,10 @@ def obter_gastos_maior_categoria(perfil):
                 f"Sua maior despesa está na categoria "
                 f"'{categoria}', totalizando "
                 f"R$ {formatar_moeda(valor)}."
+                + "\n"
             )
 
-def obter_gastos(perfil):
+def obter_despesas(perfil):
         saidas = contexto.transacoes[
             (contexto.transacoes["id_cliente"] == perfil["id"])
             &
@@ -43,6 +54,7 @@ def obter_gastos(perfil):
         return(
             f"Suas despesas totalizam "
             f"R$ {formatar_moeda(total)}."
+            + "\n"
         )
 
 def obter_historico(perfil):
@@ -68,6 +80,7 @@ def obter_historico(perfil):
     return (
         "Seu histórico de atendimento:\n"
         + "\n".join(linhas)
+        + "\n"
     )
 
 def obter_metas(perfil):
@@ -89,7 +102,32 @@ def obter_metas(perfil):
         return (
             "Suas metas atuais são:\n"
             + "\n".join(texto_metas)
+            + "\n"
         )
+
+def obter_receitas(perfil):
+        entradas = contexto.transacoes[
+            (contexto.transacoes["id_cliente"] == perfil["id"])
+            &
+            (contexto.transacoes["tipo"] == "entrada")
+        ]
+
+        total = entradas["valor"].sum()
+
+        return(
+            f"Suas receitas totalizam "
+            f"R$ {formatar_moeda(total)}."
+            + "\n"
+        )
+
+
+def obter_suporte():
+    suportes = [suporte for suporte in contexto.chave_sugestoes.get("suporte", [])]
+    suporte = random.choice(suportes)
+
+    return (
+        f"{suporte}\n"
+    )
 
 def obter_transacoes(perfil):
         trans = contexto.transacoes[
@@ -101,7 +139,7 @@ def obter_transacoes(perfil):
             ultimas = (
                 trans
                 .sort_values("data", ascending=False)
-                .head(10)
+                .head(5)
             )
 
             linhas = []
@@ -117,6 +155,7 @@ def obter_transacoes(perfil):
             return (
                 "Suas últimas transações foram:\n"
                 + "\n".join(linhas)
+                + "\n"
             )
 
 
@@ -139,4 +178,5 @@ def obter_ultimo_atendimento(perfil):
         f"{ultimo['data']} via {ultimo['canal']}.\n"
         f"Tema: {ultimo['tema']}.\n"
         f"Resumo: {ultimo['resumo']}."
+        + "\n"
     )
