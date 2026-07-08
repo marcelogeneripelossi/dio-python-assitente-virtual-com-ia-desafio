@@ -1,0 +1,58 @@
+{
+"cdb": [
+    "cdb",
+    "liquidez diaria",
+    "renda fixa bancaria"
+],
+
+"etf": [
+    "etf",
+    "indice",
+    "fundo de indice",
+    "ibovespa",
+    "sp500",
+    "internacional",
+    "global",
+    "nasdaq"
+],
+
+"fundo_acoes": [
+    "fundo de acoes",
+    "fundos de acoes",
+    "acoes tech",
+    "acoes",
+    "renda variavel",
+    "fundo agressivo",
+    "fundo arrojado"
+],
+
+"fundo_multimercado": [
+    "multimercado",
+    "diversificacao",
+    "diversificar",
+    "carteira diversificada",
+    "misturar investimentos"
+],
+
+"lci_lca": [
+    "lci",
+    "lca",
+    "lci lca",
+    "letra de credito",
+    "credito imobiliario",
+    "credito agricola",
+    "isento de imposto",
+    "investimento isento"
+],
+
+"titulo_publico": [
+    "tesouro",
+    "tesouro direto",
+    "selic",
+    "titulo publico",
+    "titulo do governo",
+    "tesouro selic",
+    "tesouro ipca"
+]
+
+}
