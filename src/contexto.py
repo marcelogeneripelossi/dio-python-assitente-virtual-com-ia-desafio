@@ -2,12 +2,14 @@
 # Contexto global
 # ==========================================================
 
+chave_sugestoes = None
+historico = None
+normalizacao_expressoes = None
+normalizacao_palavras = None
+palavras_chave = None
 perfis = None
 produtos = None
 transacoes = None
-historico = None
-palavras_chave = None
-chave_sugestoes = None
 
 # ==========================================================
 # Constantes
