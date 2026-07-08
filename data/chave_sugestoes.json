@@ -1,12 +1,5 @@
 {
-"poupanca": [
-"A poupança pode ser utilizada para objetivos de curto prazo, mas costuma apresentar rentabilidade inferior a outros investimentos de baixo risco.",
-"Para reserva de emergência, produtos com liquidez diária costumam ser alternativas interessantes à poupança.",
-"Avalie opções que ofereçam maior rentabilidade mantendo baixo risco e boa liquidez.",
-"A poupança continua sendo um investimento simples e acessível para iniciantes.",
-"Antes de investir, considere prazo, liquidez e objetivo financeiro."
-],
-"acoes": [
+"acao": [
     "Investimentos em ações costumam ser mais adequados para objetivos de longo prazo.",
     "A volatilidade faz parte dos investimentos em renda variável.",
     "Diversificar setores e empresas pode reduzir riscos específicos.",
@@ -14,116 +7,15 @@
     "É importante alinhar investimentos em ações ao perfil de risco do investidor."
 ],
 
-"tesouro": [
-    "Títulos públicos costumam ser utilizados para objetivos de curto, médio e longo prazo.",
-    "Investimentos indexados à inflação podem ajudar na preservação do poder de compra.",
-    "O prazo do investimento é um fator importante na escolha do título público adequado.",
-    "Títulos públicos costumam ser considerados investimentos de baixo risco de crédito.",
-    "O Tesouro Direto é frequentemente utilizado por investidores iniciantes."
-],
-
-"cdb": [
-    "CDBs podem oferecer diferentes níveis de liquidez e rentabilidade.",
-    "É importante observar o percentual do CDI oferecido pelo investimento.",
-    "Investimentos com liquidez diária costumam ser utilizados para reserva de emergência.",
-    "O prazo de vencimento influencia diretamente a estratégia de investimento.",
-    "CDBs contam com cobertura do FGC dentro dos limites estabelecidos pela legislação."
-],
-
-"lci_lca": [
-    "LCIs e LCAs possuem isenção de imposto de renda para pessoas físicas.",
-    "Esses produtos costumam ser utilizados em estratégias de médio prazo.",
-    "É importante verificar o prazo de carência antes do investimento.",
-    "Investimentos isentos de imposto podem aumentar a rentabilidade líquida.",
-    "A liquidez deve ser considerada antes da aplicação."
-],
-
-"fundo_multimercado": [
-    "Fundos multimercado buscam diversificação entre diferentes classes de ativos.",
-    "Esses fundos podem combinar renda fixa, câmbio e renda variável.",
-    "O nível de risco varia conforme a estratégia adotada pelo gestor.",
-    "Fundos multimercado podem ser adequados para investidores moderados.",
-    "É importante avaliar histórico, estratégia e taxa de administração."
-],
-
-"fundo_acoes": [
-    "Fundos de ações normalmente possuem foco em objetivos de longo prazo.",
-    "A gestão profissional pode facilitar o acesso ao mercado acionário.",
-    "O desempenho pode variar significativamente ao longo do tempo.",
-    "Esses fundos costumam ser mais adequados para investidores arrojados.",
-    "A diversificação interna do fundo reduz riscos específicos de empresas individuais."
-],
-
-"etf": [
-    "ETFs permitem investir em diversos ativos através de uma única aplicação.",
-    "Fundos de índice costumam apresentar custos menores do que fundos tradicionais.",
-    "ETFs podem ser utilizados para diversificação nacional e internacional.",
-    "Existem ETFs de renda fixa, ações e mercados internacionais.",
-    "A diversificação geográfica pode reduzir riscos da carteira."
-],
-
-"seguro": [
-    "Investimentos conservadores priorizam estabilidade e preservação de patrimônio.",
-    "Liquidez e segurança costumam ser prioridades para investidores conservadores.",
-    "Diversificação continua sendo importante mesmo em carteiras conservadoras.",
-    "Produtos de baixo risco podem ser adequados para reservas de emergência.",
-    "A preservação do patrimônio costuma ser prioridade em momentos de incerteza."
-],
-
-"investir": [
-    "Investir regularmente costuma ser mais importante do que tentar prever o melhor momento do mercado.",
-    "A definição de objetivos financeiros ajuda na escolha dos investimentos.",
-    "Prazo, liquidez e risco são fatores fundamentais na decisão de investimento.",
-    "Investimentos devem estar alinhados ao perfil e aos objetivos do investidor.",
-    "Diversificação é uma das principais ferramentas de gestão de risco."
-],
-
-"meta": [
-    "Definir metas claras facilita o planejamento financeiro.",
-    "Separar objetivos em curto, médio e longo prazo ajuda na organização.",
-    "Automatizar aportes pode acelerar a conquista das metas.",
-    "Metas financeiras devem possuir prazo e valor definidos.",
-    "Revisar objetivos periodicamente ajuda a manter o planejamento atualizado."
-],
-
-"gastos": [
-    "Monitorar despesas regularmente ajuda a identificar oportunidades de economia.",
-    "Pequenos gastos recorrentes podem representar valores significativos ao longo do tempo.",
-    "O acompanhamento das despesas melhora a tomada de decisões financeiras.",
-    "Organizar gastos por categoria facilita o controle financeiro.",
-    "Controlar despesas é um dos pilares do planejamento financeiro."
-],
-
-"transacoes": [
-    "Acompanhar movimentações financeiras ajuda no controle do orçamento.",
-    "O histórico de transações permite identificar padrões de consumo.",
-    "Registrar receitas e despesas facilita o planejamento financeiro.",
-    "Analisar movimentações periodicamente ajuda na organização financeira.",
-    "O acompanhamento financeiro constante melhora a previsibilidade do orçamento."
-],
-
-"historico_atendimento": [
-    "O histórico de atendimento ajuda a acompanhar a evolução financeira do cliente.",
-    "Registrar orientações anteriores facilita o planejamento de longo prazo.",
-    "O acompanhamento contínuo melhora a personalização das recomendações.",
-    "Decisões financeiras costumam se beneficiar de acompanhamento periódico.",
-    "Revisar atendimentos anteriores pode ajudar na definição de novos objetivos."
-],
-
-"conservador": [
-    "Investidores conservadores normalmente priorizam segurança e previsibilidade.",
-    "A preservação do patrimônio costuma ser o principal objetivo desse perfil.",
-    "Liquidez e estabilidade tendem a ser prioridades para investidores conservadores.",
-    "Oscilações elevadas geralmente não são compatíveis com esse perfil.",
-    "Produtos de renda fixa costumam ser predominantes em carteiras conservadoras."
-],
-
-"moderado": [
-    "Investidores moderados buscam equilíbrio entre risco e retorno.",
-    "A diversificação costuma ser um elemento importante para esse perfil.",
-    "Carteiras moderadas normalmente combinam renda fixa e renda variável.",
-    "Esse perfil costuma aceitar oscilações moderadas em busca de melhor rentabilidade.",
-    "O horizonte de investimento influencia a alocação dos recursos."
+"ajuda": [
+    "Se precisar de atendimento personalizado, entre em contato com nossa Central de Relacionamento. Teremos prazer em ajudá-lo.",
+    "Caso sua dúvida não tenha sido totalmente esclarecida, nossa equipe de atendimento está à disposição para oferecer o suporte necessário.",
+    "Para receber orientações específicas sobre sua situação financeira, recomendamos entrar em contato com um de nossos especialistas.",
+    "Se preferir um atendimento humano, utilize nossos canais oficiais para conversar com um de nossos consultores.",
+    "Estamos à disposição para ajudá-lo. Caso necessário, entre em contato com nossa equipe para receber um atendimento mais detalhado.",
+    "Se precisar de suporte adicional, procure nossa Central de Atendimento. Será um prazer auxiliá-lo em suas dúvidas.",
+    "Em caso de dúvidas sobre produtos, investimentos ou sua conta, nossa equipe poderá fornecer orientações personalizadas.",
+    "Se não encontrou a informação que procurava, entre em contato conosco pelos canais oficiais para que possamos ajudá-lo da melhor forma possível."
 ],
 
 "arrojado": [
@@ -134,11 +26,149 @@
     "O foco costuma estar no potencial de crescimento do patrimônio ao longo do tempo."
 ],
 
+"cdb": [
+    "CDBs podem oferecer diferentes níveis de liquidez e rentabilidade.",
+    "É importante observar o percentual do CDI oferecido pelo investimento.",
+    "Investimentos com liquidez diária costumam ser utilizados para reserva de emergência.",
+    "O prazo de vencimento influencia diretamente a estratégia de investimento.",
+    "CDBs contam com cobertura do FGC dentro dos limites estabelecidos pela legislação."
+],
+
+"conservador": [
+    "Investidores conservadores normalmente priorizam segurança e previsibilidade.",
+    "A preservação do patrimônio costuma ser o principal objetivo desse perfil.",
+    "Liquidez e estabilidade tendem a ser prioridades para investidores conservadores.",
+    "Oscilações elevadas geralmente não são compatíveis com esse perfil.",
+    "Produtos de renda fixa costumam ser predominantes em carteiras conservadoras."
+],
+
+"etf": [
+    "ETFs permitem investir em diversos ativos através de uma única aplicação.",
+    "Fundos de índice costumam apresentar custos menores do que fundos tradicionais.",
+    "ETFs podem ser utilizados para diversificação nacional e internacional.",
+    "Existem ETFs de renda fixa, ações e mercados internacionais.",
+    "A diversificação geográfica pode reduzir riscos da carteira."
+],
+
+"fundo_acoes": [
+    "Fundos de ações normalmente possuem foco em objetivos de longo prazo.",
+    "A gestão profissional pode facilitar o acesso ao mercado acionário.",
+    "O desempenho pode variar significativamente ao longo do tempo.",
+    "Esses fundos costumam ser mais adequados para investidores arrojados.",
+    "A diversificação interna do fundo reduz riscos específicos de empresas individuais."
+],
+
+"fundo_multimercado": [
+    "Fundos multimercado buscam diversificação entre diferentes classes de ativos.",
+    "Esses fundos podem combinar renda fixa, câmbio e renda variável.",
+    "O nível de risco varia conforme a estratégia adotada pelo gestor.",
+    "Fundos multimercado podem ser adequados para investidores moderados.",
+    "É importante avaliar histórico, estratégia e taxa de administração."
+],
+
+"gastos": [
+    "Monitorar despesas regularmente ajuda a identificar oportunidades de economia.",
+    "Pequenos gastos recorrentes podem representar valores significativos ao longo do tempo.",
+    "O acompanhamento das despesas melhora a tomada de decisões financeiras.",
+    "Organizar gastos por categoria facilita o controle financeiro.",
+    "Controlar despesas é um dos pilares do planejamento financeiro."
+],
+
 "geral": [
     "Planejamento financeiro é um processo contínuo e deve ser revisado periodicamente.",
     "Diversificar investimentos ajuda na gestão dos riscos.",
     "A reserva de emergência costuma ser o primeiro passo da organização financeira.",
     "Investimentos devem estar alinhados ao perfil e aos objetivos do investidor.",
     "Educação financeira é uma das principais ferramentas para tomada de decisões conscientes."
+],
+
+"historico_atendimento": [
+    "O histórico de atendimento ajuda a acompanhar a evolução financeira do cliente.",
+    "Registrar orientações anteriores facilita o planejamento de longo prazo.",
+    "O acompanhamento contínuo melhora a personalização das recomendações.",
+    "Decisões financeiras costumam se beneficiar de acompanhamento periódico.",
+    "Revisar atendimentos anteriores pode ajudar na definição de novos objetivos."
+],
+
+"investir": [
+    "Investir regularmente costuma ser mais importante do que tentar prever o melhor momento do mercado.",
+    "A definição de objetivos financeiros ajuda na escolha dos investimentos.",
+    "Prazo, liquidez e risco são fatores fundamentais na decisão de investimento.",
+    "Investimentos devem estar alinhados ao perfil e aos objetivos do investidor.",
+    "Diversificação é uma das principais ferramentas de gestão de risco."
+],
+
+"lci_lca": [
+    "LCIs e LCAs possuem isenção de imposto de renda para pessoas físicas.",
+    "Esses produtos costumam ser utilizados em estratégias de médio prazo.",
+    "É importante verificar o prazo de carência antes do investimento.",
+    "Investimentos isentos de imposto podem aumentar a rentabilidade líquida.",
+    "A liquidez deve ser considerada antes da aplicação."
+],
+
+"meta": [
+    "Definir metas claras facilita o planejamento financeiro.",
+    "Separar objetivos em curto, médio e longo prazo ajuda na organização.",
+    "Automatizar aportes pode acelerar a conquista das metas.",
+    "Metas financeiras devem possuir prazo e valor definidos.",
+    "Revisar objetivos periodicamente ajuda a manter o planejamento atualizado."
+],
+
+"moderado": [
+    "Investidores moderados buscam equilíbrio entre risco e retorno.",
+    "A diversificação costuma ser um elemento importante para esse perfil.",
+    "Carteiras moderadas normalmente combinam renda fixa e renda variável.",
+    "Esse perfil costuma aceitar oscilações moderadas em busca de melhor rentabilidade.",
+    "O horizonte de investimento influencia a alocação dos recursos."
+],
+
+"poupanca": [
+"A poupança pode ser utilizada para objetivos de curto prazo, mas costuma apresentar rentabilidade inferior a outros investimentos de baixo risco.",
+"Para reserva de emergência, produtos com liquidez diária costumam ser alternativas interessantes à poupança.",
+"Avalie opções que ofereçam maior rentabilidade mantendo baixo risco e boa liquidez.",
+"A poupança continua sendo um investimento simples e acessível para iniciantes.",
+"Antes de investir, considere prazo, liquidez e objetivo financeiro."
+],
+
+"receitas": [
+    "Aumentar sua renda pode acelerar o alcance das suas metas financeiras. Considere oportunidades de renda extra ou desenvolvimento profissional.",
+    "Sempre que receber um valor inesperado, avalie investir parte desse recurso em vez de utilizá-lo integralmente em despesas.",
+    "Destinar um percentual fixo da sua renda para investimentos ajuda a criar disciplina financeira e aumentar seu patrimônio ao longo do tempo.",
+    "Buscar novas oportunidades de ganhos pode contribuir para fortalecer sua saúde financeira e ampliar sua capacidade de investir."
+],
+
+"seguro": [
+    "Investimentos conservadores priorizam estabilidade e preservação de patrimônio.",
+    "Liquidez e segurança costumam ser prioridades para investidores conservadores.",
+    "Diversificação continua sendo importante mesmo em carteiras conservadoras.",
+    "Produtos de baixo risco podem ser adequados para reservas de emergência.",
+    "A preservação do patrimônio costuma ser prioridade em momentos de incerteza."
+],
+
+"suporte": [
+    "Se precisar de atendimento personalizado, entre em contato com nossa Central de Relacionamento. Teremos prazer em ajudá-lo.",
+    "Caso sua dúvida não tenha sido totalmente esclarecida, nossa equipe de atendimento está à disposição para oferecer o suporte necessário.",
+    "Para receber orientações específicas sobre sua situação financeira, recomendamos entrar em contato com um de nossos especialistas.",
+    "Se preferir um atendimento humano, utilize nossos canais oficiais para conversar com um de nossos consultores.",
+    "Estamos à disposição para ajudá-lo. Caso necessário, entre em contato com nossa equipe para receber um atendimento mais detalhado.",
+    "Se precisar de suporte adicional, procure nossa Central de Atendimento. Será um prazer auxiliá-lo em suas dúvidas.",
+    "Em caso de dúvidas sobre produtos, investimentos ou sua conta, nossa equipe poderá fornecer orientações personalizadas.",
+    "Se não encontrou a informação que procurava, entre em contato conosco pelos canais oficiais para que possamos ajudá-lo da melhor forma possível."
+],
+
+"tesouro": [
+    "Títulos públicos costumam ser utilizados para objetivos de curto, médio e longo prazo.",
+    "Investimentos indexados à inflação podem ajudar na preservação do poder de compra.",
+    "O prazo do investimento é um fator importante na escolha do título público adequado.",
+    "Títulos públicos costumam ser considerados investimentos de baixo risco de crédito.",
+    "O Tesouro Direto é frequentemente utilizado por investidores iniciantes."
+],
+
+"transacoes": [
+    "Acompanhar movimentações financeiras ajuda no controle do orçamento.",
+    "O histórico de transações permite identificar padrões de consumo.",
+    "Registrar receitas e despesas facilita o planejamento financeiro.",
+    "Analisar movimentações periodicamente ajuda na organização financeira.",
+    "O acompanhamento financeiro constante melhora a previsibilidade do orçamento."
 ]
 }
