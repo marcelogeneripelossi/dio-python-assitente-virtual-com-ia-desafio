@@ -13,9 +13,11 @@ import consultas_cliente
 import contexto
 from util import (
     cls,
-    detectar_intencao,
+    detectar_chaves,
     normalizar_perfil,
+    normalizar_expressao,
     normalizar_texto,
+    obter_produtos_por_tipo,
     termo_negado,
     tokenizar
 )
@@ -60,26 +62,35 @@ DATA_DIR = os.path.abspath(
 # ==========================================================
 
 def inicializar_contexto(dados):
+    global chave_sugestoes
+    global historico
+    global normalizacao_expressoes
+    global normalizacao_palavras
+    global palavras_chave
+    global palavras_chave_produtos
+    global perfis
     global produtos
     global transacoes
-    global historico
-    global palavras_chave
-    global chave_sugestoes
-    global perfis
 
+    contexto.chave_sugestoes = dados["chave_sugestoes"]
+    contexto.historico = dados["historico"]
+    contexto.normalizacao_expressoes = dados["normalizacao_expressoes"]
+    contexto.normalizacao_palavras = dados["normalizacao_palavras"]
+    contexto.palavras_chave = dados["palavras_chave"]
+    contexto.palavras_chave_produtos = dados["palavras_chave_produtos"]
+    contexto.perfis = dados["perfis"]
     contexto.produtos = dados["produtos"]
     contexto.transacoes = dados["transacoes"]
-    contexto.historico = dados["historico"]
-    contexto.palavras_chave = dados["palavras_chave"]
-    contexto.chave_sugestoes = dados["chave_sugestoes"]
-    contexto.perfis = dados["perfis"]
 
+    chave_sugestoes = contexto.chave_sugestoes
+    historico = contexto.historico
+    normalizacao_expressoes = contexto.normalizacao_expressoes
+    normalizacao_palavras = contexto.normalizacao_palavras
+    palavras_chave = contexto.palavras_chave
+    palavras_chave_produtos = contexto.palavras_chave_produtos
+    perfis = contexto.perfis
     produtos = contexto.produtos
     transacoes = contexto.transacoes
-    historico = contexto.historico
-    palavras_chave = contexto.palavras_chave
-    chave_sugestoes = contexto.chave_sugestoes
-    perfis = contexto.perfis
 
 # ============================================================
 # Carregamento dos dados
@@ -89,10 +100,35 @@ def carregar_dados():
     with open(
         os.path.join(
             DATA_DIR,
+            "chave_sugestoes.json"
+        ),
+        encoding="utf-8") as f:
+        chave_sugestoes = json.load(f)
+
+    with open(
+        os.path.join(
+            DATA_DIR,
+            "normalizacao_expressoes.json"
+        ),
+        encoding="utf-8") as f:
+        normalizacao_expressoes = json.load(f)
+
+    with open(
+        os.path.join(
+            DATA_DIR,
+            "normalizacao_palavras.json"
+        ),
+        encoding="utf-8") as f:
+        normalizacao_palavras = json.load(f)
+
+    with open(
+        os.path.join(
+            DATA_DIR,
             "perfil_investidor.json"
         ), 
         'r', encoding='utf-8') as f:
         perfis = json.load(f)
+
     with open(
         os.path.join(
             DATA_DIR,
@@ -100,6 +136,7 @@ def carregar_dados():
         ), 
         'r', encoding='utf-8') as f:
         produtos = json.load(f)
+
     with open(
         os.path.join(
             DATA_DIR,
@@ -107,30 +144,37 @@ def carregar_dados():
         ),
         encoding="utf-8") as f:
         palavras_chave = json.load(f)
+
     with open(
         os.path.join(
             DATA_DIR,
-            "chave_sugestoes.json"
+            "palavras_chave_produtos.json"
         ),
         encoding="utf-8") as f:
-        chave_sugestoes = json.load(f)
+        palavras_chave_produtos = json.load(f)
+
     transacoes = pd.read_csv(
             os.path.join(
                 DATA_DIR,
                 "transacoes.csv"
             ))
+
     historico = pd.read_csv(
         os.path.join(
             DATA_DIR,
             "historico_atendimento.csv"
         ))
+
     return {
+        "chave_sugestoes": chave_sugestoes,
+        "historico": historico,
+        "normalizacao_expressoes": normalizacao_expressoes,
+        "normalizacao_palavras": normalizacao_palavras,
+        "palavras_chave": palavras_chave,
+        "palavras_chave_produtos": palavras_chave_produtos,
         "perfis": perfis,
         "produtos": produtos,
         "transacoes": transacoes,
-        "historico": historico,
-        "palavras_chave": palavras_chave,
-        "chave_sugestoes": chave_sugestoes
     }
 
 # ============================================================
@@ -139,7 +183,9 @@ def carregar_dados():
 
 def motor_finassist(perfil, pergunta, dados):
 
-    pergunta_normalizada = normalizar_texto(pergunta)
+    pergunta_normalizada = normalizar_expressao(pergunta)
+
+    pergunta_normalizada = normalizar_texto(pergunta_normalizada)
 
     tokens = tokenizar(pergunta_normalizada)
     
@@ -155,17 +201,17 @@ def motor_finassist(perfil, pergunta, dados):
         "arrojado": "alto"
     }
 
+    intencoes = detectar_chaves(
+        pergunta_normalizada,
+        tokens,
+        contexto.palavras_chave
+    )
+
     # ========================================================
     # 1) Metas
     # ========================================================
 
-    quer_metas = detectar_intencao(
-        pergunta_normalizada,
-        tokens,
-        "meta"
-    )
-
-    if quer_metas:
+    if "meta" in intencoes:
         resposta = consultas_cliente.obter_metas(perfil)
         resposta_final.append(resposta)
 
@@ -177,13 +223,7 @@ def motor_finassist(perfil, pergunta, dados):
     # Último atendimento
     #=====================
 
-    quer_ultimo_atendimento = detectar_intencao(
-        pergunta_normalizada,
-        tokens,
-        "atendimento_ultimo"
-    )
-
-    if quer_ultimo_atendimento:
+    if "atendimento_ultimo" in intencoes:
         resposta = consultas_cliente.obter_ultimo_atendimento(perfil)
         resposta_final.append(resposta)
 
@@ -191,16 +231,9 @@ def motor_finassist(perfil, pergunta, dados):
     # Histórico de atendimento
     #=====================
 
-    quer_historico = detectar_intencao(
-        pergunta_normalizada,
-        tokens,
-        "atendimento_historico"
-    )
-
-    if quer_historico:
+    if "atendimento_historico" in intencoes:
         resposta = consultas_cliente.obter_historico(perfil)
         resposta_final.append(resposta)
-
     
     #=====================
     # Últimas transações, gastos e categoria de maior gasto
@@ -210,13 +243,7 @@ def motor_finassist(perfil, pergunta, dados):
     # Transações
     #=======
 
-    quer_transacoes = detectar_intencao(
-        pergunta_normalizada,
-        tokens,
-        "transacoes"
-    )
-
-    if quer_transacoes:
+    if "transacoes" in intencoes:
         resposta = consultas_cliente.obter_transacoes(perfil)
         resposta_final.append(resposta)
 
@@ -225,29 +252,55 @@ def motor_finassist(perfil, pergunta, dados):
     # Gastos
     #=======
     
-    quer_gastos = detectar_intencao(
-        pergunta_normalizada,
-        tokens,
-        "gastos"
-    )
-
-    if quer_gastos:
-        resposta = consultas_cliente.obter_gastos(perfil)
+    if "gastos" in intencoes:
+        resposta = consultas_cliente.obter_despesas(perfil)
         resposta_final.append(resposta)
 
     #=======
     # Categoria de maior gasto
     #=======
 
-    quer_categoria_maior_gasto = detectar_intencao(
-        pergunta_normalizada,
-        tokens,
-        "categoria"
-    )
-
-    if quer_categoria_maior_gasto:
-        resposta = consultas_cliente.obter_gastos_maior_categoria(perfil)
+    if "maior_gasto" in intencoes:
+        resposta = consultas_cliente.obter_despesas_maior_categoria(perfil)
         resposta_final.append(resposta)
+
+    #=======
+    # Receitas
+    #=======
+
+    if "receitas" in intencoes:
+        resposta = consultas_cliente.obter_receitas(perfil)
+        resposta_final.append(resposta)
+
+    #=====================
+    # Ajuda / Suporte
+    #=====================
+
+    #=======
+    # Ajuda
+    #=======
+
+    quer_ajuda = False
+
+    if "ajuda" in intencoes:
+        resposta = consultas_cliente.obter_ajuda()
+
+        if resposta is not None:
+            quer_ajuda = True
+            resposta_final.append(resposta)
+
+    #=======
+    # Suporte
+    #=======
+
+    quer_suporte = False
+
+    if "suporte" in intencoes:
+        resposta = consultas_cliente.obter_suporte()
+
+        if resposta is not None:
+            quer_suporte = True
+            resposta_final.append(resposta)
 
     # ========================================================
     # 3) Riscos
@@ -352,10 +405,18 @@ def motor_finassist(perfil, pergunta, dados):
             break
 
     # ========================================================
-    # 5) Meu perfil
+    # 5) Meu perfil / Sugestões
     # ========================================================
 
-    if (perfil_detectado is None and "perfil" in pergunta_normalizada):
+    # if (perfil_detectado is None and "perfil" in pergunta_normalizada):
+    #      perfil_detectado = perfil_cliente
+
+    quer_sugestoes = False
+
+    if "sugestoes" in intencoes:
+        quer_sugestoes = True
+
+    if quer_sugestoes and perfil_detectado is None:
         perfil_detectado = perfil_cliente
 
     # ========================================================
@@ -372,7 +433,7 @@ def motor_finassist(perfil, pergunta, dados):
 
     if quer_investimento and perfil_detectado is None:
         perfil_detectado = perfil_cliente
-                
+
     # ========================================================
     # 7) Produtos pelo perfil
     # ========================================================
@@ -404,6 +465,7 @@ def motor_finassist(perfil, pergunta, dados):
                     "Os produtos abaixo possuem um nível "
                     "de risco diferente daquele "
                     "habitualmente recomendado para você."
+                    + "\n"
                 )
 
             random.shuffle(produtos_perfil)
@@ -413,8 +475,9 @@ def motor_finassist(perfil, pergunta, dados):
                 f"{perfil_detectado} são:\n"
                 + "\n".join(
                     f"- {p}"
-                    for p in sorted(produtos_perfil[:5])
+                    for p in sorted(produtos_perfil[:3])
                 )
+                + "\n"
             )
 
     # ========================================================
@@ -474,68 +537,109 @@ def motor_finassist(perfil, pergunta, dados):
                 for produto in sugestoes
             )
         )
-        
+
     # ========================================================
-    # 8) Sugestões acumuladas
+    # 8) Sobre Produtos Financeiros
     # ========================================================
 
-    sugestoes = []
+    assuntos = detectar_chaves(
+        pergunta_normalizada,
+        tokens,
+        contexto.palavras_chave_produtos
+    )
 
-    for chave, termos in contexto.palavras_chave.items():
+    assunto_detectado = assuntos[0] if assuntos else None
 
-        encontrou_chave = False
+    if assunto_detectado: #and not resposta_final:
+        sugestoes = chave_sugestoes.get(assunto_detectado, [])
+        sugestoes = random.sample(sugestoes, 2) if sugestoes else ""
 
-        for termo in termos:
-
-            termo_busca = termo.lower()
-
-            for indice, token in enumerate(tokens):
-
-                if token != termo_busca:
-                    continue
-
-                # ignora se estiver negado
-                if termo_negado(tokens, indice):
-                    continue
-
-                encontrou_chave = True
-                break
-
-            if encontrou_chave:
-                break
-
-        if not encontrou_chave:
-            continue
-
-        # chave direta
-        if chave in contexto.chave_sugestoes:
-
-            sugestoes.extend(
-                contexto.chave_sugestoes[chave]
+        produtos_tipo = obter_produtos_por_tipo(
+                assunto_detectado
             )
 
-    # remove duplicidades
-    sugestoes = list(dict.fromkeys(sugestoes))
+        produtos_tipo = [
+            p["nome"]
+            for p in produtos_tipo
+        ]
 
-    if sugestoes:
-
-        random.shuffle(sugestoes)
+        if produtos_tipo:
+            random.shuffle(produtos_tipo)
 
         resposta_final.append(
-            "Sugestões:\n"
-            + "\n".join(
-                f"- {s}"
-                for s in sugestoes[:1]
+            "\n".join(f"{s}" for s in sugestoes[:2]
+            )
+        )
+
+        resposta_final.append(
+            "\n".join(f"- {p}" for p in (produtos_tipo[:5])
             )
         )
 
     # ========================================================
-    # 9) Fallback
+    # 9) Sugestões acumuladas
     # ========================================================
+
+    if not quer_suporte and not quer_ajuda:
+        sugestoes = []
+
+        for chave, termos in contexto.palavras_chave.items():
+
+            encontrou_chave = False
+
+            for termo in termos:
+
+                termo_busca = termo.lower()
+
+                for indice, token in enumerate(tokens):
+
+                    if token != termo_busca:
+                        continue
+
+                    # ignora se estiver negado
+                    if termo_negado(tokens, indice):
+                        continue
+
+                    encontrou_chave = True
+                    break
+
+                if encontrou_chave:
+                    break
+
+            if not encontrou_chave:
+                continue
+
+            # chave direta
+            if chave in contexto.chave_sugestoes:
+
+                sugestoes.extend(
+                    contexto.chave_sugestoes[chave]
+                )
+
+        # remove duplicidades
+        sugestoes = list(dict.fromkeys(sugestoes))
+
+        if sugestoes and not assunto_detectado:
+
+            random.shuffle(sugestoes)
+
+            resposta_final.append(
+                "Sugestões:\n"
+                + "\n".join(
+                    f"- {s}"
+                    for s in sugestoes[:2]
+                )
+            )
+
+    # ========================================================
+    # 10) Fallback
+    # ========================================================
+
+    #return obter_resposta(resposta_final, chave_sugestoes)
 
     if resposta_final:
 
-        return "\n\n".join(resposta_final)
+        return "\n".join(resposta_final)
 
     return "Sinto muito, mas não tenho essa informação detalhada no momento. Posso ajudar com suas metas ou sugestões de investimento?"
 
