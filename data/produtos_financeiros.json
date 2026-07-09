@@ -6,7 +6,7 @@
 "rentabilidade": "SELIC",
 "aporte_minimo": 100,
 "indicado_para": "conservador",
-"tipo": "titulo_publico",
+"tipo": "tesouro",
 "prazo": "curto",
 "tags": [
     "tesouro",
@@ -23,7 +23,7 @@
 "rentabilidade": "IPCA + juros",
 "aporte_minimo": 100,
 "indicado_para": "conservador",
-"tipo": "titulo_publico",
+"tipo": "tesouro",
 "prazo": "longo",
 "tags": [
     "tesouro",
@@ -40,7 +40,7 @@
 "rentabilidade": "prefixada",
 "aporte_minimo": 100,
 "indicado_para": "conservador",
-"tipo": "titulo_publico",
+"tipo": "tesouro",
 "prazo": "medio",
 "tags": [
     "tesouro",
