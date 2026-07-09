@@ -100,18 +100,42 @@ O Finassist utiliza uma base de conhecimento local composta por arquivos JSON e 
 | Arquivo                     | Formato | Descrição                                                                                                                                                                                                          |
 | --------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `chave_sugestoes.json`      | JSON    | Base de sugestões educativas e recomendações pré-definidas associadas a temas financeiros específicos, utilizada para complementar as respostas do agente.                
-| `perfil_investidor.json`    | JSON    | Base cadastral dos investidores contendo perfil, renda, patrimônio, metas e demais informações utilizadas pelo motor de inferência. |
 | `normalizacao_expressoes.json`    | JSON    | Mapeia expressões compostas para uma representação padronizada antes da análise da pergunta. |
 | `normalizacao_palavras.json`    | JSON    | Define exceções de singularização e normalização de palavras. Evita transformações incorretas durante a tokenização. |
-| `produtos_financeiros.json` | JSON    | Catálogo de produtos financeiros disponibilizados pela instituição. Cada produto possui informações como categoria, risco, rentabilidade, perfil indicado, aporte mínimo, prazo, tipo e demais características utilizadas nas recomendações.                                                |
 | `palavras_chave.json`       | JSON    | Dicionário de intenções utilizado pelo motor de inferência para identificar temas presentes nas perguntas dos usuários e direcionar o fluxo de resposta.                                                           |
 | `palavras_chave_produtos.json`       | JSON    | Dicionário específico para identificação de produtos financeiros. Relaciona palavras e expressões informadas pelo usuário às categorias de produtos existentes no catálogo, permitindo localizar investimentos como CDB, Tesouro, ETF, Fundos, LCI/LCA, Previdência, entre outros.                                                           |
+| `produtos_financeiros.json` | JSON    | Catálogo de produtos financeiros disponibilizados pela instituição. Cada produto possui informações como categoria, risco, rentabilidade, perfil indicado, aporte mínimo, prazo, tipo e demais características utilizadas nas recomendações.                                                |
+| `perfil_investidor.json`    | JSON    | Base cadastral dos investidores contendo perfil, renda, patrimônio, metas e demais informações utilizadas pelo motor de inferência. |
 | `historico_atendimento.csv` | CSV     | Registro de atendimentos anteriores realizados pelos clientes, incluindo canal de contato, tema abordado, resumo da interação e status de resolução.                                                               |
 | `transacoes.csv`            | CSV     | Histórico simplificado de movimentações financeiras dos clientes, contendo receitas, despesas, investimentos, categorias de gastos e tipo da transação (entrada ou saída).                                         |
 
 
 Esses arquivos representam a fonte de conhecimento do Finassist e permitem a implementação de um mecanismo simples de recuperação de informações (retrieval), sem dependência de bancos de dados externos.
-
+````
+Pergunta do usuário
+        │
+        ▼
+normalizacao_expressoes.json
+        │
+        ▼
+normalizacao_palavras.json
+        │
+        ▼
+detecção de intenções
+   ├── palavras_chave.json
+   └── palavras_chave_produtos.json
+        │
+        ▼
+Motor de Inferência
+   ├── perfil_investidor.json
+   ├── produtos_financeiros.json
+   ├── transacoes.csv
+   ├── historico_atendimento.csv
+   └── chave_sugestoes.json
+        │
+        ▼
+Resposta ao usuário
+````
 ## 💬 Exemplos de Perguntas
 
 A seguir, alguns exemplos de perguntas que podem ser realizadas ao Finassist para demonstrar suas capacidades de personalização, recuperação de conhecimento e inferência baseada em regras.
